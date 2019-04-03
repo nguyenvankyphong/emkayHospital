@@ -15,7 +15,6 @@ class Home extends Component {
 
     this.state = {
       data:[],
-      userFeed: '',
       redirectToReferrer: false,
       name:'',
     };
@@ -55,7 +54,7 @@ class Home extends Component {
     }
     var body;
     switch (sessionStorage.getItem("userRole")) {
-      case "1": body = <Patient/>;
+      case "1": body = <Patient/>
    }
 
     return (

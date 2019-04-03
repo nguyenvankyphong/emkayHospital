@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-import './styles/foundation.min.css';
-import './styles/custom.css';
 import Routes from './routes';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Sidebar from './components/Sidebar/Sidebar';
 
 import MobileHeader from './components/MobileHeader/MobileHeader';
 
@@ -28,7 +27,8 @@ class App extends Component {
 
         <div className="off-canvas-content" data-off-canvas-content>
           <MobileHeader name={this.state.appName}/>
-          <Header name={this.state.appName}/>
+          
+          <Sidebar/>
           <Routes name={this.state.appName}/>
           <hr/>
          <Footer/>
