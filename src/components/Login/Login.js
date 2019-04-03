@@ -40,6 +40,7 @@ class Login extends Component {
       const scope = this;
 
       request.onload = function () {
+        console.log("response: ");
         console.log(this.response);
         rs = JSON.parse(this.response);
         console.log(rs);
@@ -49,7 +50,6 @@ class Login extends Component {
         sessionStorage.setItem('userRole',rs.role);
         scope.setState({redirectToReferrer: true});
         console.log(scope.state);
-        return (<Redirect to={'/patient'}/>)
       }
 
         //check info rs
@@ -79,11 +79,6 @@ class Login extends Component {
       //
       // });
     }
-    if (!rs.errCode) {
-
-    sessionStorage.setItem('token',rs.token);
-    this.setState({redirectToReferrer: true});
-  }
    }
 
   onChange(e){
