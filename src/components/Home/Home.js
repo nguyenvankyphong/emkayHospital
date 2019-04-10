@@ -6,6 +6,7 @@ import UserFeed from "../UserFeed/UserFeed";
 import Patient from "../Patient/Patient";
 import ReactConfirmAlert, { confirmAlert } from 'react-confirm-alert';
 import '../../styles/react-confirm-alert.css';
+import Sidebar from "../Sidebar/Sidebar";
 
 class Home extends Component {
 
@@ -58,12 +59,15 @@ class Home extends Component {
    }
 
     return (
-      <div className="row" id="Body">
+      <div>
+        <Sidebar/>
+        <div className="row" id="Body">
         <div className="medium-12 columns">
         <a href="#" onClick={this.logout} className="logout">Logout</a>
         {body}
         </div>
 
+      </div>
       </div>
     );
   }

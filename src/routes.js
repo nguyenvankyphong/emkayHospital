@@ -7,6 +7,7 @@ import Login from '././components/Login/Login';
 import Signup from '././components/Signup/Signup';
 import Patient from '././components/Patient/Patient';
 import NotFound from '././components/NotFound/NotFound';
+import Admin from './components/Admin/Admin';
 
 
 const Routes = () => (
@@ -17,6 +18,7 @@ const Routes = () => (
           <Route path="/login" component={Login}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/patient" component={Patient}/>
+          <Route path="/admin" component={Admin}/>
           <Route path="*" component={NotFound}/>
       </Switch>
   </BrowserRouter>

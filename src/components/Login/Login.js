@@ -1,31 +1,37 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import {PostData} from '../../services/PostData';
 import './Login.css';
+import logo from './icon_hospital.png';
+import 'react-inputs-validation/lib/react-inputs-validation';
+import Input from 'react-validation/build/input';
+
+
+
 
 class Login extends Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
      username: '',
      password: '',
-     redirectToReferrer: false
+     redirectToReferrer : false,
     };
 
     this.login = this.login.bind(this);
     this.onChange = this.onChange.bind(this);
-
+    this.handlereset = this.handlereset.bind(this);
   }
 
   login() {
+
     if(this.state.username && this.state.password){
       var request = new XMLHttpRequest()
       var proxy = 'https://cors-anywhere.herokuapp.com/'
 
       // Open a new connection, using the GET request on the URL endpoint
-      request.open('POST', proxy+'http://13.70.25.1:8080/DOANHTTT/rest/account/login', true)
+      request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/login', true)
       request.setRequestHeader("content-type","application/json")
 
 
@@ -49,6 +55,7 @@ class Login extends Component {
         sessionStorage.setItem('userData',rs.token);
         sessionStorage.setItem('userRole',rs.role);
         scope.setState({redirectToReferrer: true});
+
         console.log(scope.state);
       }
 
@@ -81,14 +88,25 @@ class Login extends Component {
     }
    }
 
+
+
   onChange(e){
     this.setState({[e.target.name]:e.target.value});
+    
+   }
+   handlereset(){
+    this.refs.someUser.value = '';
+    this.refs.somePass.value = '';
+    this.setState({
+      username: '',
+      password: ''
+    }) 
    }
 
   render() {
 
      if (this.state.redirectToReferrer) {
-      return (<Redirect to={'/home'}/>)
+      return (<Redirect to={'/admin'}/>)
     }
 
     if(sessionStorage.getItem('userData')){
@@ -96,17 +114,34 @@ class Login extends Component {
     }
 
      return (
-      <div className="row" id="Body">
-        <div className="medium-5 columns left">
-        <h4>Loginnnnn</h4>
-        <label>Username</label>
-        <input type="text" name="username" placeholder="Username" onChange={this.onChange}/>
-        <label>Password</label>
-        <input type="password" name="password"  placeholder="Password" onChange={this.onChange}/>
-        <input type="submit" className="button success" value="Login" onClick={this.login}/>
-        <a href="/signup">Registration</a>
-        </div>
-      </div>
+       <div className= "row" cid="Body">
+        <h1 className="title">EMKAY HOSPITAL</h1>
+        <div className= "icon"> <img src={logo} alt="" className ="ava"/></div>      
+         <div className="medium-4 columns left">
+           <h1>LOGIN</h1>
+           <label>Username</label>
+           <input
+             type="text"
+             ref="someUser"
+             name="username"
+             placeholder="Username"
+             onChange={this.onChange} 
+             
+             />
+           <label>Password</label>
+           <input
+             type="password"
+             ref="somePass"
+             name="password"
+             placeholder="Password"
+             onChange={this.onChange} 
+             />
+           <div className= "bt">
+           <input type="submit" className="button success" value="Login" onClick={this.login} />
+           <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
+           </div>
+         </div>
+       </div>
     );
   }
 }
