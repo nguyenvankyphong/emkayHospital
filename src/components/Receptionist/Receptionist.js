@@ -1,17 +1,17 @@
 import React from 'react';
 import Sidebar from "../Sidebar/Sidebar";
 
-const Patient = () => {
+const Receptionist = () => {
   return (
     <div>
       <Sidebar/>
       <div className="row" id="Body">
         <div className="medium-12 columns">
+          <a href="#" onClick={this.logout} className="logout">Logout</a>
         </div>
-      <h1>Content</h1>
       </div>
     </div>
   );
 };
 
-export default Patient;
+export default Receptionist;
