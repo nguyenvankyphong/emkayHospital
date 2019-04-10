@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -148,7 +149,7 @@ const styles = theme => ({
     },
   },
   footer: {
-    
+
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing.unit * 8,
     padding: `${theme.spacing.unit * 6}px 0`,
@@ -169,9 +170,15 @@ class Admin extends React.Component {
       anchorEl: null,
       mobileMoreAnchorEl: null,
       redirectToReferrer: false,
+      listSidebar: ["Home", "Bác sĩ"],
     };
+    this.logout = this.logout.bind(this);
   }
-  
+
+  handleListSidebar = list => {
+    this.setState({listSidebar: list})
+  };
+
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -197,26 +204,19 @@ class Admin extends React.Component {
   handleDrawerClose = () => {
     this.setState({ open: false });
   };
-  logout = () => {
-    this.setState({redirectToReferrer: true});
-     this.handleMenuClose();
-    // sessionStorage.setItem("userData",'');
-    // sessionStorage.clear();
-    
-    
-  }
-  handleLogout = () => {
-    const scope = this;
-    this.logout();
-    if(this.redirectToReferrer){
-      console.log("state: "+scope.state.redirectToReferrer)
 
-    }else{
-      console.log("ko: "+scope.state.redirectToReferrer)
-    }
-    
-  }
+  logout(){
+    sessionStorage.setItem("userData",'');
+    sessionStorage.setItem("userRole",'');
+    sessionStorage.clear();
+    this.setState({redirectToReferrer: true});
+  };
+
   render() {
+    if (this.state.redirectToReferrer) {
+      return (<Redirect to={'/login'}/>)
+    }
+
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes, theme } = this.props;
     const isMenuOpen = Boolean(anchorEl);
@@ -227,14 +227,14 @@ class Admin extends React.Component {
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         open={isMenuOpen}
         onClose={this.handleMenuClose}
-        
-        
+
+
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        <MenuItem  
-        
-        onClick={this.handleLogout}>Logout</MenuItem>
+        <MenuItem
+
+        onClick={this.logout}>Logout</MenuItem>
       </Menu>
     );
 
@@ -314,13 +314,15 @@ class Admin extends React.Component {
           </div>
           <Divider />
           <List>
-            {['Trang chủ', 'Thống kê'].map((text, index) => (
-              <ListItem button key={text}>
+            {this.state.listSidebar.map((text, index) => (
+              // <a>
+              <ListItem button key={text} onClick={this.handleDrawerClose}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
+              // </a>
             ))}
-          </List>         
+          </List>
         </Drawer>
       </div>
     );

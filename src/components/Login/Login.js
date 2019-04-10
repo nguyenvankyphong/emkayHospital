@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import './Login.css';
 import logo from './icon_hospital.png';
-import 'react-inputs-validation/lib/react-inputs-validation';
-import Input from 'react-validation/build/input';
-
-
-
 
 class Login extends Component {
 
@@ -50,6 +45,7 @@ class Login extends Component {
         console.log(this.response);
         rs = JSON.parse(this.response);
         console.log(rs);
+        console.log("role" +rs.role);
 
         if (!rs.errCode) {
         sessionStorage.setItem('userData',rs.token);
@@ -92,7 +88,7 @@ class Login extends Component {
 
   onChange(e){
     this.setState({[e.target.name]:e.target.value});
-    
+
    }
    handlereset(){
     this.refs.someUser.value = '';
@@ -100,23 +96,33 @@ class Login extends Component {
     this.setState({
       username: '',
       password: ''
-    }) 
+    })
    }
 
   render() {
 
      if (this.state.redirectToReferrer) {
-      return (<Redirect to={'/admin'}/>)
+       switch (sessionStorage.getItem('userRole')) {
+         case "1":
+           return (<Redirect to={'/patient'}/>)
+           break;
+         case "2":
+           return (<Redirect to={'/doctor'}/>)
+           break;
+         case "3":
+           return (<Redirect to={'/receptionist'}/>)
+           break;
+         case "4":
+           return (<Redirect to={'/admin'}/>)
+           break;
+       }
     }
 
-    if(sessionStorage.getItem('userData')){
-      return (<Redirect to={'/home'}/>)
-    }
 
      return (
        <div className= "row" cid="Body">
         <h1 className="title">EMKAY HOSPITAL</h1>
-        <div className= "icon"> <img src={logo} alt="" className ="ava"/></div>      
+        <div className= "icon"> <img src={logo} alt="" className ="ava"/></div>
          <div className="medium-4 columns left">
            <h1>LOGIN</h1>
            <label>Username</label>
@@ -125,8 +131,8 @@ class Login extends Component {
              ref="someUser"
              name="username"
              placeholder="Username"
-             onChange={this.onChange} 
-             
+             onChange={this.onChange}
+
              />
            <label>Password</label>
            <input
@@ -134,7 +140,7 @@ class Login extends Component {
              ref="somePass"
              name="password"
              placeholder="Password"
-             onChange={this.onChange} 
+             onChange={this.onChange}
              />
            <div className= "bt">
            <input type="submit" className="button success" value="Login" onClick={this.login} />

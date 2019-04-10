@@ -8,6 +8,8 @@ import Signup from '././components/Signup/Signup';
 import Patient from '././components/Patient/Patient';
 import NotFound from '././components/NotFound/NotFound';
 import Admin from './components/Admin/Admin';
+import Receptionist from './components/Receptionist/Receptionist';
+import Doctor from './components/Doctor/Doctor';
 
 
 const Routes = () => (
@@ -19,6 +21,8 @@ const Routes = () => (
           <Route path="/signup" component={Signup}/>
           <Route path="/patient" component={Patient}/>
           <Route path="/admin" component={Admin}/>
+          <Route path="/doctor" component={Doctor}/>
+          <Route path="/receptionist" component={Receptionist}/>
           <Route path="*" component={NotFound}/>
       </Switch>
   </BrowserRouter>

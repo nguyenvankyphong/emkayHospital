@@ -55,19 +55,15 @@ class Home extends Component {
     }
     var body;
     switch (sessionStorage.getItem("userRole")) {
-      case "1": body = <Patient/>
+      case "1": body = "<div> savs</div"
    }
 
     return (
       <div>
         <Sidebar/>
         <div className="row" id="Body">
-        <div className="medium-12 columns">
-        <a href="#" onClick={this.logout} className="logout">Logout</a>
-        {body}
+          content
         </div>
-
-      </div>
       </div>
     );
   }

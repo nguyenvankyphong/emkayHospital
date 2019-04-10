@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './styles/foundation.min.css';
 import './styles/custom.css';
+import './App.css';
 
 import Routes from './routes';
 import Header from './components/Header/Header';
