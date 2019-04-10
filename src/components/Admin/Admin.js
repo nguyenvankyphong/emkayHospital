@@ -25,7 +25,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
-import Trangchu from '../Admin/Trangchu';
+import Trangchu from './Trangchu';
+import './Admin.css'
 
 const drawerWidth = 240;
 
@@ -320,8 +321,23 @@ class Admin extends React.Component {
                 <ListItemText primary={text} />
               </ListItem>
             ))}
-          </List>         
+          </List>
+          
         </Drawer>
+        <main className={classes.content} id= "content">
+          <div className={classes.toolbar} />
+              
+            <Trangchu />
+       
+        </main>
+
+        {/* <footer className={classes.footer}>
+          <Paper className={classes.root1} elevation={1}>
+            <Typography variant="h5" component="h3">
+              React App with Material UI
+            </Typography>
+          </Paper>
+        </footer> */}
       </div>
     );
   }

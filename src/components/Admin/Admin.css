@@ -1,0 +1,13 @@
+#hd {
+    background-color: #3adb76;
+}
+#body{
+    min-height: -webkit-fill-available;
+    max-height: 100%;
+}
+#search{
+    background-color: #fefefe36;
+}
+#search_icon{
+    color: #00000096;
+}
