@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
+import Patients from "./Patients";
 
-const Patient = () => {
-  return (
-    <div>
-      <Sidebar/>
-      <div className="row" id="Body">
-        <div className="medium-12 columns">
+
+class Patient extends Component {
+
+  render() {
+    return (
+      <div>
+        <Sidebar/>
+        <div className="row" id="Body">
+          <Patients/>
         </div>
-      <h1>Content</h1>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Patient;
