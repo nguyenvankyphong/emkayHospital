@@ -33,26 +33,26 @@ class Login extends Component {
       var list = [];
       list.push(this.state.username);
       list.push(this.state.password);
-      console.log("show list push");
-      console.log(list);
+      // console.log("show list push");
+      // console.log(list);
       request.send(JSON.stringify(list));
       var rs = {};
 
       const scope = this;
 
       request.onload = function () {
-        console.log("response: ");
-        console.log(this.response);
+        // console.log("response: ");
+        // console.log(this.response);
         rs = JSON.parse(this.response);
-        console.log(rs);
-        console.log("role" +rs.role);
+        // console.log(rs);
+        // console.log("role" +rs.role);
 
         if (!rs.errCode) {
         sessionStorage.setItem('userData',rs.token);
         sessionStorage.setItem('userRole',rs.role);
         scope.setState({redirectToReferrer: true});
 
-        console.log(scope.state);
+        // console.log(scope.state);
       }
 
         //check info rs
@@ -63,7 +63,7 @@ class Login extends Component {
         // for (var key in rs) {
         //     array_keys.push(key);
         //     array_values.push(rs[key]);
-        //     console.log(array_values);
+            // console.log(array_values);
         // }
 
 
@@ -116,6 +116,9 @@ class Login extends Component {
            return (<Redirect to={'/admin'}/>)
            break;
        }
+    }
+    if (sessionStorage.getItem("userData")) {
+      return (<Redirect to={'/home'}/>)
     }
 
 

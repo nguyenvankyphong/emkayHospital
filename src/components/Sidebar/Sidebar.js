@@ -170,9 +170,10 @@ class Admin extends React.Component {
       anchorEl: null,
       mobileMoreAnchorEl: null,
       redirectToReferrer: false,
-      listSidebar: ["Home", "Bác sĩ"],
+      path: '',
     };
     this.logout = this.logout.bind(this);
+    this.handleUrlSidebar = this.handleUrlSidebar.bind(this);
   }
 
   handleListSidebar = list => {
@@ -205,6 +206,16 @@ class Admin extends React.Component {
     this.setState({ open: false });
   };
 
+  handleUrlSidebar = (path) => {
+    if (this.props.current_path === path) {
+      this.handleDrawerClose();
+    }
+    else {
+      this.setState({path: path});
+      this.setState({redirectToReferrer: true});
+    }
+  };
+
   logout(){
     sessionStorage.setItem("userData",'');
     sessionStorage.setItem("userRole",'');
@@ -214,7 +225,8 @@ class Admin extends React.Component {
 
   render() {
     if (this.state.redirectToReferrer) {
-      return (<Redirect to={'/login'}/>)
+      this.setState({redirectToReferrer: false});
+      return (<Redirect to={this.state.path}/>)
     }
 
     const { anchorEl, mobileMoreAnchorEl } = this.state;
@@ -230,7 +242,7 @@ class Admin extends React.Component {
 
 
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem  onClick={() => this.handleUrlSidebar('/patients')}>Patients</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
         <MenuItem
 
@@ -314,11 +326,11 @@ class Admin extends React.Component {
           </div>
           <Divider />
           <List>
-            {this.state.listSidebar.map((text, index) => (
+            {this.props.listSidebar.map((item, index) => (
               // <a>
-              <ListItem button key={text} onClick={this.handleDrawerClose}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+              <ListItem button key={item.text} onClick={() => this.handleUrlSidebar(item.path)}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={item.text} />
               </ListItem>
               // </a>
             ))}
