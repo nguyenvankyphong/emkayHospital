@@ -8,7 +8,7 @@ import Patients from '././components/Patients/Patients';
 import NotFound from '././components/NotFound/NotFound';
 import Admin from './components/Admin/Admin';
 import Receptionist from './components/Receptionist/Receptionist';
-import Doctor from './components/Doctor/Doctor';
+import Doctor from './components/SpecialistDoctor/SpecialistDoctor';
 
 
 const Routes = () => (

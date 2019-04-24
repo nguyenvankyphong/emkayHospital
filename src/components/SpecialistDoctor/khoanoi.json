@@ -1,0 +1,252 @@
+{
+  "array": [
+    {
+      "isGroup":false,
+      "name": "Lý do vào viện",
+      "type": "longText",
+      "id": "lydo"
+    },
+    {
+      "isGroup":true,
+      "name": "Hỏi bệnh",
+      "arr": [
+        {
+        "isGroup":false,
+        "name": "Quá trình bệnh lý",
+        "type": "longText",
+        "id":"quatrinh"
+        },
+         {
+        "isGroup":true,
+        "name": "Tiền sử bệnh",
+        "arr": [
+            {
+              "isGroup":false,
+              "name": "Bản thân (phát triển thể lực từ nhỏ đến lớn, những bệnh đã mắc, phương pháp ĐTr, tiêm phòng, ăn uống, sinh hoạt  vv...)",
+              "type": "longText",
+              "id": "banthan"
+            },
+            {
+              "isGroup":true,
+              "name": "đặc điểm liên quan tới bệnh",
+              "arr": [
+                {
+                  "isGroup":false,
+                  "name": "Dị ứng",
+                  "type": "boolean",
+                  "id": "diung"
+                },
+                {
+                  "isGroup":false,
+                  "name": "Ma túy",
+                  "type": "boolean",
+                  "id": "matuy"
+                },
+                {
+                  "isGroup":false,
+                  "name": "Rượu bia",
+                  "type": "boolean",
+                  "id": "ruoubia"
+                },
+                {
+                  "isGroup":false,
+                  "name": "Thuốc lá",
+                  "type": "boolean",
+                  "id": "thuocla"
+                },
+                {
+                  "isGroup":false,
+                  "name": "Thuốc lào",
+                  "type": "boolean",
+                  "id": "thuoclao"
+                },
+                {
+                  "isGroup":false,
+                  "name": "Khác",
+                  "type": "boolean",
+                  "id": "khac"
+                }
+                ]
+            },
+            {
+              "isGroup":false,
+              "name": "Gia đình",
+              "type": "longText",
+              "id": "giadinh"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "isGroup":true,
+      "name": "Khám bệnh",
+      "arr": [
+        {
+          "isGroup":false,
+          "name": "Toàn thân:  (ý thức, da niêm mạc, hệ thống hạch, tuyến giáp, vị trí, kích thước, số lượng, di động v.v...)",
+          "type": "longText",
+          "id": "toanthan"
+        },
+        {
+          "isGroup" : true,
+          "name": "Chỉ số",
+          "arr": [
+            {
+            "isGroup" : false,
+            "name" : "Mạch",
+            "type": "shortText",
+            "unit": "lần/ph",
+            "id": "mach"
+            },
+            {
+            "isGroup" : false,
+            "name" : "Nhiệt độ",
+            "type": "shortText",
+            "unit": "độ C",
+            "id": "nhietdo"
+            },
+            {
+            "isGroup" : false,
+            "name" : "Huyết áp",
+            "type": "shortText",
+            "unit": "mmHg",
+            "id": "huyetap"
+            },
+            {
+            "isGroup" : false,
+            "name" : "Nhịp thở",
+            "type": "shortText",
+            "unit": "lần/ph",
+            "id": "nhiptho"
+            },
+            {
+            "isGroup" : false,
+            "name" : "Cân nặng",
+            "type": "shortText",
+            "unit": "kg",
+            "id": "cannang"
+            }
+          ]
+        },
+        {
+            "isGroup" : true,
+            "name" : "Các cơ quan",
+            "arr": [
+                  {
+                    "isGroup" : false,
+                    "name" : "Tuần hoàn",
+                    "type": "longText",
+                    "id": "tuanhoan"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Hô hấp",
+                    "type": "longText",
+                    "id": "hohap"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Tiêu hóa",
+                    "type": "longText",
+                    "id": "tieuhoa"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Thận, tiết niệu, sinh dục",
+                    "type": "longText",
+                    "id": "tietnieu"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Thần kinh",
+                    "type": "longText",
+                    "id": "thankinh"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Cơ Xương Khớp",
+                    "type": "longText",
+                    "id": "xuongkhop"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Tai mũi họng",
+                    "type": "longText",
+                    "id": "taimuihong"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Răng hàm mặt",
+                    "type": "longText",
+                    "id": "ranghammat"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Mắt",
+                    "type": "longText",
+                    "id": "mats"
+                  },
+                  {
+                    "isGroup" : false,
+                    "name" : "Nội tiết, dinh dưỡng và các bệnh lý khác",
+                    "type": "longText",
+                    "id": "noitiet"
+                  }
+            ]
+        },
+        {
+          "isGroup" : false,
+          "name" : "Các xét nghiệm cận lâm sàng cần làm",
+          "type": "longText",
+          "id": "xetnghiem"
+        },
+        {
+          "isGroup" : false,
+          "name" : "Tóm tắt bệnh án",
+          "type": "longText",
+          "id": "tomtat"
+        }
+      ]
+    },
+    {
+      "isGroup" : true,
+      "name" : "Chuẩn đoán khi vào khoa điều trị",
+      "arr": [
+        {
+          "isGroup" : false,
+          "name" : "Bệnh chính",
+          "type": "shortText",
+          "unit" : "",
+          "id": "benhchinh"
+        },
+        {
+          "isGroup" : false,
+          "name" : "Bệnh kèm theo, nếu có",
+          "type": "shortText",
+          "unit" : "",
+          "id": "benhkemtheo"
+        },
+        {
+          "isGroup" : false,
+          "name" : "Phân biệt",
+          "type": "shortText",
+          "unit" : "",
+          "id": "phanbiet"
+        }
+      ]
+    },
+    {
+      "isGroup" : false,
+      "name" : "Tiên lượng",
+      "type": "longText",
+      "id": "tienluong"
+    },
+    {
+      "isGroup" : false,
+      "name" : "Hướng điều trị",
+      "type": "longText",
+      "id": "huongdieutri"
+    }
+  ]
+}

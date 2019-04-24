@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar";
-import BenhAn from './BenhAn';
-import PatientIndex from './Patient/index';
+import Sidebar from "../../Sidebar/Sidebar";
+import InfoPatient from './InfoPatient';
+import HistoryPatient from './HistoryPatient';
+import BenhAn from '../BenhAn';
 import {Route} from 'react-router-dom';
 
 class Patient extends Component {
@@ -29,8 +30,11 @@ class Patient extends Component {
 
     return (
       <div>
-        <Route exact path={this.props.match.path} component={PatientIndex} />
-        <Route path={`${this.props.match.path}/benhan`} component={BenhAn} />
+        <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
+        <div className="row" id="Body">
+            <InfoPatient />
+            <HistoryPatient />
+        </div>
       </div>
     );
   }

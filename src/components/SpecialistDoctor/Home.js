@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
-import DependentPatient from './DependentPatient';
 
 class Home extends Component {
 
@@ -11,9 +10,9 @@ class Home extends Component {
 
     this.state = {
       redirectToReferrer : false,
-      listSidebar: [{text: "Home", path: "/receptionist"},
-                    {text: "Tạo tài khoản", path: "/receptionist/register"},
-                    {text: "Book ca khám", path: "/home"}],
+      listSidebar: [{text: "Home", path: "/doctor"},
+                    {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
+                    {text: "Lịch trực", path: "/doctor/lichtruc"}],
     };
   }
 
@@ -28,7 +27,9 @@ class Home extends Component {
     return (
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
-        <DependentPatient/>
+          <div className="row" id="Body">
+            aa
+          </div>
       </div>
     );
   }

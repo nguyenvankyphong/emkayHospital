@@ -33,19 +33,19 @@ class Login extends Component {
       var list = [];
       list.push(this.state.username);
       list.push(this.state.password);
-      // console.log("show list push");
-      // console.log(list);
+      console.log("show list push");
+      console.log(list);
       request.send(JSON.stringify(list));
       var rs = {};
 
       const scope = this;
 
       request.onload = function () {
-        // console.log("response: ");
-        // console.log(this.response);
+        console.log("response: ");
+        console.log(this.response);
         rs = JSON.parse(this.response);
-        // console.log(rs);
-        // console.log("role" +rs.role);
+        console.log(rs);
+        console.log("role" +rs.role);
 
         if (!rs.errCode) {
         sessionStorage.setItem('userData',rs.token);
@@ -88,6 +88,7 @@ class Login extends Component {
 
   onChange(e){
     this.setState({[e.target.name]:e.target.value});
+    console.log(e);
 
    }
    handlereset(){
