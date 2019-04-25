@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
+import Calendar from "../Layout/Calendar";
 
 class LichTruc extends Component {
 
@@ -49,6 +50,12 @@ class LichTruc extends Component {
     ))
   }
 
+  renderCalendar() {
+    return {
+
+    }
+  }
+
   render() {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)
@@ -58,7 +65,7 @@ class LichTruc extends Component {
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
           <div className="row" id="Body">
-            {this.renderListCaTruc()}
+            <Calendar/>
           </div>
       </div>
     );
