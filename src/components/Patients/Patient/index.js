@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../../Sidebar/Sidebar";
+import InfoPatient from './InfoPatient';
+import HistoryPatient from './HistoryPatient';
+import BenhAn from '../BenhAn';
+import {Route} from 'react-router-dom';
 
-class Home extends Component {
+class Patient extends Component {
 
 
   constructor(props) {
@@ -10,7 +14,9 @@ class Home extends Component {
 
     this.state = {
       redirectToReferrer : false,
-      listSidebar: [{text: "Home", path: "/home"}],
+      listSidebar: [{text: "Home", path: "/patients"},
+                    {text: "All patients", path: "/register"},
+                    {text: "This", path: "/patients/patient"}],
     };
   }
 
@@ -26,10 +32,12 @@ class Home extends Component {
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
         <div className="row" id="Body">
+            <InfoPatient />
+            <HistoryPatient />
         </div>
       </div>
     );
   }
 }
 
-export default Home;
+export default Patient;

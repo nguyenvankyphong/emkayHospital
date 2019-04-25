@@ -3,8 +3,6 @@ import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
 
 class Register extends Component {
-
-
   constructor(props) {
     super(props);
 
@@ -16,11 +14,14 @@ class Register extends Component {
       bhyt: '',
       diachi: '',
       redirectToReferrer : false,
-      listSidebar: [{text: "Home", path: "/receptionist/home"},
-                    {text: "Tạo tài khoản", path: "/register"},
+      isRegistered: false,
+      qr: '',
+      listSidebar: [{text: "Home", path: "/receptionist"},
+                    {text: "Tạo tài khoản", path: "/receptionist/register"},
                     {text: "Book ca khám", path: "/home"}],
     };
 
+    this.newAccount = this.newAccount.bind(this);
     this.onChange = this.onChange.bind(this);
     this.register = this.register.bind(this);
     this.convertTime = this.convertTime.bind(this);
@@ -54,22 +55,24 @@ class Register extends Component {
       list.push(this.state.gioitinh);
       list.push(this.state.bhyt);
       list.push(this.state.diachi);
-      console.log("show list push");
-      console.log(list);
       request.send(JSON.stringify(list));
       var rs = {};
 
-      const scope = this;
+      console.log("list");
+      console.log(list);
 
+      const scope = this;
       request.onload = function () {
         console.log("response: ");
         console.log(this.response);
         rs = JSON.parse(this.response);
-        console.log(rs);
-        console.log("role" +rs.qr);
+        // console.log(rs);
+        // console.log("role" +rs.qr);
 
         if (!rs.errCode) {
-        console.log(scope.state);
+          scope.setState({isRegistered: true});
+          scope.setState({qr: rs.value});
+        // console.log(scope.state);
       }
     }
     }
@@ -77,12 +80,36 @@ class Register extends Component {
 
   onChange(e){
     this.setState({[e.target.name]:e.target.value});
-    console.log(this.state);
+    // console.log(this.state);
+   }
+
+   newAccount() {
+       // console.log("vô đc");
+       this.setState({isRegistered: false});
+       this.setState({qr: ''});
+
    }
 
   render() {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)
+    }
+
+    if (this.state.isRegistered) {
+      return (
+        <div>
+          <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
+          <div className="row" id="Body">
+          <div className= "row" cid="Body">
+            <div className="medium-4 columns left">
+              <h1>Register</h1>
+              <img src = {this.state.qr}></img>
+              <input type="submit" className="button success" value="New account" onClick={this.newAccount} />
+            </div>
+          </div>
+          </div>
+        </div>
+      );
     }
     var body;
     switch (sessionStorage.getItem("userRole")) {
@@ -91,6 +118,7 @@ class Register extends Component {
 
     return (
       <div>
+        {console.log(this.state)}
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
         <div className="row" id="Body">
         <div className= "row" cid="Body">

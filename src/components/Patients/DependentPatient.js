@@ -14,6 +14,8 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
+import { Link } from '@material-ui/core';
+import {Redirect} from 'react-router-dom';
 
 const actionsStyles = theme => ({
   root: {
@@ -113,7 +115,7 @@ const styles = theme => ({
   },
 });
 
-class Patients extends React.Component {
+class DependentPatient extends React.Component {
   constructor(props){
     super(props);
 
@@ -121,8 +123,9 @@ class Patients extends React.Component {
       listBenhNhan:[],
      page: 0,
      rowsPerPage: 5,
+     redirectPatient: false
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   handleChangePage = (event, page) => {
@@ -132,7 +135,13 @@ class Patients extends React.Component {
   handleChangeRowsPerPage = event => {
     this.setState({ page: 0, rowsPerPage: event.target.value });
   };
-  componentDidMount() {
+  redirectPatient(id){
+    sessionStorage.setItem('id_patient',id);
+    this.setState({redirectPatient: true});
+  }
+
+
+  componentWillMount() {
     var proxy = 'https://cors-anywhere.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/getListBenhNhan',{
         method: 'GET',
@@ -147,7 +156,8 @@ class Patients extends React.Component {
     .then(resData => {
        console.log(JSON.stringify(resData))
        console.log("Token: "+sessionStorage.getItem('userData'))
-       this.setState({ listBenhNhan: resData.listBenhNhan });
+       this.setState({ listBenhNhan: resData.listBenhNhan});
+
     })
 }
 
@@ -156,8 +166,10 @@ class Patients extends React.Component {
     const { classes } = this.props;
     const {rowsPerPage, page } = this.state;
     const {listBenhNhan} = this.state;
-    const emptyRows = rowsPerPage - Math.min(rowsPerPage, listBenhNhan.length - page * rowsPerPage);
-
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, this.state.listBenhNhan.length - page * rowsPerPage);
+    if(this.state.redirectPatient){
+      return (<Redirect to={'/patients/patient'}/>)
+    }
 
     return (
       <Paper className={classes.root}>
@@ -175,7 +187,8 @@ class Patients extends React.Component {
               {listBenhNhan.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row,index) => (
                 <TableRow key ={index}>
                 <TableCell align="center">{row.id}</TableCell>
-                <TableCell align="center">{row.name}</TableCell>
+
+                <TableCell align="center" ><Link onClick={()=>this.redirectPatient(row.id)}>{row.name}</Link></TableCell>
                 <TableCell align="center">{row.NgaySinh}</TableCell>
 
                 </TableRow>
@@ -210,8 +223,8 @@ class Patients extends React.Component {
   }
 }
 
-Patients.propTypes = {
+DependentPatient.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Patients);
+export default withStyles(styles)(DependentPatient);

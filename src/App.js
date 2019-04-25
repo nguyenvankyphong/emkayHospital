@@ -5,12 +5,6 @@ import './styles/custom.css';
 import './App.css';
 
 import Routes from './routes';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Sidebar from './components/Sidebar/Sidebar';
-
-import MobileHeader from './components/MobileHeader/MobileHeader';
-
 
 class App extends Component {
 

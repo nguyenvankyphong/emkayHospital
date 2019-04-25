@@ -2,23 +2,25 @@ import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
-import Register from "./Register";
 import Home from "./Home";
+import HosoKhamBenh from "./HosoKhamBenh";
+import CaTruc from "./CaTruc";
 
 
-class Receptionist extends Component {
+class SpecialistDoctor extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      listSidebar: [{text: "Home", path: "/receptionist"},
-                    {text: "Tạo tài khoản", path: "/register"},
-                    {text: "Book ca khám", path: "/home"}],
+      listSidebar: [{text: "Home", path: "/doctor"},
+                    {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
+                    {text: "Lịch trực", path: "/doctor/lichtruc"}],
       redirectToReferrer: false,
     };
   }
 
   componentWillMount() {
+    
 
   }
 
@@ -29,10 +31,11 @@ class Receptionist extends Component {
     return (
       <div>
             <Route exact path={this.props.match.path} component={Home} />
-            <Route path={`${this.props.match.path}/register`} component={Register} />
+            <Route path={`${this.props.match.path}/hoso`} component={HosoKhamBenh} />
+            <Route path={`${this.props.match.path}/lichtruc`} component={CaTruc} />
       </div>
     );
   }
 }
 
-export default Receptionist;
+export default SpecialistDoctor;

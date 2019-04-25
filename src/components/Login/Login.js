@@ -52,7 +52,7 @@ class Login extends Component {
         sessionStorage.setItem('userRole',rs.role);
         scope.setState({redirectToReferrer: true});
 
-        console.log(scope.state);
+        // console.log(scope.state);
       }
 
         //check info rs
@@ -63,7 +63,7 @@ class Login extends Component {
         // for (var key in rs) {
         //     array_keys.push(key);
         //     array_values.push(rs[key]);
-        //     console.log(array_values);
+            // console.log(array_values);
         // }
 
 
@@ -88,6 +88,7 @@ class Login extends Component {
 
   onChange(e){
     this.setState({[e.target.name]:e.target.value});
+    console.log(e);
 
    }
    handlereset(){
@@ -116,6 +117,9 @@ class Login extends Component {
            return (<Redirect to={'/admin'}/>)
            break;
        }
+    }
+    if (sessionStorage.getItem("userData")) {
+      return (<Redirect to={'/home'}/>)
     }
 
 
