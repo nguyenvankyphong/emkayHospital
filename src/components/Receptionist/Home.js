@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
+import AddCaKham from "./AddCaKham"
 
 class Home extends Component {
 
@@ -28,6 +29,7 @@ class Home extends Component {
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
         <div className="row" id="Body">
+          <AddCaKham/>
         </div>
       </div>
     );

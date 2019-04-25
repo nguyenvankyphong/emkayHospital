@@ -5,7 +5,7 @@ import Sidebar from "../Sidebar/Sidebar";
 class Register extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       sdt: '',
       ngaysinh: '',
@@ -58,10 +58,13 @@ class Register extends Component {
       request.send(JSON.stringify(list));
       var rs = {};
 
+      console.log("list");
+      console.log(list);
+
       const scope = this;
       request.onload = function () {
-        // console.log("response: ");
-        // console.log(this.response);
+        console.log("response: ");
+        console.log(this.response);
         rs = JSON.parse(this.response);
         // console.log(rs);
         // console.log("role" +rs.qr);
@@ -115,6 +118,7 @@ class Register extends Component {
 
     return (
       <div>
+        {console.log(this.state)}
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
         <div className="row" id="Body">
         <div className= "row" cid="Body">
