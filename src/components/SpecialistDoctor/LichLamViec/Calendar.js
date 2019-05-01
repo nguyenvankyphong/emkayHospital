@@ -4,6 +4,7 @@ import MomentCalendarFactory from 'moment-calendar-2/src/api';
 import './Calendar.css';
 import Grid from '@material-ui/core/Grid';
 import SimpleModal from './SimpleModal'
+import { Link } from 'react-router-dom'
 
 
 class Calendar extends Component {
@@ -35,31 +36,19 @@ class Calendar extends Component {
 
 
   loadCaTrucTrongNgay(day) {
-    // console.log("this.state.list")
-    // console.log(this.state.list)
-    var listOfThisDay = this.state.list.filter((item) => {
-      let thisDay = new Date(item.Ngay);
+
+    var item = this.state.list.find((item) => {
+      let thisDay = new Date(item.ngay);
       if (thisDay.getDate() == day) return item;
     })
-    var ca1 = listOfThisDay.filter((item) => {
-      if (item.Buoi == 1) return item;
-    })
-    var ca2 = listOfThisDay.filter((item) => {
-      if (item.Buoi == 2) return item;
-    })
-    var ca3 = listOfThisDay.filter((item) => {
-      if (item.Buoi == 3) return item;
-    })
-
-    var date = new Date(this.props.date);
-    date.setDate(day);
-
+    if (typeof item !== 'undefined') {
+      return <Grid container spacing={24} className="">
+            <Grid item xs = {12}><a href={"/doctor/khambenh/"+item.idCakham}>{day}</a></Grid>
+            <Grid item xs = {12}>Ca {item.buoi} - {item.tenPhong}</Grid>
+          </Grid>}
     return <Grid container spacing={24} className="">
-      <Grid item xs = {12}><SimpleModal name = {day} list={listOfThisDay} room={this.props.room} date={date}/></Grid>
-      <Grid item xs = {12}>Ca 1({ca1.length})</Grid>
-      <Grid item xs = {12}>Ca 2({ca2.length})</Grid>
-      <Grid item xs = {12}>Ca 3({ca3.length})</Grid>
-    </Grid>
+                                <Grid item xs = {12}>{day}</Grid>
+                              </Grid>
   }
 
   render() {

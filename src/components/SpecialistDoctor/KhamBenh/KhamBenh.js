@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../../Sidebar/Sidebar";
 
 class Home extends Component {
 

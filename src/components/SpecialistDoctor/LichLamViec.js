@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
-import Calendar from "./CaTruc/Calendar";
+import Calendar from "./LichLamViec/Calendar";
 import leftPad from 'left-pad';
 import Grid from '@material-ui/core/Grid';
 
-class LichTruc extends Component {
+class LichLamViec extends Component {
 
 
   constructor(props) {
@@ -62,7 +62,7 @@ class LichTruc extends Component {
   componentDidMount() {
     var self = this;
     var proxy = 'https://cors-anywhere.herokuapp.com/'
-    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListPhongKham',{
+    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getLichLamViec',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -74,18 +74,18 @@ class LichTruc extends Component {
     .then(response =>  response.json())
     .then(resData => {
         this.setState({
-          listRoom: [...resData.arr],
-          room: {...resData.arr[0]}
+          listCaTruc: [...resData.arr]
+        //   listRoom: [...resData.arr],
+        //   room: {...resData.arr[0]}
         });
-        this.loadData(this.state.room, this.state.month, this.state.year)
+        // this.loadData(this.state.room, this.state.month, this.state.year)
 
     })
   }
 
-  loadData(room, month, year) {
-    console.log("load data");
+  loadData() {
     var proxy = 'https://cors-anywhere.herokuapp.com/'
-    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getAllCaKham?idPhong='+room.idPhongKham+'&month='+month+'&year='+year,{
+    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getLichLamViec',{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -96,10 +96,8 @@ class LichTruc extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
-      console.log(resData);
-      console.log(resData);
-      this.setState({ listCaTruc: resData.arr});
-      console.log(this.state);
+       this.setState({ listCaTruc: resData.arr});
+
     })
 
   }
@@ -157,6 +155,7 @@ class LichTruc extends Component {
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
           <div className="row" id="Body">
             <div className="App">
+              Lịch Làm Việc
               <form className="year-selection">
                 <Grid container spacing={24}>
                   <Grid item xs = {4} >
@@ -199,9 +198,7 @@ class LichTruc extends Component {
                 </Grid>
               </form>
 
-              <div id="calendar">
-                <Calendar date={formattedDate} list={this.state.listCaTruc} room={this.state.room}/>
-              </div>
+              <Calendar date={formattedDate} list={this.state.listCaTruc} room={this.state.room}/>
             </div>
           </div>
       </div>
@@ -210,4 +207,4 @@ class LichTruc extends Component {
   }
 }
 
-export default LichTruc;
+export default LichLamViec;

@@ -174,6 +174,7 @@ class Admin extends React.Component {
     };
     this.logout = this.logout.bind(this);
     this.handleUrlSidebar = this.handleUrlSidebar.bind(this);
+    this.lockRedirect = this.lockRedirect.bind(this);
   }
 
   handleListSidebar = list => {
@@ -223,9 +224,12 @@ class Admin extends React.Component {
     this.setState({redirectToReferrer: true});
   };
 
+  lockRedirect() {
+    this.setState({redirectToReferrer: false});
+  };
+
   render() {
     if (this.state.redirectToReferrer) {
-      this.setState({redirectToReferrer: false});
       return (<Redirect to={this.state.path}/>)
     }
 

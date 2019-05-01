@@ -19,7 +19,8 @@ class HosoKhamBenh extends Component {
       kq: {},
       listSidebar: [{text: "Home", path: "/doctor"},
                     {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
-                    {text: "Lịch trực", path: "/doctor/lichtruc"}],
+                    {text: "Lịch trực", path: "/doctor/lichtruc"},
+                    {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 
     this.renderListFeatures = this.renderListFeatures.bind(this);
@@ -41,8 +42,6 @@ class HosoKhamBenh extends Component {
   }
 
   onChange(e){
-    console.log("value");
-    console.log(e.target.checked);
     const a = e.target;
     this.setState(prevState => ({
       kq: {
@@ -52,14 +51,11 @@ class HosoKhamBenh extends Component {
 
     }
   ));
-  console.log(this.state.kq);
 
    }
 
    handleChangeCheckbox(e) {
-     console.log(e.target.checked);
      const a = e.target;
-     console.log(a.checked);
 
      this.setState(prevState => ({
        kq: {
@@ -69,7 +65,6 @@ class HosoKhamBenh extends Component {
 
      }
    ));
-   console.log(this.state.kq);
    }
 
   renderInput(item) {
@@ -96,6 +91,7 @@ class HosoKhamBenh extends Component {
 }
 
   renderListFeatures(list) {
+    console.log(list);
     return list.map((item, index) => (
       <Grid item xs={item.isGroup ? 12 : (item.type == "longText"? 6 : 4)} key = {index} item>
       {item.isGroup ? (
