@@ -12,13 +12,17 @@ class SpecialistDoctor extends Component {
     this.state = {
       listSidebar: [{text: "Home", path: "/doctor"},
                     {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
-                    {text: "Lịch trực", path: "/doctor/lichtruc"}],
+                    {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
       redirectToReferrer: false,
     };
   }
 
-  componentWillMount() {
-
+  componentDidMount() {
+    if (localStorage.truongKhoa === "true") {
+      let listSidebar = [...this.state.listSidebar];
+      listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
+      this.setState({ listSidebar });
+    }
 
   }
 

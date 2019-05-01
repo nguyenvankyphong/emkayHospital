@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import {Redirect} from 'react-router-dom';
+import {checkErrCode} from '../../Layout/checkErrCode'
 
 class AddCaTrucForm extends React.Component {
   constructor(props) {
@@ -65,7 +66,8 @@ class AddCaTrucForm extends React.Component {
         console.log("response: ");
         console.log(this.response);
         // rs = JSON.parse(this.response);
-
+        checkErrCode(rs.errCode);
+        window.location.pathname = window.location.pathname
         if (!rs.errCode) {
           return (<Redirect to={'/home'}/>)
         // sessionStorage.setItem('userData',rs.token);

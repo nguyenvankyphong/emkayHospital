@@ -7,7 +7,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ReactDOM from 'react-dom';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import './KhamTheoCa.css';
+import {checkErrCode} from '../../Layout/checkErrCode'
 class Home extends Component {
 
 
@@ -19,13 +20,21 @@ class Home extends Component {
       listMauHoSo: [],
       mauHoSo: '',
       kq: {},
+      listSuggestedThuoc: [],
+      selectedThuoc: '',
+      soLuong: 0,
+      note: '',
       redirectToReferrer : false,
       listSidebar: [{text: "Home", path: "/doctor"},
                     {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
-                    {text: "Lịch trực", path: "/doctor/lichtruc"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 
+    this.addThuoc= this.addThuoc.bind(this);
+    this.onFocusOut= this.onFocusOut.bind(this);
+    this.selectThuoc= this.selectThuoc.bind(this);
+    this.onSearchThuoc= this.onSearchThuoc.bind(this);
+    this.addFormDonThuoc= this.addFormDonThuoc.bind(this);
     this.chonBenhNhan= this.chonBenhNhan.bind(this);
     this.onChangeHoSo= this.onChangeHoSo.bind(this);
     this.addKetQuaKham= this.addKetQuaKham.bind(this);
@@ -36,6 +45,11 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    if (localStorage.truongKhoa === "true") {
+      let listSidebar = [...this.state.listSidebar];
+      listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
+      this.setState({ listSidebar });
+    }
     console.log(this.props.match.params);
     var idCaKham = this.props.match.params.id;
     var proxy = 'https://cors-anywhere.herokuapp.com/'
@@ -52,6 +66,7 @@ class Home extends Component {
     .then(resData => {
         console.log("list ho so:");
         console.log(resData);
+        checkErrCode(resData.errCode);
         this.setState({
           listBenhNhan: [...resData.arr]
         //   listRoom: [...resData.arr],
@@ -63,8 +78,6 @@ class Home extends Component {
   }
 
   chonBenhNhan(idHoSo) {
-
-    console.log("chọn bệnh nhân");
     var idCaKham = this.props.match.params.id;
     var proxy = 'https://cors-anywhere.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListMauHoSo?idCaKham='+idCaKham,{
@@ -78,6 +91,7 @@ class Home extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
         // console.log(resData);
         this.setState({
           listMauHoSo: [...resData.arr]
@@ -113,8 +127,179 @@ class Home extends Component {
         ReactDOM.render(<div>{selector}</div>, document.getElementById("chonMauHoSo"));
         ReactDOM.render(<div>
           {this.renderListFeatures(b.array)}
+          <input type="submit" className="button success" value="Thêm thuốc" onClick={this.addFormDonThuoc} />
+          <div id="formDonThuoc">
+          </div>
+
           <input type="submit" className="button success" value="Lưu" onClick={this.addKetQuaKham} />
+
         </div>, document.getElementById("Khambenh"));
+    })
+  }
+
+  addFormDonThuoc() {
+    console.log("begin add form don thuoc");
+    console.log(this.state.listSuggestedThuoc);
+
+    ReactDOM.render(<div>
+      <Grid container spacing={24}>
+        <Grid item xs = {3} >
+          <input
+            id="inputThuoc"
+            type="text"
+            name="tenthuoc"
+            placeholder="Tên thuốc"
+            onChange={this.onSearchThuoc}
+            onBlur={this.onFocusOut}
+          />
+          <div>
+            {this.state.listSuggestedThuoc.map((item, index) => (
+              <div key={index} className="suggestedItem" onClick={this.selectThuoc} value={item.idChiPhi} name={item.tenchiphi}>
+                {item.tenchiphi}
+              </div>
+            ))}
+          </div>
+        </Grid>
+        <Grid item xs = {3} >
+          <input
+            type="text"
+            name="soLuong"
+            placeholder="Số lượng"
+            onChange={this.onChangeHoSo}
+            id="inputSoLuong"
+          />
+
+        </Grid>
+        <Grid item xs = {3} >
+          <input
+            type="text"
+            name="note"
+            placeholder="Note"
+            onChange={this.onChangeHoSo}
+            id="inputNote"
+          />
+        </Grid>
+        <Grid item xs = {1} >
+          <input
+            type="submit"
+            className="button success"
+            value="Lưu"
+            onClick={this.addThuoc} />
+        </Grid>
+        <Grid item xs = {1} >
+          <div id="addThuocRs"></div>
+        </Grid>
+      </Grid>
+    </div>, document.getElementById("formDonThuoc"));
+  }
+
+  addThuoc() {
+    console.log(this.state);
+    if(this.state.selectedThuoc && this.state.note && this.state.soLuong){
+      var request = new XMLHttpRequest()
+      var proxy = 'https://cors-anywhere.herokuapp.com/'
+
+      // Open a new connection, using the GET request on the URL endpoint
+      request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/bill/themthuocvaodonthuoc', true)
+      request.setRequestHeader("content-type","application/json")
+      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+
+
+      var list = {
+                "idHSKB": localStorage.idHoSo,
+                "listdtdv":[
+                  {
+                    "idChiPhi":this.state.selectedThuoc,
+                    "SoLuong": parseInt(this.state.soLuong),
+                    "note": this.state.note
+                  }]
+              }
+
+      console.log("show list push");
+      console.log(JSON.stringify(list));
+      request.send(JSON.stringify(list));
+      var rs = {};
+
+      const scope = this;
+
+      request.onload = function () {
+        console.log("response: ");
+        console.log(this.response);
+        rs = JSON.parse(this.response);
+        console.log(rs);
+
+
+        checkErrCode(rs.errCode);
+        if (!rs.errCode) {
+          var a = document.getElementById('inputSoLuong')
+          a.value = '';
+          var b = document.getElementById('inputNote')
+          b.value='';
+          var c = document.getElementById('inputThuoc')
+          c.value='';
+          var c = document.getElementById('addThuocRs')
+          c.innerHTML ='ok';
+
+        // sessionStorage.setItem('userRole',rs.role);
+        scope.setState({
+          // listMauHoSo: [],
+          // mauHoSo: '',
+          // kq: {},
+        });
+        // ReactDOM.render(<div></div>, document.getElementById("chonMauHoSo"));
+        // ReactDOM.render(<div></div>, document.getElementById("Khambenh"));
+
+        }
+      }
+    }
+  }
+
+  selectThuoc(e) {
+    var idThuoc = e.target.attributes.value.value;
+    var element = document.getElementById("inputThuoc");
+    element.value= e.target.attributes.name.value
+    console.log(element);
+    this.setState({
+      listSuggestedThuoc: [],
+      selectedThuoc: idThuoc,
+    });
+    this.state.listSuggestedThuoc.length = 0;
+    console.log("end of select");
+    console.log(this.state.listSuggestedThuoc);
+    this.addFormDonThuoc();
+  }
+
+  onFocusOut(e) {
+    // this.setState({
+    //   listSuggestedThuoc: []
+    // });
+  }
+
+  onSearchThuoc(e) {
+    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/bill/getDrugByName?TenChiPhi='+e.target.value,{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Origin': '',
+          'Token' : sessionStorage.getItem('userData'),
+        },
+    })
+    .then(response =>  response.json())
+    .then(resData => {
+        console.log(resData);
+        if (resData.errCode === 0) {
+          this.setState({
+            listSuggestedThuoc: [...resData.result]
+          });
+        }
+        else {
+          this.setState({
+            listSuggestedThuoc: []
+          });
+        }
+        this.addFormDonThuoc();
     })
   }
 
@@ -228,8 +413,6 @@ class Home extends Component {
         console.log("role" +rs.role);
 
         if (!rs.errCode) {
-
-
         // sessionStorage.setItem('userRole',rs.role);
         scope.setState({
           listMauHoSo: [],
@@ -282,6 +465,7 @@ class Home extends Component {
 
             </Grid>
           </Grid>
+
         </div>
       </div>
     );

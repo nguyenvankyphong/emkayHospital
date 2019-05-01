@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
+import Example from "./Example";
 
 class Home extends Component {
 
@@ -12,7 +13,6 @@ class Home extends Component {
       redirectToReferrer : false,
       listSidebar: [{text: "Home", path: "/doctor"},
                     {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
-                    {text: "Lịch trực", path: "/doctor/lichtruc"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
   }
@@ -20,6 +20,15 @@ class Home extends Component {
   componentWillMount() {
 
   }
+
+  componentDidMount() {
+    if (localStorage.truongKhoa === "true") {
+      let listSidebar = [...this.state.listSidebar];
+      listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
+      this.setState({ listSidebar });
+    }
+  }
+
   render() {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)
@@ -29,7 +38,7 @@ class Home extends Component {
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
           <div className="row" id="Body">
-            aa
+
           </div>
       </div>
     );

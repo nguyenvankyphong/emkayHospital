@@ -27,7 +27,6 @@ class LichTruc extends Component {
       listRoom: [],
       listSidebar: [{text: "Home", path: "/doctor"},
                     {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
-                    {text: "Lịch trực", path: "/doctor/lichtruc"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 
@@ -60,6 +59,11 @@ class LichTruc extends Component {
   }
 
   componentDidMount() {
+    if (localStorage.truongKhoa === "true") {
+      let listSidebar = [...this.state.listSidebar];
+      listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
+      this.setState({ listSidebar });
+    }
     var self = this;
     var proxy = 'https://cors-anywhere.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListPhongKham',{
@@ -85,7 +89,7 @@ class LichTruc extends Component {
   loadData(room, month, year) {
     console.log("load data");
     var proxy = 'https://cors-anywhere.herokuapp.com/'
-    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getAllCaKham?idPhong='+room.idPhongKham+'&month='+month+'&year='+year,{
+    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getAllCaKham?idPhong='+localStorage.idPhongKham+'&month='+month+'&year='+year,{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -115,7 +119,13 @@ class LichTruc extends Component {
   }
 
   onChangeRoom = (e) => {
+    console.log("onchange room");
+    console.log(e.target.value);
+    var b = document.getElementById('selectRoom');
+
     var room = this.state.listRoom.find((item) => {return item.idPhongKham == e.target.value})
+    b.value = room.idPhongKham;
+    localStorage.setItem('idPhongKham', room.idPhongKham);
     this.setState({ room: {...room} });
     this.loadData(room, this.state.month, this.state.year);
   }
@@ -161,7 +171,7 @@ class LichTruc extends Component {
                 <Grid container spacing={24}>
                   <Grid item xs = {4} >
                     <label htmlFor="room">Room</label>
-                    <select name="room" value="phong" onChange={this.onChangeRoom}>
+                    <select name="room" onChange={this.onChangeRoom} id="selectRoom" value={localStorage.idPhongKham}>
                       {this.state.listRoom.map( (room) => {
                         return <option key={room.idPhongKham} value={room.idPhongKham}>{room.SoPhong}-{room.TenPhong}</option>
                       })}
