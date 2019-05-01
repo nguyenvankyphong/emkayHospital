@@ -4,25 +4,25 @@ import Sidebar from "../Sidebar/Sidebar";
 import AddCaKham from "./AddCaKham"
 
 class Home extends Component {
-
-
   constructor(props) {
     super(props);
 
     this.state = {
       redirectToReferrer : false,
-      listSidebar: [{ text: "Home", path: "/receptionist" },
-      { text: "Tạo tài khoản", path: "/receptionist/register" },
-      { text: "Đặt lịch khám", path: "/receptionist/dat_lich" },
-      { text: "Thêm khoản phí", path: "/receptionist/add_khoan_phi" },
-      { text: "Xuất hóa đơn", path: "/receptionist/xuat_hoa_don" },
-      ],
+      listSidebar: [{text: "Home", path: "/receptionist"},
+                    {text: "Tạo tài khoản", path: "/receptionist/register"},
+                    {text: "Book ca khám", path: "/home"},
+                    { text: "Đặt lịch khám", path: "/receptionist/dat_lich" },
+                    { text: "Thêm khoản phí", path: "/receptionist/add_khoan_phi" },
+                    { text: "Xuất hóa đơn", path: "/receptionist/xuat_hoa_don" },
+                    {text: "Tạo QR mới", path: "/receptionist/newqr"}],
     };
   }
 
   componentWillMount() {
 
   }
+
   render() {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)

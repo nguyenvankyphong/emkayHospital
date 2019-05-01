@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
+import DatePicker from 'react-datepicker';
 
 class Register extends Component {
   constructor(props) {
@@ -21,11 +22,13 @@ class Register extends Component {
       { text: "Đặt lịch khám", path: "/receptionist/dat_lich" },
       { text: "Thêm khoản phí", path: "/receptionist/add_khoan_phi" },
       { text: "Xuất hóa đơn", path: "/receptionist/xuat_hoa_don" },
+      {text: "Tạo QR mới", path: "/receptionist/newqr"}
       ],
     };
 
     this.newAccount = this.newAccount.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleChangeRadio = this.handleChangeRadio.bind(this);
     this.register = this.register.bind(this);
     this.convertTime = this.convertTime.bind(this);
   }
@@ -93,6 +96,12 @@ class Register extends Component {
 
   }
 
+   handleChangeRadio(e) {
+     console.log("e");
+     console.log(e);
+     this.setState({[e.target.name]:e.target.value});
+   }
+
   render() {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
@@ -123,33 +132,32 @@ class Register extends Component {
       <div>
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
         <div className="row" id="Body">
-          <div className="row" cid="Body">
-            <div className="medium-4 columns left">
-              <h1>Register</h1>
-              <label>Số điện thoại</label>
-              <input type="text" ref="someUser" name="sdt" placeholder="Số điện thoại" onChange={this.onChange} />
+          <h1 className="title">EMKAY HOSPITAL</h1>
+          <div className="medium-4 columns left">
+            <h1>Register</h1>
+            <label>Số điện thoại</label>
+            <input type="text" ref="someUser" name="sdt" placeholder="Số điện thoại" onChange={this.onChange}/>
 
-              <label>Tên</label>
-              <input type="text" ref="someUser" name="ten" placeholder="Tên" onChange={this.onChange} />
+            <label>Tên</label>
+            <input type="text" ref="someUser" name="ten" placeholder="Tên" onChange={this.onChange}/>
 
-              <label>Ngày sinh</label>
-              <input type="text" ref="someUser" name="ngaysinh" placeholder="Ngày sinh" onChange={this.onChange} />
+            <label>Ngày sinh</label>
+            <input type="text" ref="someUser" name="ngaysinh" placeholder="Ngày sinh" onChange={this.onChange}/>
 
-              <label>Giới tính</label>
-              <select onChange={this.onChange} ref="gender">
-                <option key="0" value="0">Nam</option>
-                <option key="1" value="1">Nữ</option>
-              </select>
+            <label>Giới tính</label>
+            <select onChange={this.onChange} ref="gender">
+              <option key="0" value="0">Nam</option>
+              <option key="1" value="1">Nữ</option>
+            </select>
 
-              <label>Địa chỉ</label>
-              <input type="text" ref="someUser" name="diachi" placeholder="Địa chỉ" onChange={this.onChange} />
+            <label>Địa chỉ</label>
+            <input type="text" ref="someUser" name="diachi" placeholder="Địa chỉ" onChange={this.onChange}/>
 
-              <label>Số BHYT</label>
-              <input type="text" ref="someUser" name="bhyt" placeholder="Số BHYT" onChange={this.onChange} />
-              <div className="bt">
-                <input type="submit" className="button success" value="Register" onClick={this.register} />
-                <input type="reset" className="button reset" value="reset" onClick={this.handlereset} />
-              </div>
+            <label>Số BHYT</label>
+            <input type="text" ref="someUser" name="bhyt" placeholder="Số BHYT" onChange={this.onChange}/>
+            <div className= "bt">
+              <input type="submit" className="button success" value="Register" onClick={this.register} />
+              <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
             </div>
           </div>
         </div>

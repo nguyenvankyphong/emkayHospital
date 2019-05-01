@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar";
-import Home from "./Home";
-import HosoKhamBenh from "./HosoKhamBenh";
-import CaTruc from "./CaTruc";
-import LichLamViec from "./LichLamViec";
-import KhamBenh from "./KhamBenh";
+import Home from "./KhamBenh/KhamBenh";
+import KhamTheoCa from "./KhamBenh/KhamTheoCa";
 
 
 class SpecialistDoctor extends Component {
@@ -33,10 +29,7 @@ class SpecialistDoctor extends Component {
     return (
       <div>
             <Route exact path={this.props.match.path} component={Home} />
-            <Route path={`${this.props.match.path}/hoso`} component={HosoKhamBenh} />
-            <Route path={`${this.props.match.path}/lichtruc`} component={CaTruc} />
-            <Route path={`${this.props.match.path}/lichlamviec`} component={LichLamViec} />
-            <Route path={`${this.props.match.path}/khambenh`} component={KhamBenh} />
+            <Route path={`${this.props.match.path}/:id`} component={KhamTheoCa} />
       </div>
     );
   }
