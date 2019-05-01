@@ -2,11 +2,9 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import InfoPatient from './InfoPatient';
-import HistoryPatient from './HistoryPatient';
 import BenhAn from '../BenhAn';
-import {Route} from 'react-router-dom';
 
-class Patient extends Component {
+class index extends Component {
 
 
   constructor(props) {
@@ -14,9 +12,11 @@ class Patient extends Component {
 
     this.state = {
       redirectToReferrer : false,
-      listSidebar: [{text: "Home", path: "/patients"},
-                    {text: "All patients", path: "/register"},
-                    {text: "This", path: "/patients/patient"}],
+      listSidebar: [{ text: "Home", path: "/patients/patient" },
+                    { text: "Lịch sử khám bệnh", path: "/patients/patient/history" },
+                    { text: "Lịch tái khám", path: "/patients/patient/lich_tai_kham" },
+                    { text: "Đặt lịch khám", path: "/patients/patient/dat_lich_kham" },
+                    { text: "Góp ý", path: "/patients/patient/gopy" }],
     };
   }
 
@@ -30,14 +30,13 @@ class Patient extends Component {
 
     return (
       <div>
-        <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
+        <Sidebar listSidebar= {this.state.listSidebar} />
         <div className="row" id="Body">
             <InfoPatient />
-            <HistoryPatient />
         </div>
       </div>
     );
   }
 }
 
-export default Patient;
+export default index;

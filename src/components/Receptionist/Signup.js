@@ -39,7 +39,7 @@ class Register extends Component {
 
     if(this.state.sdt && this.state.ten){
       var request = new XMLHttpRequest()
-      var proxy = 'https://cors-anywhere.herokuapp.com/'
+      var proxy = 'https://doanhttt.herokuapp.com/'
 
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/register_patient', true)

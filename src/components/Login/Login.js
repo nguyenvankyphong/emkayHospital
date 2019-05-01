@@ -23,7 +23,7 @@ class Login extends Component {
 
     if(this.state.username && this.state.password){
       var request = new XMLHttpRequest()
-      var proxy = 'https://cors-anywhere.herokuapp.com/'
+      var proxy = 'https://doanhttt.herokuapp.com/'
 
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/login', true)
@@ -88,7 +88,6 @@ class Login extends Component {
 
   onChange(e){
     this.setState({[e.target.name]:e.target.value});
-    console.log(e);
 
    }
    handlereset(){
@@ -105,7 +104,7 @@ class Login extends Component {
      if (this.state.redirectToReferrer) {
        switch (sessionStorage.getItem('userRole')) {
          case "1":
-           return (<Redirect to={'/patient'}/>)
+           return (<Redirect to={'/patients'}/>)
            break;
          case "2":
            return (<Redirect to={'/doctor'}/>)
