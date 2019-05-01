@@ -1,9 +1,5 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import {Redirect} from 'react-router-dom';
 
 class InfoPatient extends React.Component {
   constructor(props){
@@ -15,14 +11,18 @@ class InfoPatient extends React.Component {
       gender: '',
       add: '',
       phone: '',
-      insurance: ''
+      insurance: '',
+      redirect: false
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleGender = this.handleGender.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
-
-  componentDidMount() {
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+onChange(e){
+  this.setState({[e.target.name]:e.target.value});
+}
+  componentDidMount() { 
+    var proxy = 'https://doanhttt.herokuapp.com/'
     var id= sessionStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/account/getBenhNhanById?idBenhNhan='+id;
     fetch(proxy+apiadd,{
@@ -59,29 +59,35 @@ handleGender(gender){
     }
 
 }
-
+update_Page=()=>{
+  this.setState({redirect: true});
+}
   render() {
-    const{name,birth,gender,add,phone,insurance} = this.state;
+    if(this.state.redirect){
+      return (<Redirect to="/patients/patient/update_Info"/>)
+    }
+    const { name, birth, gender, add, phone, insurance } = this.state;
     return (
-      <Paper className="">
-        <h1>Thông tin bệnh nhân</h1>
-          <Table className="">
-            <TableBody>
-                <TableRow>
-                  <TableCell component="th" scope="row">Tên bệnh nhân: {name}</TableCell>
-                  <TableCell component="th" scope="row">Địa chỉ: {add}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Ngày sinh: {birth}</TableCell>
-                  <TableCell component="th" scope="row">SĐT: {phone}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">Giới tính: {gender}</TableCell>
-                  <TableCell component="th" scope="row">Số thẻ bảo hiểm: {insurance}</TableCell>
-                </TableRow>
-            </TableBody>
-          </Table>
-      </Paper>
+     <div>
+       <h2 className="title">Thông tin bệnh nhân</h2>
+        <div className="medium-3 columns left">
+        <h6>Tên bệnh nhân:</h6>
+        <input type="text" value={name} onChange={this.onChange} />
+        <h6>Ngày sinh:</h6>
+        <input type="text" value={birth} onChange={this.onChange} />
+        <h6> Giới tính:</h6>
+        <input type="text" value={gender} onChange={this.onChange} />
+        <h6> Địa chỉ:</h6>
+        <input type="text" value={add} onChange={this.onChange} />
+        <h6>SĐT:</h6>
+        <input type="text" value={phone} onChange={this.onChange} />
+        <h6>Số thẻ bảo hiểm:</h6>
+        <input type="text" value={insurance} onChange={this.onChange} />
+        <div className="bt">
+          <input type="submit" className="button success" value="Sửa" onClick={this.update_Page} />
+        </div>
+      </div>
+     </div>
     );
   }
 }

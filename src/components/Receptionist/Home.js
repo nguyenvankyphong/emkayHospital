@@ -11,9 +11,12 @@ class Home extends Component {
 
     this.state = {
       redirectToReferrer : false,
-      listSidebar: [{text: "Home", path: "/receptionist"},
-                    {text: "Tạo tài khoản", path: "/receptionist/register"},
-                    {text: "Book ca khám", path: "/home"}],
+      listSidebar: [{ text: "Home", path: "/receptionist" },
+      { text: "Tạo tài khoản", path: "/receptionist/register" },
+      { text: "Đặt lịch khám", path: "/receptionist/dat_lich" },
+      { text: "Thêm khoản phí", path: "/receptionist/add_khoan_phi" },
+      { text: "Xuất hóa đơn", path: "/receptionist/xuat_hoa_don" },
+      ],
     };
   }
 

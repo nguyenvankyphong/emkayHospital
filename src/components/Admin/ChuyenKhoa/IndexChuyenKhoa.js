@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
-import Sidebar from "../Sidebar/Sidebar";
-import Home from "./Home";
-import Patient from './Patient';
+import Show from './Show';
+import Add from './Add';
+import Edit from './Edit';
 
 
-class Patients extends Component {
+class Receptionist extends Component {
   constructor(props) {
     super(props);
 
@@ -25,11 +25,13 @@ class Patients extends Component {
     }
     return (
       <div>
-            <Route exact path={this.props.match.path} component={Home} />
-            <Route path={`${this.props.match.path}/patient`} component={Patient} />
+            <Route exact path={this.props.match.path} component={Show} />
+            <Route path={`${this.props.match.path}/add`} component={Add} />
+            <Route path={`${this.props.match.path}/edit`} component={Edit} />
+            
       </div>
     );
   }
 }
 
-export default Patients;
+export default Receptionist;

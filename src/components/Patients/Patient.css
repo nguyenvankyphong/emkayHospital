@@ -1,0 +1,36 @@
+.title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.table {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+h3{
+    text-align: center;
+}
+.hoso {
+    float: left;
+    width: 40%;
+}
+.hoadon {
+    
+}
+.clear {
+    clear: both;
+}
+.gopy{
+    min-height: -webkit-fill-available;
+    max-width: 100%;
+    text-align: center;    
+}
+.select{
+    width: 400px;
+   margin-bottom: 50px;
+}
+.form{
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
