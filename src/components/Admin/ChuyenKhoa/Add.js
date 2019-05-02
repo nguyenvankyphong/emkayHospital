@@ -17,8 +17,8 @@ class Add extends React.Component {
             listSidebar: [{ text: "Admin", path: "/admin" },
             { text: "Bác sĩ", path: "/admin/doctor" },
             { text: "Lễ tân", path: "/admin/recep" },
-            { text: "Chuyên khoa", path: "/admin/chuyen_khoa" },
-            { text: "Phòng khám", path: "/admin/phong_kham" },
+            { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
+            { text: "Phòng khám", path: "/admin/phongKham" },
             ],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -76,23 +76,16 @@ class Add extends React.Component {
     render() {
         const {arr} = this.state;
         if (this.state.redirect) {
-            return (<Redirect to="/admin/doctor" />)
+            return (<Redirect to="/admin/chuyenKhoa" />)
         }
         return (
             <div>
                 <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
                 <div className="row" id="Body">
-                    <h2 className="title">Thêm tài khoản bác sĩ</h2>
+                    <h2 className="title">Thêm chuyên khoa</h2>
                     <div className="medium-3 columns left">
-                        <h6>SĐT:</h6>
-                        <input type="text" name="sdt" ref="phone" onChange={this.handleChange} />
-                        <h6>Họ tên:</h6>
-                        <input type="text" name="name" ref="name_BN" onChange={this.handleChange} />
-                        <h6> Giới tính:</h6>
-                        <select name="gender" onChange={this.handleChange} ref="gender">
-                            <option key="0" value="0">Nam</option>
-                            <option key="1" value="1">Nữ</option>
-                        </select>
+                        <h6>Tên chuyên khoa:</h6>
+                        <input type="text" name="name" onChange={this.handleChange} />
                         <h6>Chuyên khoa:</h6>
                         <select ref="chuyenkhoa" onChange={this.handleChange}>
                             {arr.map(row => (

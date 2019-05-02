@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {Route} from 'react-router-dom';
-import index from './Patient/index';
-import update_Info from './Patient/Update_Info';
-import History_kham_benh from './Patient/History/History_kham_benh';
-import Lich_tai_kham from './Patient/Lich_tai_kham';
-import Gopy from './Patient/Gopy';
-import ShowDatLich from './Patient/ShowDatLich';
+import XemLichDat from './XemLichDat';
+import Dat_lich_kham from './Dat_lich_kham';
 
 
 class Patient extends Component {
@@ -35,12 +31,8 @@ class Patient extends Component {
 
     return (
       <div>
-        <Route exact path={this.props.match.path} component={index} />
-        <Route path={`${this.props.match.path}/update_Info`} component={update_Info} />
-        <Route path={`${this.props.match.path}/history`} component={History_kham_benh} />
-        <Route path={`${this.props.match.path}/lich_tai_kham`} component={Lich_tai_kham} />
-        <Route path={`${this.props.match.path}/dat_lich_kham`} component={ShowDatLich} />
-        <Route path={`${this.props.match.path}/gopy`} component={Gopy} />
+        <Route exact path={this.props.match.path} component={XemLichDat} />
+        <Route path={`${this.props.match.path}/add`} component={Dat_lich_kham} />
       </div>
     );
   }

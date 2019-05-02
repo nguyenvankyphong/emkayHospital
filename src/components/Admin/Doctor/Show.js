@@ -16,8 +16,8 @@ class Home extends Component {
       listSidebar: [{ text: "Admin", path: "/admin" },
       { text: "Bác sĩ", path: "/admin/doctor" },
       { text: "Lễ tân", path: "/admin/recep" },
-      { text: "Chuyên khoa", path: "/admin/chuyen_khoa" },
-      { text: "Phòng khám", path: "/admin/phong_kham" },
+      { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
+      { text: "Phòng khám", path: "/admin/phongKham" },
       ],
     };
     this.componentWillMount= this.componentWillMount.bind(this);

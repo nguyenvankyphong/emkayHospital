@@ -98,7 +98,7 @@ class InfoPatient extends React.Component {
                 <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
                 <div className="row" id="Body">
                     <h2 className="title">Cập nhật thông tin</h2>
-                    <div className="medium-3 columns left">
+                    <div className="medium-3 columns" id="tt">
                         <h6>Tên bệnh nhân:</h6>
                         <input type="text" value={name} ref="name_BN" onChange={this.handleChange} />
                         <h6>Ngày sinh:</h6>

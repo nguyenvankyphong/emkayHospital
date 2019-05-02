@@ -8,6 +8,7 @@ class Add extends React.Component {
 
         this.state = {
             password:'',
+            username:'',
             redirect: false,
             listSidebar: [{ text: "Admin", path: "/admin" },
                         { text: "Bác sĩ", path: "/admin/doctor" },
@@ -16,7 +17,6 @@ class Add extends React.Component {
                         { text: "Phòng khám", path: "/admin/phong_kham" },
                         ],
         };
-        this.componentDidMount = this.componentDidMount.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange(e) {
@@ -24,35 +24,10 @@ class Add extends React.Component {
             [e.target.name]: e.target.value
         });
     }
-    componentDidMount() {
-        // var proxy = 'https://doanhttt.herokuapp.com/'
-        // var id = sessionStorage.getItem('id_patient');
-        // var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/account/getBenhNhanById?idBenhNhan=' + id;
-        // fetch(proxy + apiadd, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //         'Origin': '',
-        //         'Token': sessionStorage.getItem('userData'),
-        //     },
-        // })
-        //     .then(response => response.json())
-        //     .then(resData => {
-        //         console.log(JSON.stringify(resData))
-        //         console.log("id :" + id);
-        //         this.setState({
-        //             name: resData.name,
-        //             birth: resData.birth,
-        //             gender: resData.gender,
-        //             add: resData.add,
-        //             phone: resData.phone,
-        //             insurance: resData.insurance
-        //         });
-
-        //     })
-    }
     add = () => {
+        var arr=[];
+        arr.push(this.state.username);
+        arr.push(this.state.password);
         var proxy = 'https://doanhttt.herokuapp.com/'
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/addNewAdmin';
         fetch(proxy + apiadd, {
@@ -63,7 +38,7 @@ class Add extends React.Component {
                 'Origin': '',
                 'token': sessionStorage.getItem('userData'),
             },
-            body: (JSON.stringify(this.state.password)),
+            body: (JSON.stringify(arr)),
         })
             .then(response => response.json())
             .then(resData => {
@@ -72,7 +47,7 @@ class Add extends React.Component {
 
     }
     render() {
-        const { gender,name, birth, add, phone, insurance } = this.state;
+        const {  } = this.state;
         if(this.state.redirect){
             return (<Redirect to="/admin"/>)
         }
@@ -82,6 +57,8 @@ class Add extends React.Component {
                 <div className="row" id="Body">
                     <h2 className="title">Thêm admin mới</h2>
                     <div className="medium-3 columns left">
+                        <h6>Username:</h6>
+                        <input type="text" ref="username" name="username" onChange={this.handleChange} />
                         <h6>Password:</h6>
                         <input type="text" ref="password" name="password" onChange={this.handleChange} />
                         <div className="bt">

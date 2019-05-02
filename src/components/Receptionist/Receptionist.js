@@ -6,6 +6,7 @@ import Home from "./Home";
 import Add_khoan_phi from './Add_khoan_phi';
 import XuatHoaDon from './XuatHoaDon';
 import NewQR from "./NewQR";
+import DatLich from "./DatLich";
 
 
 class Receptionist extends Component {
@@ -15,9 +16,9 @@ class Receptionist extends Component {
     this.state = {
       listSidebar: [{ text: "Home", path: "/receptionist" },
                     { text: "Tạo tài khoản", path: "/receptionist/register" },
-                    { text: "Đặt lịch khám", path: "/receptionist/dat_lich" },
-                    { text: "Thêm khoản phí", path: "/receptionist/add_khoan_phi" },
-                    { text: "Xuất hóa đơn", path: "/receptionist/xuat_hoa_don" },
+                    { text: "Đặt lịch khám", path: "/receptionist/datLich" },
+                    { text: "Thêm khoản phí", path: "/receptionist/addKhoanPhi" },
+                    { text: "Xuất hóa đơn", path: "/receptionist/xuatHoaDon" },
                     {text: "Tạo QR mới", path: "/receptionist/newqr"}
                     ],
       redirectToReferrer: false,
@@ -36,9 +37,9 @@ class Receptionist extends Component {
       <div>
             <Route exact path={this.props.match.path} component={Home} />
             <Route path={`${this.props.match.path}/register`} component={Register} />
-            <Route path={`${this.props.match.path}/dat_lich`} component={Register} />
-            <Route path={`${this.props.match.path}/add_khoan_phi`} component={Add_khoan_phi} />
-            <Route path={`${this.props.match.path}/xuat_hoa_don`} component={XuatHoaDon} />
+            <Route path={`${this.props.match.path}/datLich`} component={DatLich} />
+            <Route path={`${this.props.match.path}/addKhoanPhi`} component={Add_khoan_phi} />
+            <Route path={`${this.props.match.path}/xuatHoaDon`} component={XuatHoaDon} />
             <Route path={`${this.props.match.path}/newqr`} component={NewQR} />
       </div>
     );

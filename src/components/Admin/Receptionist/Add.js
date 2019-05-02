@@ -10,7 +10,6 @@ class Add extends React.Component {
             sdt:'',
             name:'',
             birth:'',
-            insuarance:'',
             add:'',
             redirect: false,
             listSidebar: [{ text: "Admin", path: "/admin" },
@@ -33,7 +32,6 @@ class Add extends React.Component {
         Arr.push(this.state.name);
         Arr.push(this.state.birth);      
         Arr.push(this.refs.gender.value);
-        Arr.push(this.state.insuarance);
         Arr.push(this.state.add);
         console.log(Arr);
         var proxy = 'https://doanhttt.herokuapp.com/'
@@ -68,7 +66,7 @@ class Add extends React.Component {
                         <h6>SĐT:</h6>
                         <input type="text" name="sdt" ref="phone" onChange={this.handleChange} />
                         <h6>Họ tên:</h6>
-                        <input type="text" name="name" ref="name_BN" onChange={this.handleChange} />
+                        <input type="text" name="name" ref="name" onChange={this.handleChange} />
                         <h6>Ngày sinh:</h6>
                         <input type="text" name="birth" ref="birth" onChange={this.handleChange} />
                         <h6> Giới tính:</h6>
@@ -76,8 +74,6 @@ class Add extends React.Component {
                             <option key="0" value="0">Nam</option>
                             <option key="1" value="1">Nữ</option>
                         </select>
-                        <h6>Số thẻ bảo hiểm:</h6>
-                        <input type="text" name="insuarance" ref="insurance" onChange={this.handleChange} />
                         <h6> Địa chỉ:</h6>
                         <input type="text" name="add" ref="add" onChange={this.handleChange} />
                         <div className="bt">
