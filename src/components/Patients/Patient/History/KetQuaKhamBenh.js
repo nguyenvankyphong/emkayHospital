@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 
-class BenhAn extends Component {
+class KetQuaKhamBenh extends Component {
 
 
   constructor(props) {
@@ -17,9 +17,12 @@ class BenhAn extends Component {
   }
 
   componentDidMount() {
+    var listFeatures = {};
+    var modelFeatures = {};
+    // console.log(this.props.idHoSo);
     var proxy = 'https://doanhttt.herokuapp.com/'
     var id= sessionStorage.getItem('idDK');
-    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/xemHoSoKhamBenh?idHoSo=';
+    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/xemHoSoKhamBenh?idHoSo=' + this.props.idHoSo;
     fetch(proxy+apiadd,{
         method: 'GET',
         headers: {
@@ -31,23 +34,32 @@ class BenhAn extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
-       console.log(JSON.stringify(resData))
-       this.setState({result:resData.result});
+       // console.log("resData hồ sơ");
+       // console.log(resData);
+       console.log("features:");
+       console.log(JSON.parse(resData.mauHoSo.replace(/'/g, '"')));
+       // console.log("kq");
+       // console.log(JSON.parse(resData.ketQua.replace(/'/g, '"')));
+       listFeatures = {...JSON.parse(resData.mauHoSo.replace(/'/g, '"'))};
+       modelFeatures = JSON.parse(resData.ketQua.replace(/'/g, '"'));
+       console.log("listFeatures");
+       console.log(listFeatures);
+       listFeatures.array.map(item => (
+         this.state.listFeatures.push(item)
+       ));
+       this.setState(prevState => ({
+         modelFeatures: {
+             ...modelFeatures,
+         }
+       }
+     ));
     })
 
-    var listFeatures = require('../SpecialistDoctor/khoanoi.json');
-    var modelFeatures = require('./ketquakham.json');
-    listFeatures.array.map(item => (
-      this.state.listFeatures.push(item)
-    ));
-    this.setState(prevState => ({
-      modelFeatures: {
-          ...modelFeatures,
-      }
-    }
-  ));
+    // listFeatures = require('../../../SpecialistDoctor/khoanoi.json');
+    // modelFeatures = require('../../ketquakham.json');
+
     // this.setState({modelFeatures: a});
-    console.log(modelFeatures);
+    // console.log(modelFeatures);
 
   }
 
@@ -97,11 +109,10 @@ class BenhAn extends Component {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)
     }
-    console.log(this.state);
+    // console.log(this.state);
 
     return (
       <div>
-        <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
           <div className="row" id="Body">
             Bệnh án
             <Grid container spacing={24}>
@@ -113,4 +124,4 @@ class BenhAn extends Component {
   }
 }
 
-export default BenhAn;
+export default KetQuaKhamBenh;

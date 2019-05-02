@@ -3,6 +3,9 @@ import { Redirect } from 'react-router-dom';
 import Sidebar from "../../../Sidebar/Sidebar";
 import '../../Patient.css';
 import Hoa_don from './Hoa_don';
+import KetQuaKhamBenh from './KetQuaKhamBenh';
+import ReactDOM from 'react-dom';
+import Grid from '@material-ui/core/Grid';
 
 class Home extends Component {
 
@@ -39,14 +42,20 @@ class Home extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
-       console.log(JSON.stringify(resData))
-       this.setState({result:resData.result});
+      // console.log("resData");
+      // console.log(resData);
+      this.setState({result:resData.result});
     })
 
   }
 
-  chonHoSo() {
+  chonHoSo(IdHSKB) {
+    // console.log("chọn hồ sơ");
+    // console.log(IdHSKB);
+    ReactDOM.render(<div></div>, document.getElementById("ketquakham"));
+    localStorage.setItem("idHoSoKhamBenh", IdHSKB);
 
+    ReactDOM.render(<KetQuaKhamBenh idHoSo={IdHSKB}/>, document.getElementById("ketquakham"));
   }
 
   handleStatus(status){
@@ -58,30 +67,29 @@ class Home extends Component {
   }
   render() {
     const {result,result1} = this.state;
-    console.log("rs:");
-    console.log(result);
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
     }
 
     return (
       <div className="row">
-      <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        <div className ="hoso">        
-        <h3>Hồ sơ đợt khám</h3>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Số phòng</th>
-              <th>Tên phòng</th>
-              <th>Thời gian</th>  
-              <th>Trạng thái</th>          
-            </tr>
-          </thead>
+        <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
+        <Grid container spacing={24}>
+          <Grid item xs={5}>
+          <h3>Hồ sơ khám bệnh</h3>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Số phòng</th>
+                <th>Tên phòng</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+              </tr>
+            </thead>
             <tbody>
               {result.map((row, index)=>(
-                <tr>
+                <tr key={index}>
                     <td>{index+1}</td>
                     <td>{row.soPhong}</td>
                     <td>{row.tenPhong}</td>
@@ -89,7 +97,7 @@ class Home extends Component {
                     <td>{row.time}</td>:
                     <td></td>
                   }
-                  <td><a onClick={this.chonHoSo}>{this.handleStatus(row.status)}</a></td>
+                  <td><a onClick={() => this.chonHoSo(row.IdHSKB)}>{this.handleStatus(row.status)}</a></td>
                 </tr>
 
                 ))}
@@ -98,12 +106,16 @@ class Home extends Component {
           <div className = "hoadon">
             <Hoa_don />
           </div>
-        </div>
-        <div className = "ketquakham">
-          Kết quả khám bệnh
-          <Hoa_don />
-        </div>
-        <div className="clear"></div>
+          </Grid>
+          <Grid item xs={7}>
+            <div id = "hosokhambenh">
+              Kết quả khám bệnh
+              <div id = "ketquakham"></div>
+
+            </div>
+          </Grid>
+        </Grid>
+
       </div>
     );
   }
