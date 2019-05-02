@@ -7,6 +7,7 @@ import Add_khoan_phi from './Add_khoan_phi';
 import XuatHoaDon from './XuatHoaDon';
 import NewQR from "./NewQR";
 import DatLich from "./DatLich";
+import ChangePass from "../Sidebar/ChangePass";
 
 
 class Receptionist extends Component {
@@ -36,6 +37,7 @@ class Receptionist extends Component {
     return (
       <div>
             <Route exact path={this.props.match.path} component={Home} />
+            <Route path={`${this.props.match.path}/changePass`} component={ChangePass} />
             <Route path={`${this.props.match.path}/register`} component={Register} />
             <Route path={`${this.props.match.path}/datLich`} component={DatLich} />
             <Route path={`${this.props.match.path}/addKhoanPhi`} component={Add_khoan_phi} />

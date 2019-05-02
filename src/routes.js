@@ -8,8 +8,8 @@ import Patients from '././components/Patients/Patients';
 import NotFound from '././components/NotFound/NotFound';
 import Admin from './components/Admin/Admin';
 import Receptionist from './components/Receptionist/Receptionist';
+import ChangePass from './components/Sidebar/ChangePass';
 import Doctor from './components/SpecialistDoctor/SpecialistDoctor';
-
 
 const Routes = () => (
   <BrowserRouter >
@@ -21,7 +21,9 @@ const Routes = () => (
           <Route path="/admin" component={Admin}/>
           <Route path="/doctor" component={Doctor}/>
           <Route path="/receptionist" component={Receptionist} />
+          <Route path="/changePass" component={ChangePass} />
           <Route path="*" component={NotFound}/>
+          
       </Switch>
   </BrowserRouter>
 );

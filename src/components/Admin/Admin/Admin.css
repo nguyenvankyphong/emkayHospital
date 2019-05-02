@@ -1,0 +1,11 @@
+.tab{
+    min-width: 400px;
+}
+.admin{
+    min-width: 700px;
+    margin-left: 400px;
+    margin-top: 50px;
+}
+#addAdmin{
+    margin-left: 445px;
+}
