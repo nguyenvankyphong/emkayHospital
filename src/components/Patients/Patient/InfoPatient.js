@@ -70,7 +70,7 @@ update_Page=()=>{
     return (
      <div>
        <h2 className="title">Thông tin bệnh nhân</h2>
-        <div className="medium-3 columns left">
+        <div className="medium-3 columns" id= "tt">
         <h6>Tên bệnh nhân:</h6>
         <input type="text" value={name} onChange={this.onChange} />
         <h6>Ngày sinh:</h6>

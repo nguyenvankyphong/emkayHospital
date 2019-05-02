@@ -67,18 +67,18 @@ class Home extends Component {
     return (
       <div className="row">
       <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        <div className ="hoso">
-          <h3>Hồ sơ khám bệnh</h3>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Số phòng</th>
-                <th>Tên phòng</th>
-                <th>Thời gian</th>
-                <th>Trạng thái</th>
-              </tr>
-            </thead>
+        <div className ="hoso">        
+        <h3>Hồ sơ đợt khám</h3>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Số phòng</th>
+              <th>Tên phòng</th>
+              <th>Thời gian</th>  
+              <th>Trạng thái</th>          
+            </tr>
+          </thead>
             <tbody>
               {result.map((row, index)=>(
                 <tr>

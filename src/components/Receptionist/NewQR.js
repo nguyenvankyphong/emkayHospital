@@ -27,8 +27,11 @@ class NewQR extends Component {
       sdt: '',
       qr: '',
       listSidebar: [{text: "Home", path: "/receptionist"},
-                    {text: "Tạo tài khoản", path: "/receptionist/register"},
-                    {text: "Book ca khám", path: "/home"}],
+      {text: "Tạo tài khoản", path: "/receptionist/register"},
+      { text: "Đặt lịch khám", path: "/receptionist/datLich" },
+      { text: "Thêm khoản phí", path: "/receptionist/addKhoanPhi" },
+      { text: "Xuất hóa đơn", path: "/receptionist/xuatHoaDon" },
+      {text: "Tạo QR mới", path: "/receptionist/newqr"}],
     };
 
     this.onChange = this.onChange.bind(this);

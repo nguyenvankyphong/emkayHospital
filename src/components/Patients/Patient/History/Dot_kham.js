@@ -24,6 +24,7 @@ class Home extends Component {
                     { text: "Góp ý", path: "/patients/patient/gopy" }],
     };
     this.componentWillMount= this.componentWillMount.bind(this);
+    this.handleStatus= this.handleStatus.bind(this);
   }
 
   componentWillMount() {
@@ -41,7 +42,7 @@ class Home extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
-       console.log(JSON.stringify(resData))
+       console.log(resData);
        console.log("id :"+id);
        this.setState({result:resData.result});
     })
@@ -49,6 +50,13 @@ class Home extends Component {
   hoSoKhamBenh(idDK){
     this.setState({redirectHSKB: true,id: idDK});
     sessionStorage.setItem("idDK",idDK);
+  }
+  handleStatus(status){
+    if(status == 0){
+      return "Chưa xong"
+    }else{
+      return "Đã xong"
+    }
   }
   render() {
     const {result} = this.state;
@@ -58,6 +66,7 @@ class Home extends Component {
     if(this.state.redirectHSKB){
         return (<Redirect to={`${this.props.match.path}/${this.state.id}`} />)
     }
+    
     return (
       <div className="row">
         <Sidebar listSidebar={this.state.listSidebar}/>
@@ -77,7 +86,7 @@ class Home extends Component {
                 <td>{index+1}</td>
                 <td><Link onClick= {()=>this.hoSoKhamBenh(row.IdHoSoDotKham)}>{row.ThongTinBenh}</Link></td>
                 <td>{row.NgayKham}</td>
-                <td>{row.Status}</td>
+                <td>{this.handleStatus(row.Status)}</td>
               </tr>
             ))}
           </tbody>

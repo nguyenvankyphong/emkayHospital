@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import '../Patient.css';
-import { Link } from '@material-ui/core';
 
 class Home extends Component {
 
@@ -13,6 +12,7 @@ class Home extends Component {
     this.state = {
       result:[],
       redirectToReferrer: false,
+      redirectAdd: false,
       listSidebar: [{ text: "Home", path: "/patients/patient" },
       { text: "Lịch sử khám bệnh", path: "/patients/patient/history" },
       { text: "Lịch tái khám", path: "/patients/patient/lich_tai_kham" },
@@ -25,74 +25,70 @@ class Home extends Component {
   componentWillMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
     var id= sessionStorage.getItem('id_patient');
-    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getDotKhamByIdBenhNhan?idBenhNhan='+id;
+    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/getListDatLich?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'token' : sessionStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
        console.log(JSON.stringify(resData))
-       console.log("id :"+id);
-       this.setState({result:resData.result});
+       this.setState({result:resData.arr});
     })
+
   }
-  hoSoKhamBenh(id){
-    var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
-    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getDotKhamByIdBenhNhan?idBenhNhan='+id;
-    fetch(proxy+apiadd,{
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
-        },
-    })
-    .then(response =>  response.json())
-    .then(resData => {
-       console.log(JSON.stringify(resData))
-       console.log("id :"+id);
-       this.setState({result:resData.result});
-    })
+  handleTinhTrang(isComplete){
+      if(isComplete){
+          return "Đặt thành công"
+      }else{
+          return "Chưa duyệt"
+      }
   }
- 
+  add_Page=()=>{
+this.setState({redirectAdd: true});
+  }
   render() {
     const {result} = this.state;
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
     }
-
+if(this.state.redirectAdd){
+  return(<Redirect to={'/patients/patient/dat_lich_kham/add'} />)
+}
     return (
       <div className="row">
-        <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        <h3>Danh sách đợt khám</h3>
-        <table className="table">
+      <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />   
+        <h3>Danh sách đặt lịch</h3>
+       <div className="table1">
+       <input type="submit" className="button" value="Đặt lịch" onClick={this.add_Page} />
+        <table>
           <thead>
             <tr>
               <th>STT</th>
-              <th>Thông tin bệnh</th>
-              <th>Ngày khám</th>
-              <th>Status</th>
+              <th>Thời gian đặt</th>
+              <th>Nội dung</th>
+              <th>Thời gian khám</th>  
+              <th>Tình trạng</th>          
             </tr>
           </thead>
           <tbody>
             {result.map((row, index)=>(
               <tr>
                 <td>{index+1}</td>
-                <td><Link onClick= {()=>this.hoSoKhamBenh(row.IdHoSoDotKham)}>{row.ThongTinBenh}</Link></td>
-                <td>{row.NgayKham}</td>
-                <td>{row.Status}</td>
+                <td>{row.timeDat}</td>
+                <td>{row.noiDung}</td>                
+                <td>{row.timeKham}</td>
+              <td>{this.handleTinhTrang(row.isComplete)}</td>                                       
               </tr>
-            ))}
+              ))}
           </tbody>
         </table>
+       </div>
       </div>
     );
   }
