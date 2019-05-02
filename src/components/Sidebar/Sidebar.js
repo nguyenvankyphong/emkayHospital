@@ -221,6 +221,7 @@ class Admin extends React.Component {
     sessionStorage.setItem("userData",'');
     sessionStorage.setItem("userRole",'');
     sessionStorage.clear();
+    localStorage.clear();
     this.setState({redirectToReferrer: true});
   };
 

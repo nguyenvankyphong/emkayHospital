@@ -50,37 +50,10 @@ class Login extends Component {
         if (!rs.errCode) {
         sessionStorage.setItem('userData',rs.token);
         sessionStorage.setItem('userRole',rs.role);
+        localStorage.setItem('truongKhoa', rs.truongKhoa);
         scope.setState({redirectToReferrer: true});
 
-        // console.log(scope.state);
-      }
-
-        //check info rs
-
-        // var array_keys = new Array();
-        // var array_values = new Array();
-        //
-        // for (var key in rs) {
-        //     array_keys.push(key);
-        //     array_values.push(rs[key]);
-            // console.log(array_values);
-        // }
-
-
-
-      }
-
-
-      // code goc
-
-      // PostData('login',this.state).then((result) => {
-      //  let responseJson = result;
-      //  if(responseJson.userData){
-      //    sessionStorage.setItem('userData',JSON.stringify(responseJson));
-      //    this.setState({redirectToReferrer: true});
-      //  }
-      //
-      // });
+      }}
     }
    }
 

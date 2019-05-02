@@ -21,6 +21,7 @@ class Home extends Component {
       { text: "Góp ý", path: "/patients/patient/gopy" }],
     };
     this.componentWillMount= this.componentWillMount.bind(this);
+    this.chonHoSo= this.chonHoSo.bind(this);
   }
 
   componentWillMount() {
@@ -43,6 +44,11 @@ class Home extends Component {
     })
 
   }
+
+  chonHoSo() {
+
+  }
+
   handleStatus(status){
       if(status == 2){
           return "Đã khám"
@@ -52,6 +58,8 @@ class Home extends Component {
   }
   render() {
     const {result,result1} = this.state;
+    console.log("rs:");
+    console.log(result);
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
     }
@@ -59,36 +67,41 @@ class Home extends Component {
     return (
       <div className="row">
       <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        <div className ="hoso">        
-        <h3>Hồ sơ khám bệnh</h3>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Số phòng</th>
-              <th>Tên phòng</th>
-              <th>Thời gian</th>  
-              <th>Trạng thái</th>          
-            </tr>
-          </thead>
-          <tbody>
-            {result.map((row, index)=>(
+        <div className ="hoso">
+          <h3>Hồ sơ khám bệnh</h3>
+          <table className="table">
+            <thead>
               <tr>
-                <td>{index+1}</td>
-                <td>{row.soPhong}</td>
-                <td>{row.tenPhong}</td>                
-                {row.status == 2?
-                <td>{row.time}</td>:
-                <td></td>
-              }    
-              <td>{this.handleStatus(row.status)}</td>                                       
+                <th>STT</th>
+                <th>Số phòng</th>
+                <th>Tên phòng</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
               </tr>
-              ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {result.map((row, index)=>(
+                <tr>
+                    <td>{index+1}</td>
+                    <td>{row.soPhong}</td>
+                    <td>{row.tenPhong}</td>
+                    {row.status == 2?
+                    <td>{row.time}</td>:
+                    <td></td>
+                  }
+                  <td><a onClick={this.chonHoSo}>{this.handleStatus(row.status)}</a></td>
+                </tr>
+
+                ))}
+            </tbody>
+          </table>
+          <div className = "hoadon">
+            <Hoa_don />
+          </div>
         </div>
-        <div className = "hoadon">
-              <Hoa_don />
+        <div className = "ketquakham">
+          Kết quả khám bệnh
+          <Hoa_don />
         </div>
         <div className="clear"></div>
       </div>

@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Calendar from "./LichLamViec/Calendar";
 import leftPad from 'left-pad';
 import Grid from '@material-ui/core/Grid';
+import {checkErrCode} from '../Layout/checkErrCode'
 
 class LichLamViec extends Component {
 
@@ -27,7 +28,6 @@ class LichLamViec extends Component {
       listRoom: [],
       listSidebar: [{text: "Home", path: "/doctor"},
                     {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
-                    {text: "Lịch trực", path: "/doctor/lichtruc"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 
@@ -53,6 +53,7 @@ class LichLamViec extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+        checkErrCode(resData.errCode);
         this.setState({ listRoom: [...resData.arr]});
         this.setState({ room: {...resData.arr[0]}});
 
@@ -60,6 +61,11 @@ class LichLamViec extends Component {
   }
 
   componentDidMount() {
+    if (localStorage.truongKhoa === "true") {
+      let listSidebar = [...this.state.listSidebar];
+      listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
+      this.setState({ listSidebar });
+    }
     var self = this;
     var proxy = 'https://cors-anywhere.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getLichLamViec',{
@@ -73,6 +79,7 @@ class LichLamViec extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+        checkErrCode(resData.errCode);
         this.setState({
           listCaTruc: [...resData.arr]
         //   listRoom: [...resData.arr],
@@ -96,6 +103,7 @@ class LichLamViec extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+        checkErrCode(resData.errCode);
        this.setState({ listCaTruc: resData.arr});
 
     })
