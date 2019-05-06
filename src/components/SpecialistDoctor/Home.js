@@ -33,6 +33,8 @@ class Home extends Component {
       return (<Redirect to={'/login'}/>)
     }
 
+    
+
     return (
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>

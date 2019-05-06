@@ -1,82 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+import Sidebar from "../Sidebar/Sidebar";
+import AddCaKham from "./AddCaKham"
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+class DatLich extends Component {
+  constructor(props) {
+    super(props);
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+    this.state = {
+      redirectToReferrer : false,
+      listSidebar: [{text: "Home", path: "/receptionist"},
+                    {text: "Tạo tài khoản", path: "/receptionist/register"},
+                    { text: "Đặt lịch khám", path: "/receptionist/datLich" },
+                    { text: "Thêm khoản phí", path: "/receptionist/addKhoanPhi" },
+                    { text: "Xuất hóa đơn", path: "/receptionist/xuatHoaDon" },
+                    {text: "Tạo QR mới", path: "/receptionist/newqr"}],
+    };
+  }
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+  componentWillMount() {
 
-const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: 'none',
-  },
-});
-
-class SimpleModal extends React.Component {
-  state = {
-    open: false,
-  };
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  }
 
   render() {
-    const { classes } = this.props;
+    if (this.state.redirectToReferrer) {
+      return (<Redirect to={'/login'}/>)
+    }
 
     return (
       <div>
-        <Typography gutterBottom>Click to get the full Modal experience!</Typography>
-        <Button onClick={this.handleOpen}>Open Modal</Button>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
-          <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant="h6" id="modal-title">
-              Text in a modal
-            </Typography>
-            <Typography variant="subtitle1" id="simple-modal-description">
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-            <SimpleModalWrapped />
-          </div>
-        </Modal>
+        <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
+        <div className="row" id="Body">
+          <AddCaKham/>
+        </div>
       </div>
     );
   }
 }
 
-SimpleModal.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-// We need an intermediary variable for handling the recursive nesting.
-const SimpleModalWrapped = withStyles(styles)(SimpleModal);
-
-export default SimpleModalWrapped;
+export default DatLich;

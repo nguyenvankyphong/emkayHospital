@@ -27,7 +27,6 @@ class LichLamViec extends Component {
       room: {},
       listRoom: [],
       listSidebar: [{text: "Home", path: "/doctor"},
-                    {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 
@@ -143,6 +142,21 @@ class LichLamViec extends Component {
   render() {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)
+    }
+
+    switch (localStorage.userRole) {
+      case "1":
+        return (<Redirect to={'/patients'}/>)
+        break;
+      case "2":
+        return (<Redirect to={'/doctor'}/>)
+        break;
+      case "3":
+        return (<Redirect to={'/receptionist'}/>)
+        break;
+      case "4":
+        return (<Redirect to={'/admin'}/>)
+        break;
     }
 
 

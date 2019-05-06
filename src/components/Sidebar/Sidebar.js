@@ -241,7 +241,7 @@ class Admin extends React.Component {
     }
     if(this.state.changePass){
       console.log("nhảy");
-      
+
       return (<Redirect to={'/changePass'}/>)
     }
     const { anchorEl, mobileMoreAnchorEl } = this.state;
@@ -288,18 +288,7 @@ class Admin extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <div className={classes.search} id= "search">
-              <div className={classes.searchIcon} id= "search_icon">
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
+            
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton

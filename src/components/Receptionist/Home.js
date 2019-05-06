@@ -27,6 +27,19 @@ class Home extends Component {
       return (<Redirect to={'/login'}/>)
     }
 
+    switch (localStorage.userRole) {
+      case "1":
+        return (<Redirect to={'/patients'}/>)
+        break;
+      case "2":
+        return (<Redirect to={'/doctor'}/>)
+        break;
+      case "4":
+        return (<Redirect to={'/admin'}/>)
+        break;
+    }
+
+
     return (
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>

@@ -26,7 +26,6 @@ class Home extends Component {
       note: '',
       redirectToReferrer : false,
       listSidebar: [{text: "Home", path: "/doctor"},
-                    {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 
@@ -443,7 +442,7 @@ class Home extends Component {
         <div className="row" id="Body">
           <Grid container spacing={24}>
             <Grid item xs = {2} >
-              list hồ sơ
+              <b>BỆNH NHÂN ĐANG CHỜ</b>
               {this.state.listBenhNhan.map((item) => (
                 <ListItem style={ulStyle} key={item.idHoSoKhamBenh}>
                   <a onClick= {() => this.chonBenhNhan(item.idHoSoKhamBenh)}>
@@ -456,7 +455,7 @@ class Home extends Component {
               </List>
             </Grid>
             <Grid item xs = {10} >
-              khám bệnh
+              <b>KHÁM BỆNH</b>
               <div id="chonMauHoSo">
               </div>
 
