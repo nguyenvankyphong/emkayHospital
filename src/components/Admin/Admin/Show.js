@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from '@material-ui/core';
+import './Admin.css';
 
 class Home extends Component {
 
@@ -56,29 +57,31 @@ class Home extends Component {
     return (
       <div className="row">
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        <div className="hoso">
-          <h3>Danh sách admin</h3>
-          <Link onClick={this.add}>Thêm</Link>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Username</th>
-                <th>Password</th>
-              </tr>
-            </thead>
-            <tbody>
-              {result.map((row, index) => (
+        <div>
+          <h3 className="title">Danh sách admin</h3>
+          <div className="admin">
+            <Link onClick={this.add}>Thêm</Link>
+            <table className="tab">
+              <thead>
                 <tr>
-                  <td>{index+1}</td>
-                  <td>{row.username}</td>
-                  <td>{row.pass}</td>
+                  <th>STT</th>
+                  <th>Username</th>
+                  <th>Password</th>
                 </tr>
-              ))
+              </thead>
+              <tbody>
+                {result.map((row, index) => (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{row.username}</td>
+                    <td>{row.pass}</td>
+                  </tr>
+                ))
 
-              }
-            </tbody>
-          </table>
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

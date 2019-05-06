@@ -171,10 +171,12 @@ class Admin extends React.Component {
       mobileMoreAnchorEl: null,
       redirectToReferrer: false,
       path: '',
+      changePass:false,
     };
     this.logout = this.logout.bind(this);
     this.handleUrlSidebar = this.handleUrlSidebar.bind(this);
     this.lockRedirect = this.lockRedirect.bind(this);
+    this.changePassword = this.changePassword.bind(this);
   }
 
   handleListSidebar = list => {
@@ -224,16 +226,24 @@ class Admin extends React.Component {
     localStorage.clear();
     this.setState({redirectToReferrer: true});
   };
-
+  changePassword(){
+    localStorage.setItem("listSidebar", JSON.stringify(this.props.listSidebar));
+    this.setState({changePass: true});
+  }
   lockRedirect() {
     this.setState({redirectToReferrer: false});
   };
 
   render() {
+
     if (this.state.redirectToReferrer) {
       return (<Redirect to={this.state.path}/>)
     }
-
+    if(this.state.changePass){
+      console.log("nhảy");
+      
+      return (<Redirect to={'/changePass'}/>)
+    }
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes, theme } = this.props;
     const isMenuOpen = Boolean(anchorEl);
@@ -248,7 +258,7 @@ class Admin extends React.Component {
 
       >
         <MenuItem  onClick={() => this.handleUrlSidebar('/patients')}>Patients</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={this.changePassword}>Change password</MenuItem>
         <MenuItem
 
         onClick={this.logout}>Logout</MenuItem>
@@ -292,11 +302,6 @@ class Admin extends React.Component {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"

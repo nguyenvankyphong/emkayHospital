@@ -61,6 +61,7 @@ class Add_com4 extends React.Component {
                 .then(response => response.json())
                 .then(resData => {
                     console.log("Thêm thành công");
+                    window.location.reload(); 
                 })
         } else {
             alert("Vui lòng chọn ca khám");
@@ -114,7 +115,7 @@ class Add_com4 extends React.Component {
                         name="check"
                         onChange={() => this.handleChangeCheckbox(listCaKham.length)}
                         color="primary"
-                    />{row.TenPhong} - {row.Bacsi} - {row.ThongTinPhong}({row.dangCho})</label>
+                    />{row.TenPhong} - Ca {row.Buoi} - {row.ThongTinPhong} ( {row.dangCho})</label>
                 ))}
 
                 <div className="bt">

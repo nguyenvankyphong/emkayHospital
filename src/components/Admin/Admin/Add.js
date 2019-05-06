@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from "../../Sidebar/Sidebar";
 import {Redirect} from 'react-router-dom';
+import './Admin.css';
 
 class Add extends React.Component {
     constructor(props) {
@@ -13,8 +14,8 @@ class Add extends React.Component {
             listSidebar: [{ text: "Admin", path: "/admin" },
                         { text: "Bác sĩ", path: "/admin/doctor" },
                         { text: "Lễ tân", path: "/admin/recep" },
-                        { text: "Chuyên khoa", path: "/admin/chuyen_khoa" },
-                        { text: "Phòng khám", path: "/admin/phong_kham" },
+                        { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
+                        { text: "Phòng khám", path: "/admin/phongKham" },
                         ],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -56,7 +57,7 @@ class Add extends React.Component {
                 <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
                 <div className="row" id="Body">
                     <h2 className="title">Thêm admin mới</h2>
-                    <div className="medium-3 columns left">
+                    <div className="medium-3 columns left" id ="addAdmin">
                         <h6>Username:</h6>
                         <input type="text" ref="username" name="username" onChange={this.handleChange} />
                         <h6>Password:</h6>

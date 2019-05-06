@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from '@material-ui/core';
+import './PhongKham.css';
 
 class Home extends Component {
 
@@ -102,10 +103,10 @@ class Home extends Component {
         break;
     }
     return (
-      <div className="row">
-        <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        <div className="hoso">
+      <div className="showPK">
+        <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />       
           <h3>Phòng khám</h3>
+          <div>
           <Link onClick={this.add}>Thêm</Link>
           <table className="table">
             <thead>
