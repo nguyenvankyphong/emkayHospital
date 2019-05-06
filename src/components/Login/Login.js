@@ -74,7 +74,6 @@ class Login extends Component {
 
   render() {
 
-     if (this.state.redirectToReferrer) {
        switch (sessionStorage.getItem('userRole')) {
          case "1":
            return (<Redirect to={'/patients'}/>)
@@ -89,16 +88,14 @@ class Login extends Component {
            return (<Redirect to={'/admin'}/>)
            break;
        }
-    }
     if (sessionStorage.getItem("userData")) {
       return (<Redirect to={'/home'}/>)
     }
 
 
      return (
-       <div className= "row" cid="Body">
+       <div className= "row " cid="Body">
         <h1 className="title">EMKAY HOSPITAL</h1>
-        <div className= "icon"> <img src={logo} alt="" className ="ava"/></div>
          <div className="medium-4 columns left">
            <h1>LOGIN</h1>
            <label>Username</label>

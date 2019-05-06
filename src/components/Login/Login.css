@@ -34,3 +34,7 @@ input[type="password"] {
 .icon{
     text-align: center;
 }
+
+.login_page {
+  background-image: url('./bg.jpg');
+}

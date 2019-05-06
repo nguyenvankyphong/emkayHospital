@@ -31,7 +31,7 @@ class Home extends Component {
     })
       .then(response => response.json())
       .then(resData => {
-        console.log(JSON.stringify(resData))
+        // console.log(JSON.stringify(resData))
         this.setState({
           result: resData.result,
           value: resData.value
@@ -68,7 +68,7 @@ class Home extends Component {
             </thead>
             <tbody>
               {result.map((row, index) => (
-                <tr>
+                <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{row.tenchiphi}</td>
                   <td>{row.donvitinh}</td>
