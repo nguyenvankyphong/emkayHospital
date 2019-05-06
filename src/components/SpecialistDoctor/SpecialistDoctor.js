@@ -32,7 +32,7 @@ class SpecialistDoctor extends Component {
     }
     return (
       <div>
-            <Route exact path={this.props.match.path} component={Home} />
+            <Route exact path={this.props.match.path} component={LichLamViec} />
             <Route path={`${this.props.match.path}/hoso`} component={HosoKhamBenh} />
             <Route path={`${this.props.match.path}/lichtruc`} component={CaTruc} />
             <Route path={`${this.props.match.path}/lichlamviec`} component={LichLamViec} />

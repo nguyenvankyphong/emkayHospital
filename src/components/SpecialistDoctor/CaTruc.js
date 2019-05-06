@@ -26,7 +26,6 @@ class LichTruc extends Component {
       room: {},
       listRoom: [],
       listSidebar: [{text: "Home", path: "/doctor"},
-                    {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
                     {text: "Lịch làm việc", path: "/doctor/lichlamviec"}],
     };
 

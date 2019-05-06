@@ -48,10 +48,13 @@ class Login extends Component {
         console.log("role" +rs.role);
 
         if (!rs.errCode) {
-        sessionStorage.setItem('userData',rs.token);
-        sessionStorage.setItem('userRole',rs.role);
-        localStorage.setItem('truongKhoa', rs.truongKhoa);
-        scope.setState({redirectToReferrer: true});
+          localStorage.setItem('userData', rs.token);
+          sessionStorage.setItem('userData',rs.token);
+          localStorage.setItem('userRole', rs.role);
+          sessionStorage.setItem('userRole',rs.role);
+          localStorage.setItem('truongKhoa', rs.truongKhoa);
+          localStorage.setItem('truongKhoa', rs.truongKhoa);
+          scope.setState({redirectToReferrer: true});
 
       }}
     }
@@ -74,7 +77,7 @@ class Login extends Component {
 
   render() {
 
-       switch (sessionStorage.getItem('userRole')) {
+       switch (localStorage.userRole) {
          case "1":
            return (<Redirect to={'/patients'}/>)
            break;
