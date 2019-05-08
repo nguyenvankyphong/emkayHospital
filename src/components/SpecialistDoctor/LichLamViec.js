@@ -148,9 +148,6 @@ class LichLamViec extends Component {
       case "1":
         return (<Redirect to={'/patients'}/>)
         break;
-      case "2":
-        return (<Redirect to={'/doctor'}/>)
-        break;
       case "3":
         return (<Redirect to={'/receptionist'}/>)
         break;

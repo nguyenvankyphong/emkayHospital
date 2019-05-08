@@ -15,7 +15,6 @@ class SpecialistDoctor extends Component {
 
     this.state = {
       listSidebar: [{text: "Home", path: "/doctor"},
-                    {text: "Thêm hồ sơ khám bệnh", path: "/doctor/hoso"},
                     {text: "Lịch trực", path: "/doctor/lichtruc"}],
       redirectToReferrer: false,
     };

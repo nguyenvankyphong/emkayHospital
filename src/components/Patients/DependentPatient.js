@@ -125,7 +125,6 @@ class DependentPatient extends React.Component {
      rowsPerPage: 5,
      redirectPatient: false
     };
-    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   handleChangePage = (event, page) => {
@@ -141,7 +140,7 @@ class DependentPatient extends React.Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/getListBenhNhan',{
         method: 'GET',

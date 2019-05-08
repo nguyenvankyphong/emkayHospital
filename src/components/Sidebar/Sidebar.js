@@ -18,7 +18,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Home from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
+import PersonAdd from '@material-ui/icons/PersonAdd';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import Badge from '@material-ui/core/Badge';
@@ -27,6 +29,7 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Trangchu from '../Admin/Trangchu';
+import listSidebar from './ListSidebar'
 
 const drawerWidth = 240;
 
@@ -172,11 +175,18 @@ class Admin extends React.Component {
       redirectToReferrer: false,
       path: '',
       changePass:false,
+      listSidebar: [...listSidebar]
     };
     this.logout = this.logout.bind(this);
     this.handleUrlSidebar = this.handleUrlSidebar.bind(this);
     this.lockRedirect = this.lockRedirect.bind(this);
     this.changePassword = this.changePassword.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("to will mount");
+    this.setState({listSidebar: [...listSidebar]})
+
   }
 
   handleListSidebar = list => {
@@ -265,6 +275,21 @@ class Admin extends React.Component {
       </Menu>
     );
 
+    var listICon = [];
+    listICon.push(<InboxIcon />);
+    listICon.push(<MailIcon />);
+    listICon.push(<PersonAdd />);
+    listICon.push(<Home/>);
+    const numbers = [1, 2, 3, 4, 5];
+    const listItems = numbers.map((number) =>
+      <li>{number}</li>
+    );
+
+    console.log("listItems");
+    console.log(listSidebar);
+
+
+
 
 
     return (
@@ -288,7 +313,7 @@ class Admin extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            
+
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton
@@ -325,10 +350,11 @@ class Admin extends React.Component {
           </div>
           <Divider />
           <List>
-            {this.props.listSidebar.map((item, index) => (
+
+            {this.state.listSidebar.map((item, index) => (
               // <a>
               <ListItem button key={item.text} onClick={() => this.handleUrlSidebar(item.path)}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>
               // </a>
