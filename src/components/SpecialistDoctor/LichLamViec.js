@@ -47,7 +47,7 @@ class LichLamViec extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
@@ -73,7 +73,7 @@ class LichLamViec extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
@@ -97,7 +97,7 @@ class LichLamViec extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())

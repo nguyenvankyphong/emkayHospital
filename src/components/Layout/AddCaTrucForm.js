@@ -36,7 +36,7 @@ class AddCaTrucForm extends React.Component {
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/login', true)
       request.setRequestHeader("content-type","application/json")
-      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+      request.setRequestHeader("Token", localStorage.getItem('userData'))
 
       var date = this.props.date;
       var list = {
@@ -66,8 +66,8 @@ class AddCaTrucForm extends React.Component {
         // rs = JSON.parse(this.response);
 
         if (!rs.errCode) {
-        // sessionStorage.setItem('userData',rs.token);
-        // sessionStorage.setItem('userRole',rs.role);
+        // localStorage.setItem('userData',rs.token);
+        // localStorage.setItem('userRole',rs.role);
         // scope.setState({redirectToReferrer: true});
 
         }
@@ -83,13 +83,13 @@ class AddCaTrucForm extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
         console.log(JSON.stringify(resData))
-       // console.log("Token: "+sessionStorage.getItem('userData'))
+       // console.log("Token: "+localStorage.getItem('userData'))
        this.setState({ listBacSi: resData.arr});
 
 

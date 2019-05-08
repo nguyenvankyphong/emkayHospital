@@ -47,12 +47,12 @@ class NewQR extends Component {
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/creatQR', true)
       request.setRequestHeader("content-type","application/json")
-      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+      request.setRequestHeader("Token", localStorage.getItem('userData'))
 
       console.log("sđt:" + this.state.sdt + " - " + JSON.stringify(this.state.sdt));
       request.send(this.state.sdt);
       var rs = {};
-      console.log("token:"+ sessionStorage.getItem('userData'));
+      console.log("token:"+ localStorage.getItem('userData'));
 
 
 
@@ -76,7 +76,7 @@ class NewQR extends Component {
             ReactDOM.render(<img src = {rs.value}></img>, document.getElementById("qrimg"));
             break;
           case 2:
-            sessionStorage.clear();
+            localStorage.clear();
             scope.setState({redirectToReferrer: true});
         }
     }

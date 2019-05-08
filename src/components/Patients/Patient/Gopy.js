@@ -30,7 +30,7 @@ class Home extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        'token': sessionStorage.getItem('userData'),
+        'token': localStorage.getItem('userData'),
       },
     })
       .then(response => response.json())
@@ -53,7 +53,7 @@ class Home extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        'token': sessionStorage.getItem('userData'),
+        'token': localStorage.getItem('userData'),
       },
       body: noidung
     })

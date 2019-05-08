@@ -47,11 +47,12 @@ class Login extends Component {
         rs = JSON.parse(this.response);
         console.log(rs);
         console.log("role" +rs.role);
+        checkErrCode(rs.errCode);
         if (!rs.errCode) {
           localStorage.setItem('userData', rs.token);
-          sessionStorage.setItem('userData',rs.token);
+          localStorage.setItem('userData',rs.token);
           localStorage.setItem('userRole', rs.role);
-          sessionStorage.setItem('userRole',rs.role);
+          localStorage.setItem('userRole',rs.role);
           localStorage.setItem('truongKhoa', rs.truongKhoa);
           localStorage.setItem('truongKhoa', rs.truongKhoa);
           scope.setState({redirectToReferrer: true});
@@ -91,7 +92,7 @@ class Login extends Component {
            return (<Redirect to={'/admin'}/>)
            break;
        }
-    if (sessionStorage.getItem("userData")) {
+    if (localStorage.getItem("userData")) {
       return (<Redirect to={'/home'}/>)
     }
 

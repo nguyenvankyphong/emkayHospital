@@ -50,7 +50,7 @@ class Add_khoan_phi extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: JSON.stringify(Arr),
         })

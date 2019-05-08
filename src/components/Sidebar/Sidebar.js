@@ -184,7 +184,6 @@ class Admin extends React.Component {
   }
 
   componentDidMount() {
-    console.log("to will mount");
     this.setState({listSidebar: [...listSidebar]})
 
   }
@@ -230,9 +229,9 @@ class Admin extends React.Component {
   };
 
   logout(){
-    sessionStorage.setItem("userData",'');
-    sessionStorage.setItem("userRole",'');
-    sessionStorage.clear();
+    localStorage.setItem("userData",'');
+    localStorage.setItem("userRole",'');
+    localStorage.clear();
     localStorage.clear();
     this.setState({redirectToReferrer: true});
   };
@@ -250,8 +249,6 @@ class Admin extends React.Component {
       return (<Redirect to={this.state.path}/>)
     }
     if(this.state.changePass){
-      console.log("nhảy");
-
       return (<Redirect to={'/changePass'}/>)
     }
     const { anchorEl, mobileMoreAnchorEl } = this.state;
@@ -274,23 +271,6 @@ class Admin extends React.Component {
         onClick={this.logout}>Logout</MenuItem>
       </Menu>
     );
-
-    var listICon = [];
-    listICon.push(<InboxIcon />);
-    listICon.push(<MailIcon />);
-    listICon.push(<PersonAdd />);
-    listICon.push(<Home/>);
-    const numbers = [1, 2, 3, 4, 5];
-    const listItems = numbers.map((number) =>
-      <li>{number}</li>
-    );
-
-    console.log("listItems");
-    console.log(listSidebar);
-
-
-
-
 
     return (
       <div className={classes.root} id ="body">

@@ -5,7 +5,7 @@ import './Welcome.css'
 
 class Welcome extends Component {
   render() {
-    if (!sessionStorage.getItem('userData')) {
+    if (!localStorage.getItem('userData')) {
       return (<Redirect to={'/login'}/>);
     }
     return (

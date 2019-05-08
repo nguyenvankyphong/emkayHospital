@@ -19,7 +19,7 @@ class Home extends Component {
 
   componentWillMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id = sessionStorage.getItem('idDK');
+    var id = localStorage.getItem('idDK');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/bill/getBillByHSDK?idHSDK=' + id;
     fetch(proxy + apiadd, {
       method: 'GET',
@@ -27,7 +27,7 @@ class Home extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        'token': sessionStorage.getItem('userData'),
+        'token': localStorage.getItem('userData'),
       },
     })
       .then(response => response.json())

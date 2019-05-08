@@ -36,7 +36,7 @@ class InfoPatient extends React.Component {
     }
     componentDidMount() {
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var id = sessionStorage.getItem('id_patient');
+        var id = localStorage.getItem('id_patient');
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/account/getBenhNhanById?idBenhNhan=' + id;
         fetch(proxy + apiadd, {
             method: 'GET',
@@ -44,7 +44,7 @@ class InfoPatient extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'Token': sessionStorage.getItem('userData'),
+                'Token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
@@ -72,7 +72,7 @@ class InfoPatient extends React.Component {
         Arr.push(this.state.gender);
         Arr.push(this.state.add);
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var id = sessionStorage.getItem('id_patient');
+        var id = localStorage.getItem('id_patient');
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/updateInformation?idBenhNhan=' + id;
         fetch(proxy + apiadd, {
             method: 'POST',
@@ -80,7 +80,7 @@ class InfoPatient extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: (JSON.stringify(Arr)),
         })

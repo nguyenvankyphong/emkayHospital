@@ -44,7 +44,7 @@ class Register extends Component {
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/register_patient', true)
       request.setRequestHeader("content-type","application/json")
-      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+      request.setRequestHeader("Token", localStorage.getItem('userData'))
 
 
       var list = [];
@@ -85,7 +85,7 @@ class Register extends Component {
       return (<Redirect to={'/login'}/>)
     }
     var body;
-    switch (sessionStorage.getItem("userRole")) {
+    switch (localStorage.getItem("userRole")) {
       case "1": body = "<div> savs</div"
    }
 

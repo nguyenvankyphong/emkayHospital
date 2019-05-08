@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from "../Sidebar/Sidebar";
 import {Redirect} from 'react-router-dom';
+import { checkErrCode } from '../Layout/checkErrCode';
 
 class Add extends React.Component {
     constructor(props) {
@@ -32,24 +33,23 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: (JSON.stringify(arr)),
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 this.setState({redirect: true})
+                console.log(resData.errCode);
+                
             })
       }else{
-          alert("mat khau khong khớp");
+          alert("Mật khẩu không khớp");
       }
 
     }
     render() {
-        const {  } = this.state;
-        // if(this.state.redirect){
-        //     return (<Redirect to={this.props.current_path}/>)
-        // }
         return (
             <div>
                 <Sidebar listSidebar={JSON.parse(localStorage.listSidebar)} current_path={window.location.pathname} />

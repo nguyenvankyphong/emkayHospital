@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
 import DatePicker from 'react-datepicker';
+import { checkErrCode } from '../Layout/checkErrCode';
 
 class Register extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class Register extends Component {
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy + 'http://168.61.49.94:8080/DOANHTTT/rest/account/register_patient', true)
       request.setRequestHeader("content-type", "application/json")
-      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+      request.setRequestHeader("Token", localStorage.getItem('userData'))
 
 
       var list = [];
@@ -68,16 +69,15 @@ class Register extends Component {
 
       const scope = this;
       request.onload = function () {
+        
         console.log("response: ");
         console.log(this.response);
         rs = JSON.parse(this.response);
-        // console.log(rs);
-        // console.log("role" +rs.qr);
-
+        console.log(rs.errCode);
+        checkErrCode(rs.errCode);
         if (!rs.errCode) {
           scope.setState({ isRegistered: true });
           scope.setState({ qr: rs.value });
-          // console.log(scope.state);
         }
       }
     }
@@ -123,7 +123,7 @@ class Register extends Component {
       );
     }
     var body;
-    switch (sessionStorage.getItem("userRole")) {
+    switch (localStorage.getItem("userRole")) {
       case "1": body = "<div> savs</div"
     }
 

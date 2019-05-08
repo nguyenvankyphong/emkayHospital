@@ -136,7 +136,7 @@ class DependentPatient extends React.Component {
     this.setState({ page: 0, rowsPerPage: event.target.value });
   };
   redirectPatient(id){
-    sessionStorage.setItem('id_patient',id);
+    localStorage.setItem('id_patient',id);
     this.setState({redirectPatient: true});
   }
 
@@ -149,14 +149,14 @@ class DependentPatient extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
       checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
-       console.log("Token: "+sessionStorage.getItem('userData'))
+       console.log("Token: "+localStorage.getItem('userData'))
        this.setState({ listBenhNhan: resData.listBenhNhan});
 
     })

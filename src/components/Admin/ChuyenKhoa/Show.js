@@ -50,7 +50,7 @@ class Home extends Component {
   }
   edit =(idChuyenKhoa)=>{
     this.setState({redirectToReferrer: 3})
-    sessionStorage.setItem("idChuyenKhoa",idChuyenKhoa);
+    localStorage.setItem("idChuyenKhoa",idChuyenKhoa);
   }
   render() {
     const { result } = this.state;

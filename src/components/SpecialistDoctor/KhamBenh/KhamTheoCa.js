@@ -58,7 +58,7 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
@@ -85,7 +85,7 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
@@ -201,7 +201,7 @@ class Home extends Component {
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/bill/themthuocvaodonthuoc', true)
       request.setRequestHeader("content-type","application/json")
-      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+      request.setRequestHeader("Token", localStorage.getItem('userData'))
 
 
       var list = {
@@ -239,7 +239,7 @@ class Home extends Component {
           var c = document.getElementById('addThuocRs')
           c.innerHTML ='ok';
 
-        // sessionStorage.setItem('userRole',rs.role);
+        // localStorage.setItem('userRole',rs.role);
         scope.setState({
           // listMauHoSo: [],
           // mauHoSo: '',
@@ -282,7 +282,7 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
@@ -390,7 +390,7 @@ class Home extends Component {
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/addKetQuaKham?idHoSo='+localStorage.idHoSo, true)
       request.setRequestHeader("content-type","application/json")
-      request.setRequestHeader("Token", sessionStorage.getItem('userData'))
+      request.setRequestHeader("Token", localStorage.getItem('userData'))
 
 
       var list = [];
@@ -412,7 +412,7 @@ class Home extends Component {
         console.log("role" +rs.role);
 
         if (!rs.errCode) {
-        // sessionStorage.setItem('userRole',rs.role);
+        // localStorage.setItem('userRole',rs.role);
         scope.setState({
           listMauHoSo: [],
           mauHoSo: '',

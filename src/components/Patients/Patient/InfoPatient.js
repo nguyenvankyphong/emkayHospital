@@ -24,7 +24,7 @@ onChange(e){
 }
   componentDidMount() { 
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
+    var id= localStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/account/getBenhNhanById?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -32,7 +32,7 @@ onChange(e){
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())

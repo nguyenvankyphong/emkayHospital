@@ -38,7 +38,7 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
@@ -64,7 +64,7 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: (JSON.stringify(Arr)),
         })

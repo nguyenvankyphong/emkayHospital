@@ -30,7 +30,7 @@ class Home extends Component {
 
   componentWillMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
+    var id= localStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getDotKhamByIdBenhNhan?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -38,7 +38,7 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
@@ -51,7 +51,7 @@ class Home extends Component {
   }
   hoSoKhamBenh(idDK){
     this.setState({redirectHSKB: true,id: idDK});
-    sessionStorage.setItem("idDK",idDK);
+    localStorage.setItem("idDK",idDK);
   }
   handleStatus(status){
     if(status == 0){
