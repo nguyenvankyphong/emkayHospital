@@ -98,33 +98,36 @@ class Login extends Component {
 
 
      return (
-       <div className= "row " cid="Body">
-        <h1 className="title">EMKAY HOSPITAL</h1>
-         <div className="medium-4 columns left">
-           <h1>LOGIN</h1>
-           <label>Username</label>
-           <input
-             type="text"
-             ref="someUser"
-             name="username"
-             placeholder="Username"
-             onChange={this.onChange}
+        <div className= "loginPage" cid="Body">
+          <div className="loginForm">
 
-             />
-           <label>Password</label>
-           <input
-             type="password"
-             ref="somePass"
-             name="password"
-             placeholder="Password"
-             onChange={this.onChange}
-             />
-           <div className= "bt">
-           <input type="submit" className="button success" value="Login" onClick={this.login} />
-           <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
-           </div>
-         </div>
-       </div>
+             <div className="columns left">
+             <h1 className="title">EMKAY HOSPITAL</h1>
+               <h1 className="loginTitle">LOGIN</h1>
+               <label>Username</label>
+               <input
+                 type="text"
+                 ref="someUser"
+                 name="username"
+                 placeholder="Username"
+                 onChange={this.onChange}
+
+                 />
+               <label>Password</label>
+               <input
+                 type="password"
+                 ref="somePass"
+                 name="password"
+                 placeholder="Password"
+                 onChange={this.onChange}
+                 />
+               <div className= "bt">
+               <input type="submit" className="button success" value="Login" onClick={this.login} />
+               <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
+               </div>
+             </div>
+          </div>
+        </div>
     );
   }
 }

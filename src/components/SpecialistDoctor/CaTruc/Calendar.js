@@ -56,9 +56,9 @@ class Calendar extends Component {
 
     return <Grid container spacing={24} className="">
       <Grid item xs = {12}><SimpleModal name = {day} list={listOfThisDay} room={this.props.room} date={date}/></Grid>
-      <Grid item xs = {12}>Ca 1({ca1.length})</Grid>
-      <Grid item xs = {12}>Ca 2({ca2.length})</Grid>
-      <Grid item xs = {12}>Ca 3({ca3.length})</Grid>
+      <Grid item xs = {12} className="caItem">Ca 1({ca1.length})</Grid>
+      <Grid item xs = {12} className="caItem">Ca 2({ca2.length})</Grid>
+      <Grid item xs = {12} className="caItem">Ca 3({ca3.length})</Grid>
     </Grid>
   }
 
@@ -76,7 +76,7 @@ class Calendar extends Component {
           return <div className="week ca" key={i}>
             {days.map( (day, di) =>{
               return <div className="day" key={di}>
-                        {day == ""? <div>{"\u00a0"}</div> : <div>
+                        {day == ""? <div><a className="dateItem">{"\u00a0"}</a></div> : <div>
                             {isNaN(day) ? day : this.loadCaTrucTrongNgay(day)}
                           </div>
                         }
@@ -86,7 +86,7 @@ class Calendar extends Component {
         } else {
           return <div className="week" key={i}>
           {days.map( (day, di) =>{
-            return <div className="dayTitle" key={di}>
+            return <div className="dayTitle caItem" key={di}>
               {day || "\u00a0"}
             </div>
           })}

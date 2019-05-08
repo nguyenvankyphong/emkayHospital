@@ -30,6 +30,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Trangchu from '../Admin/Trangchu';
 import listSidebar from './ListSidebar'
+import {applySidebar} from './applySidebar';
+import './Sidebar.css';
 
 const drawerWidth = 240;
 
@@ -175,7 +177,7 @@ class Admin extends React.Component {
       redirectToReferrer: false,
       path: '',
       changePass:false,
-      listSidebar: [...listSidebar]
+      listSidebar: []
     };
     this.logout = this.logout.bind(this);
     this.handleUrlSidebar = this.handleUrlSidebar.bind(this);
@@ -183,9 +185,10 @@ class Admin extends React.Component {
     this.changePassword = this.changePassword.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({listSidebar: [...listSidebar]})
-
+  componentWillMount() {
+    console.log("to will mount");
+    console.log(applySidebar(window.location.pathname));
+    this.setState({listSidebar: applySidebar(window.location.pathname)})
   }
 
   handleListSidebar = list => {
@@ -255,23 +258,22 @@ class Admin extends React.Component {
     const { classes, theme } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-
-
-      >
-        <MenuItem  onClick={() => this.handleUrlSidebar('/patients')}>Patients</MenuItem>
-        <MenuItem onClick={this.changePassword}>Change password</MenuItem>
-        <MenuItem
-
-        onClick={this.logout}>Logout</MenuItem>
-      </Menu>
+      <div>
+        dsfvsdv
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isMenuOpen}
+          onClose={this.handleMenuClose}
+        >
+          <MenuItem  onClick={() => this.handleUrlSidebar('/patients')}>Patients</MenuItem>
+          <MenuItem onClick={this.changePassword}>Change password</MenuItem>
+          <MenuItem
+          onClick={this.logout}>Logout</MenuItem>
+        </Menu>
+      </div>
     );
-
     return (
       <div className={classes.root} id ="body">
         <CssBaseline />
@@ -296,6 +298,7 @@ class Admin extends React.Component {
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              <p className="hello">Hello!</p>
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"

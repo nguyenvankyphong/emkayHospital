@@ -72,7 +72,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <a onClick={this.handleOpen}>{this.props.name}</a>
+        <a onClick={this.handleOpen} className="dateItem">{this.props.name}</a>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

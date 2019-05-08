@@ -43,11 +43,11 @@ class Calendar extends Component {
     })
     if (typeof item !== 'undefined') {
       return <Grid container spacing={24} className="">
-            <Grid item xs = {12}><a href={"/doctor/khambenh/"+item.idCakham}>{day}</a></Grid>
-            <Grid item xs = {12}>Ca {item.buoi} - {item.tenPhong}</Grid>
+            <Grid item xs = {12}><p className="dateItem">{day}</p></Grid>
+            <Grid item xs = {12}><a className="caItem" href={"/doctor/khambenh/"+item.idCakham}>Ca {item.buoi} - {item.tenPhong}</a></Grid>
           </Grid>}
     return <Grid container spacing={24} className="">
-                                <Grid item xs = {12}>{day}</Grid>
+                                <Grid item xs = {12}><p className="dateItem">{day}</p></Grid>
                               </Grid>
   }
 
@@ -64,8 +64,8 @@ class Calendar extends Component {
         if (i != 0) {
           return <div className="week ca" key={i}>
             {days.map( (day, di) =>{
-              return <div className="day" key={di}>
-                        {day == ""? <div>{"\u00a0"}</div> : <div>
+              return <div className="day2" key={di}>
+                        {day == ""? <Grid item xs = {12}><p className="dateItem">{"\u00a0"}</p></Grid> : <div>
                             {isNaN(day) ? day : this.loadCaTrucTrongNgay(day)}
                           </div>
                         }
@@ -75,7 +75,7 @@ class Calendar extends Component {
         } else {
           return <div className="week" key={i}>
           {days.map( (day, di) =>{
-            return <div className="dayTitle" key={di}>
+            return <div className="dayTitle caItem" key={di}>
               {day || "\u00a0"}
             </div>
           })}

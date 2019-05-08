@@ -5,15 +5,19 @@ import './Welcome.css'
 
 class Welcome extends Component {
   render() {
-    if (!localStorage.getItem('userData')) {
-      return (<Redirect to={'/login'}/>);
-    }
+    // if (!localStorage.getItem('userData')) {
+    //   return (<Redirect to={'/login'}/>);
+    // }
     return (
-      <div className="row " id="Body">
-        <div className="medium-12 columns">
-          <h2 id="welcomeText">Welcome to Emkay Hospital</h2>
+        <div className="welcome">
+          <div>
+            <a className="login-btn" href="/login">LOGIN</a>
+          </div>
+          <div className="welcomeContent">
+            <h2 id="welcomeText" className="welcomeText">WELCOME TO EMKAY HOSPITAL</h2>
+            <p className="welcomeSlogan">Leading the way in medical excellence</p>
+          </div>
         </div>
-      </div>
     );
   }
 }

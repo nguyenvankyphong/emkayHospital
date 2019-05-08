@@ -1,4 +1,50 @@
-#welcomeText{
-    font-weight: bold;
-    font-size: 50px;
+#welcomeText {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.welcome {
+  background-image: url("../../images/banner-bg.webp");
+  padding: 0px 0 450px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  background-color: #b0b0b0;
+
+
+}
+
+.welcome .welcomeContent {
+  padding-top: 150px
+}
+
+.welcome .welcomeText {
+  font-family: "Ubuntu",sans-serif;
+  margin-left: 50px;
+
+}
+.welcome .welcomeSlogan {
+  font-family: "Ubuntu",sans-serif;
+  margin-left: 50px;
+  font-size: 30px;
+}
+
+.login-btn {
+  display: block;
+  position: relative;
+  float: right;
+  margin: 30px 100px;
+  padding: 5px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  color: black;
+  font-family: "Ubuntu",sans-serif;
+}
+
+.login-btn:hover {
+  background-color: white;
+  opacity: 0.5;
+  color: black;
+  font-family: "Ubuntu",sans-serif;
 }

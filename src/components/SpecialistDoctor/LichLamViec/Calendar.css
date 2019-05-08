@@ -23,6 +23,12 @@
   height: 13em;
   border: 1px solid #ccc;
 }
+.day2 {
+  display: inline-block;
+  width: 12%;
+  height: 7em;
+  border: 1px solid #ccc;
+}
 
 .ca {
   font-size: 15px;
@@ -65,4 +71,20 @@ footer a, footer a:visited {
   flex-wrap: wrap;
   .item {
   }
+}
+
+.dateItem {
+  font-family: "Ubuntu",sans-serif;
+  font-size: 25px;
+  margin-bottom: 0rem;
+  font-style: bold;
+}
+
+.caItem {
+  font-family: "Ubuntu",sans-serif;
+}
+
+.titleA {
+  font-family: "Ubuntu",sans-serif;
+  color: #6E9BA5;
 }
