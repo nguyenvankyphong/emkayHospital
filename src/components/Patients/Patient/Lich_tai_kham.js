@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Lich_tai_kham extends Component {
 
@@ -39,6 +40,7 @@ class Lich_tai_kham extends Component {
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData))
                 this.setState({
                     value: resData.value,

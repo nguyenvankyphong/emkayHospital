@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from '@material-ui/core';
 import './Recep.css';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -38,6 +39,7 @@ class Home extends Component {
     })
       .then(response => response.json())
       .then(resData => {
+        checkErrCode(resData.errCode);
         console.log(JSON.stringify(resData))
         this.setState({ result: resData.arr });
       })

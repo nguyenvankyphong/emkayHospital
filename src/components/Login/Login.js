@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import './Login.css';
 import logo from './icon_hospital.png';
+import {checkErrCode} from '../Layout/checkErrCode'
 
 class Login extends Component {
 
@@ -46,7 +47,6 @@ class Login extends Component {
         rs = JSON.parse(this.response);
         console.log(rs);
         console.log("role" +rs.role);
-
         if (!rs.errCode) {
           localStorage.setItem('userData', rs.token);
           sessionStorage.setItem('userData',rs.token);

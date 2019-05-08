@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class InfoPatient extends React.Component {
   constructor(props){
@@ -36,6 +37,7 @@ onChange(e){
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
        console.log("id :"+id);
        this.setState({

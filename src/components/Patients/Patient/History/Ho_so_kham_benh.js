@@ -6,6 +6,7 @@ import Hoa_don from './Hoa_don';
 import KetQuaKhamBenh from './KetQuaKhamBenh';
 import ReactDOM from 'react-dom';
 import Grid from '@material-ui/core/Grid';
+import {checkErrCode} from '../../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -42,8 +43,7 @@ class Home extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
-      // console.log("resData");
-      // console.log(resData);
+      checkErrCode(resData.errCode);
       this.setState({result:resData.result});
     })
 

@@ -4,6 +4,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Calendar from "./CaTruc/Calendar";
 import leftPad from 'left-pad';
 import Grid from '@material-ui/core/Grid';
+import {checkErrCode} from '../Layout/checkErrCode';
 
 class LichTruc extends Component {
 
@@ -51,6 +52,7 @@ class LichTruc extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
         this.setState({ listRoom: [...resData.arr]});
         this.setState({ room: {...resData.arr[0]}});
 
@@ -76,6 +78,7 @@ class LichTruc extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
         this.setState({
           listRoom: [...resData.arr],
           room: {...resData.arr[0]}
@@ -99,6 +102,7 @@ class LichTruc extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
       console.log(resData);
       console.log(resData);
       this.setState({ listCaTruc: resData.arr});

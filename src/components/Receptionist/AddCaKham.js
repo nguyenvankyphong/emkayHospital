@@ -3,29 +3,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import ReactDOM from 'react-dom';
 import './AddCaKham.css';
 import Checkbox from '@material-ui/core/Checkbox';
+import {checkErrCode} from '../Layout/checkErrCode';
 
-function FormError(props) {
-    /* nếu isHidden = true, return null ngay từ đầu */
-    if (props.isHidden) { return null; }
-
-    return (<div>{props.errorMessage}</div>)
-}
-const validateInput = (checkingText) => {
-
-    const regexp = /^\d{0}$/; 
-    if (regexp.exec(checkingText) == null) {
-    //if (checkingText !== null) {
-        return {
-            isInputValid: true,
-            errorMessage: ''
-        };
-    } else {
-        return {
-            isInputValid: false,
-            errorMessage: 'Vui lòng nhập dữ liệu đầy đủ'
-        };
-    }
-}
 class Add_com4 extends React.Component {
     constructor(props) {
         super(props);
@@ -81,6 +60,7 @@ class Add_com4 extends React.Component {
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log("Ca khám: " + JSON.stringify(resData))
                 console.log("Token: " + sessionStorage.getItem('userData'))
                 this.setState({ listCaKham: resData.result });
@@ -208,6 +188,7 @@ class Add_com3_selsect extends React.Component {
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData.result))
                 console.log("Token: " + sessionStorage.getItem('userData'))
                 this.setState({ listDotKham: resData.result });
@@ -309,6 +290,7 @@ class AddCaKham extends React.Component {
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData));
                 this.setState({ listBenhNhan: resData.listBenhNhan })
 
@@ -335,13 +317,6 @@ class AddCaKham extends React.Component {
     onChange = (event) => {
         const { value } = event.target;
         this.setState({ value });
-    }
-    handleInputValidation = (event) => {
-        const { isInputValid, errorMessage } = validateInput(this.state.value);
-        this.setState({
-            isInputValid: isInputValid,
-            errorMessage: errorMessage
-        })
     }
     render() {
         return (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import '../../Patient.css';
+import {checkErrCode} from '../../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -31,7 +32,7 @@ class Home extends Component {
     })
       .then(response => response.json())
       .then(resData => {
-        // console.log(JSON.stringify(resData))
+        checkErrCode(resData.errCode);
         this.setState({
           result: resData.result,
           value: resData.value

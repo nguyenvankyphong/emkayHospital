@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class AddCaTrucForm extends React.Component {
   constructor(props) {
@@ -88,6 +89,7 @@ class AddCaTrucForm extends React.Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
         console.log(JSON.stringify(resData))
        // console.log("Token: "+sessionStorage.getItem('userData'))
        this.setState({ listBacSi: resData.arr});

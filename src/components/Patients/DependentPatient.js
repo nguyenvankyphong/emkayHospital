@@ -16,6 +16,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import TableHead from '@material-ui/core/TableHead';
 import { Link } from '@material-ui/core';
 import {Redirect} from 'react-router-dom';
+import {checkErrCode} from '../Layout/checkErrCode'
 
 const actionsStyles = theme => ({
   root: {
@@ -153,6 +154,7 @@ class DependentPatient extends React.Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
        console.log("Token: "+sessionStorage.getItem('userData'))
        this.setState({ listBenhNhan: resData.listBenhNhan});

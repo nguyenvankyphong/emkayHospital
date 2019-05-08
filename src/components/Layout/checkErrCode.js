@@ -7,6 +7,7 @@ import React, {Component} from 'react';
       console.log("0");
       break;
     case 2:
+      alert("Phiên làm việc hết hạn");
       console.log("2");
       sessionStorage.clear();
       localStorage.clear();

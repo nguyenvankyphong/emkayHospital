@@ -5,6 +5,7 @@ import '../../Patient.css';
 import { Link } from '@material-ui/core';
 import {Route} from 'react-router-dom';
 import Ho_so_kham_benh from './Ho_so_kham_benh';
+import {checkErrCode} from '../../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -42,6 +43,7 @@ class Home extends Component {
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(resData);
        console.log("id :"+id);
        this.setState({result:resData.result});
