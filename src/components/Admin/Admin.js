@@ -37,10 +37,10 @@ class Receptionist extends Component {
       <div>
             <Route exact path={this.props.match.path} component={Show} />
             <Route path={`${this.props.match.path}/add`} component={Add} />
-            <Route path={`${this.props.match.path}/doctor`} component={IndexDoctor} />
-            <Route path={`${this.props.match.path}/recep`} component={IndexRecep} />
-            <Route path={`${this.props.match.path}/chuyenKhoa`} component={IndexChuyenKhoa} />
-            <Route path={`${this.props.match.path}/phongKham`} component={IndexPhongKham} />
+            <Route path={`${this.props.match.path}/bacsi`} component={IndexDoctor} />
+            <Route path={`${this.props.match.path}/letan`} component={IndexRecep} />
+            <Route path={`${this.props.match.path}/chuyenkhoa`} component={IndexChuyenKhoa} />
+            <Route path={`${this.props.match.path}/phongkham`} component={IndexPhongKham} />
             
       </div>
     );

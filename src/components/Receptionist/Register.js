@@ -18,6 +18,7 @@ class Register extends Component {
       redirectToReferrer: false,
       isRegistered: false,
       qr: '',
+      startDate: new Date(),
       listSidebar: [{text: "Home", path: "/receptionist"},
                     {text: "Tạo tài khoản", path: "/receptionist/register"},
                     { text: "Đặt lịch khám", path: "/receptionist/datLich" },
@@ -31,6 +32,7 @@ class Register extends Component {
     this.handleChangeRadio = this.handleChangeRadio.bind(this);
     this.register = this.register.bind(this);
     this.convertTime = this.convertTime.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
   componentWillMount() {
@@ -87,7 +89,11 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
     // console.log(this.state);
   }
-
+  handleChangeDate(date) {
+    this.setState({
+      startDate: date
+    });
+  }
   newAccount() {
     // console.log("vô đc");
     this.setState({ isRegistered: false });
@@ -141,8 +147,18 @@ class Register extends Component {
             <input type="text" ref="someUser" name="ten" placeholder="Tên" onChange={this.onChange}/>
 
             <label>Ngày sinh</label>
-            <input type="text" ref="someUser" name="ngaysinh" placeholder="Ngày sinh" onChange={this.onChange}/>
+           <div>
+           <DatePicker
+            dateFormat="yyyy-MM-dd"
+            selected={this.state.startDate}
+            onChange={this.handleChangeDate}
+            peekNextMonth
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
+            />
 
+           </div>
             <label>Giới tính</label>
             <select onChange={this.onChange} ref="gender">
               <option key="0" value="0">Nam</option>
