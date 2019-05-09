@@ -13,6 +13,7 @@ class Home extends Component {
       result: [],
       redirectToReferrer: false,
       value: '',
+      totalCost: 0,
     };
     this.componentWillMount = this.componentWillMount.bind(this);
   }
@@ -32,13 +33,22 @@ class Home extends Component {
     })
       .then(response => response.json())
       .then(resData => {
+        console.log("hóa đơn");
+        console.log(resData);
         checkErrCode(resData.errCode);
         this.setState({
           result: resData.result,
-          value: resData.value
+          value: resData.value,
+          totalCost: resData["Tong bill"],
         });
       })
 
+  }
+
+  loadTotalCost(data) {
+    data.each((item, index) => {
+      console.log(item);
+    })
   }
   render() {
     const { result, value} = this.state;
@@ -55,14 +65,14 @@ class Home extends Component {
     } else {
       return (
         <div>
-          <h3>Hóa đơn</h3>
-          <table className="table">
+          <h3 className="hoadonTitle">Hóa đơn</h3>
+          <table className="">
             <thead>
               <tr>
                 <th>STT</th>
                 <th>Tên chi phí</th>
                 <th>Đơn vị tính</th>
-                <th>Đồng giá</th>
+                <th>Đơn giá</th>
                 <th>Số lượng</th>
                 <th>Type</th>
               </tr>
@@ -73,14 +83,14 @@ class Home extends Component {
                   <td>{index + 1}</td>
                   <td>{row.tenchiphi}</td>
                   <td>{row.donvitinh}</td>
-                  <td>{row.time}</td>
-                  <td>{row.donggia}</td>
-                  <td>{row.soLuong}</td>
+                  <td>{row.dongia}</td>
+                  <td>{row.SoLuong}</td>
                   <td>{row.type}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+          total: {this.state.totalCost}
         </div>
       );
     }
