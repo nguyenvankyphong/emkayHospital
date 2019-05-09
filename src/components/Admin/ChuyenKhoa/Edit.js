@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Redirect } from 'react-router-dom';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Add extends React.Component {
     constructor(props) {
@@ -37,11 +38,12 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData))
                 this.setState({ arr: resData.arr });
 
@@ -62,7 +64,7 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: (JSON.stringify(Arr)),
         })

@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Redirect } from 'react-router-dom';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Add extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Add extends React.Component {
 
     }
     componentDidMount() {
-        var idPhongKham = sessionStorage.getItem("idPhongKham");
+        var idPhongKham = localStorage.getItem("idPhongKham");
         var proxy = 'https://doanhttt.herokuapp.com/'
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/getLabById?idPhongKham='+idPhongKham;
         fetch(proxy + apiadd, {
@@ -35,11 +36,12 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData))
                 console.log(resData.errCode)
                 this.setState({TenPhong: resData.arr[0].tenPhong,
@@ -53,7 +55,7 @@ class Add extends React.Component {
         arr.push(this.state.SoPhong);
         arr.push(this.state.TenPhong);
         console.log(arr);
-        var idPhongKham= sessionStorage.getItem("idPhongKham");
+        var idPhongKham= localStorage.getItem("idPhongKham");
         var proxy = 'https://doanhttt.herokuapp.com/'
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/updateLab?idPhongKham='+idPhongKham;
         fetch(proxy + apiadd, {
@@ -62,7 +64,7 @@ class Add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: (JSON.stringify(arr)),
         })

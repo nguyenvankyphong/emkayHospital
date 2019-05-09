@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from '@material-ui/core';
 import './PhongKham.css';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -26,7 +27,7 @@ class Home extends Component {
 
   componentWillMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id = sessionStorage.getItem('idDK');
+    var id = localStorage.getItem('idDK');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListPhongKham';
     fetch(proxy + apiadd, {
       method: 'GET',
@@ -34,11 +35,12 @@ class Home extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        'Token': sessionStorage.getItem('userData'),
+        'Token': localStorage.getItem('userData'),
       },
     })
       .then(response => response.json())
       .then(resData => {
+        checkErrCode(resData.errCode);
         console.log(JSON.stringify(resData))
         this.setState({ arr: resData.arr });
       })
@@ -49,7 +51,7 @@ class Home extends Component {
   }
   edit(id){
     this.setState({redirectToReferrer: 3})
-    sessionStorage.setItem("idPhongKham",id);
+    localStorage.setItem("idPhongKham",id);
   }
   delete(idPhongKham){
     var {arr} = this.state;
@@ -62,7 +64,7 @@ class Home extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        'Token': sessionStorage.getItem('userData'),
+        'Token': localStorage.getItem('userData'),
       },
     })
       

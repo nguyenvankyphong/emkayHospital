@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class InfoPatient extends React.Component {
   constructor(props){
@@ -23,7 +24,7 @@ onChange(e){
 }
   componentDidMount() { 
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
+    var id= localStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/account/getBenhNhanById?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -31,11 +32,12 @@ onChange(e){
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
        console.log("id :"+id);
        this.setState({

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import '../Patient.css';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -24,7 +25,7 @@ class Home extends Component {
 
   componentWillMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
+    var id= localStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/getListDatLich?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -32,11 +33,12 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'token' : sessionStorage.getItem('userData'),
+          'token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
        this.setState({result:resData.arr});
     })

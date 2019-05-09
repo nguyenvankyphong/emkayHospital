@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import '../Patient.css';
 import { Link } from '@material-ui/core';
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -24,7 +25,7 @@ class Home extends Component {
 
   componentWillMount() {
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
+    var id= localStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getDotKhamByIdBenhNhan?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -32,11 +33,12 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
        console.log("id :"+id);
        this.setState({result:resData.result});
@@ -44,7 +46,7 @@ class Home extends Component {
   }
   hoSoKhamBenh(id){
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('id_patient');
+    var id= localStorage.getItem('id_patient');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getDotKhamByIdBenhNhan?idBenhNhan='+id;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -52,11 +54,12 @@ class Home extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        console.log(JSON.stringify(resData))
        console.log("id :"+id);
        this.setState({result:resData.result});

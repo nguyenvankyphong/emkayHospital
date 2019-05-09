@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
+import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Lich_tai_kham extends Component {
 
@@ -26,7 +27,7 @@ class Lich_tai_kham extends Component {
     }
     componentWillMount() {
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var id = sessionStorage.getItem('id_patient');
+        var id = localStorage.getItem('id_patient');
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/xemlichtaikham?idBenhNhan=' + id;
         fetch(proxy + apiadd, {
             method: 'GET',
@@ -34,11 +35,12 @@ class Lich_tai_kham extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData))
                 this.setState({
                     value: resData.value,

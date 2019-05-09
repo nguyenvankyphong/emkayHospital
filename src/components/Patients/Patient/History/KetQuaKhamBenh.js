@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
+import {checkErrCode} from '../../../Layout/checkErrCode';
 
 class KetQuaKhamBenh extends Component {
 
@@ -21,7 +22,7 @@ class KetQuaKhamBenh extends Component {
     var modelFeatures = {};
     // console.log(this.props.idHoSo);
     var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= sessionStorage.getItem('idDK');
+    var id= localStorage.getItem('idDK');
     var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/xemHoSoKhamBenh?idHoSo=' + this.props.idHoSo;
     fetch(proxy+apiadd,{
         method: 'GET',
@@ -29,11 +30,12 @@ class KetQuaKhamBenh extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Origin': '',
-          'Token' : sessionStorage.getItem('userData'),
+          'Token' : localStorage.getItem('userData'),
         },
     })
     .then(response =>  response.json())
     .then(resData => {
+      checkErrCode(resData.errCode);
        // console.log("resData hồ sơ");
        // console.log(resData);
        console.log("features:");

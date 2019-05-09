@@ -39,7 +39,7 @@ class Home extends Component {
   }
   add = () => {
     var arr = [];
-    var id_patient = sessionStorage.getItem("id_patient");
+    var id_patient = localStorage.getItem("id_patient");
     arr.push(this.state.thongTinBenh);
     var aDate = this.state.startDate;
     console.log(aDate)
@@ -53,7 +53,7 @@ class Home extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        'token': sessionStorage.getItem('userData'),
+        'token': localStorage.getItem('userData'),
       },
       body: (JSON.stringify(arr)),
     })

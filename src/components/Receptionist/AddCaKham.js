@@ -3,29 +3,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import ReactDOM from 'react-dom';
 import './AddCaKham.css';
 import Checkbox from '@material-ui/core/Checkbox';
+import { checkErrCode } from '../Layout/checkErrCode';
 
-function FormError(props) {
-    /* nếu isHidden = true, return null ngay từ đầu */
-    if (props.isHidden) { return null; }
-
-    return (<div>{props.errorMessage}</div>)
-}
-const validateInput = (checkingText) => {
-
-    const regexp = /^\d{0}$/; 
-    if (regexp.exec(checkingText) == null) {
-    //if (checkingText !== null) {
-        return {
-            isInputValid: true,
-            errorMessage: ''
-        };
-    } else {
-        return {
-            isInputValid: false,
-            errorMessage: 'Vui lòng nhập dữ liệu đầy đủ'
-        };
-    }
-}
 class Add_com4 extends React.Component {
     constructor(props) {
         super(props);
@@ -54,14 +33,14 @@ class Add_com4 extends React.Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Origin': '',
-                    'Token': sessionStorage.getItem('userData'),
+                    'Token': localStorage.getItem('userData'),
                 },
                 body: JSON.stringify(Arr),
             })
                 .then(response => response.json())
                 .then(resData => {
                     console.log("Thêm thành công");
-                    window.location.reload(); 
+                    window.location.reload();
                 })
         } else {
             alert("Vui lòng chọn ca khám");
@@ -76,13 +55,14 @@ class Add_com4 extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'Token': sessionStorage.getItem('userData'),
+                'Token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log("Ca khám: " + JSON.stringify(resData))
-                console.log("Token: " + sessionStorage.getItem('userData'))
+                console.log("Token: " + localStorage.getItem('userData'))
                 this.setState({ listCaKham: resData.result });
 
             })
@@ -135,7 +115,7 @@ class Add_com3_add extends React.Component {
     }
     addDK = () => {
         var Arr = [];
-        Arr.push(sessionStorage.getItem('idBenhNhan'));
+        Arr.push(localStorage.getItem('idBenhNhan'));
         Arr.push(this.refs.infor.value);
         console.log("list: " + Arr);
         var proxy = 'https://doanhttt.herokuapp.com/'
@@ -146,7 +126,7 @@ class Add_com3_add extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'token': sessionStorage.getItem('userData'),
+                'token': localStorage.getItem('userData'),
             },
             body: JSON.stringify(Arr),
         })
@@ -196,20 +176,21 @@ class Add_com3_selsect extends React.Component {
     }
     componentDidMount() {
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var idBenhNhan = sessionStorage.getItem("idBenhNhan");
+        var idBenhNhan = localStorage.getItem("idBenhNhan");
         fetch(proxy + 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getDotKhamHopLeByIdBenhNhan?idBenhNhan=' + idBenhNhan, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'Token': sessionStorage.getItem('userData'),
+                'Token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData.result))
-                console.log("Token: " + sessionStorage.getItem('userData'))
+                console.log("Token: " + localStorage.getItem('userData'))
                 this.setState({ listDotKham: resData.result });
 
             })
@@ -256,7 +237,7 @@ class Add_com2 extends React.Component {
         console.log(this.refs.select_patient.value);
     }
     select_patient = () => {
-        sessionStorage.setItem('idBenhNhan', this.refs.select_patient.value);
+        localStorage.setItem('idBenhNhan', this.refs.select_patient.value);
         ReactDOM.render(<Add_com3_add />, document.getElementById("com3_add"));
     }
     componentDidMount() {
@@ -304,28 +285,25 @@ class AddCaKham extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Origin': '',
-                'Token': sessionStorage.getItem('userData'),
+                'Token': localStorage.getItem('userData'),
             },
         })
             .then(response => response.json())
             .then(resData => {
+                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData));
                 this.setState({ listBenhNhan: resData.listBenhNhan })
 
                 if (this.refs.someUser.value != '') {
-                    if (JSON.stringify(resData.errCode) == 5) {
-                        alert("Tài khoản của bạn không có trong danh sách đăng kí");
+                    if (this.state.listBenhNhan.length == 0) {
+                        alert("Bạn chưa đăng kí tài khoản khám bệnh");
                     } else {
-                        if (this.state.listBenhNhan.length == 0) {
-                            alert("Bạn chưa đăng kí tài khoản khám bệnh");
-                        } else {
-                            localStorage.setItem('listBenhNhanKham', JSON.stringify(resData.listBenhNhan));
-                            ReactDOM.render(<Add_com2 />, document.getElementById("com2"));
-                            JSON.stringify(resData.listBenhNhan)
-                        }
+                        localStorage.setItem('listBenhNhanKham', JSON.stringify(resData.listBenhNhan));
+                        ReactDOM.render(<Add_com2 />, document.getElementById("com2"));
+                        JSON.stringify(resData.listBenhNhan)
                     }
                 } else {
-                   alert("Vui lòng nhập username");
+                    alert("Vui lòng nhập username");
                 }
             })
     }
@@ -336,13 +314,6 @@ class AddCaKham extends React.Component {
         const { value } = event.target;
         this.setState({ value });
     }
-    handleInputValidation = (event) => {
-        const { isInputValid, errorMessage } = validateInput(this.state.value);
-        this.setState({
-            isInputValid: isInputValid,
-            errorMessage: errorMessage
-        })
-    }
     render() {
         return (
             <div>
@@ -350,14 +321,14 @@ class AddCaKham extends React.Component {
                     <div className="" id="com1">
                         <h4>Nhập Username</h4>
                         <label>Username</label>
-                        <input 
-                        type="text" 
-                        ref="someUser" 
-                        name="userName" 
-                        placeholder="Username" 
-                        onChange={this.onChange}
+                        <input
+                            type="text"
+                            ref="someUser"
+                            name="userName"
+                            placeholder="Username"
+                            onChange={this.onChange}
                         />
-                     
+
                         <div className="bt">
                             <input type="submit" className="button success" value="Chọn" onClick={this.add} />
                             <input type="reset" className="button reset" value="reset" onClick={this.reset} />
