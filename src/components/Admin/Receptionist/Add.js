@@ -13,10 +13,10 @@ class Add extends React.Component {
             add:'',
             redirect: false,
             listSidebar: [{ text: "Admin", path: "/admin" },
-            { text: "Bác sĩ", path: "/admin/doctor" },
-            { text: "Lễ tân", path: "/admin/recep" },
-            { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
-            { text: "Phòng khám", path: "/admin/phongKham" },
+            { text: "Bác sĩ", path: "/admin/bacsi" },
+            { text: "Lễ tân", path: "/admin/letan" },
+            { text: "Chuyên khoa", path: "/admin/chuyenkhoa" },
+            { text: "Phòng khám", path: "/admin/phongkham" },
             ],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -53,15 +53,18 @@ class Add extends React.Component {
             })
 
     }
+   
     render() {
         if (this.state.redirect) {
-            return (<Redirect to="/admin/recep" />)
+            return (<Redirect to="/admin/letan/add" />)
         }
+        
         return (
             <div>
                 <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
                 <div className="row" id="Body">
                     <h2 className="title">Thêm tài khoản lễ tân</h2>
+                   
                     <div className="medium-3 columns left">
                         <h6>SĐT:</h6>
                         <input type="text" name="sdt" ref="phone" onChange={this.handleChange} />

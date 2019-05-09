@@ -16,10 +16,10 @@ class Receptionist extends Component {
 
     this.state = {
       listSidebar: [{ text: "Admin", path: "/admin" },
-      { text: "Bác sĩ", path: "/admin/doctor" },
-      { text: "Lễ tân", path: "/admin/recep" },
-      { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
-      { text: "Phòng khám", path: "/admin/phongKham" },
+      { text: "Bác sĩ", path: "/admin/bacsi" },
+      { text: "Lễ tân", path: "/admin/letan" },
+      { text: "Chuyên khoa", path: "/admin/chuyenkhoa" },
+      { text: "Phòng khám", path: "/admin/phongkham" },
       ],
       redirectToReferrer: false,
     };

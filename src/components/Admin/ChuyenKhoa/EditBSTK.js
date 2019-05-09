@@ -1,18 +1,13 @@
 import React from 'react';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Redirect } from 'react-router-dom';
-import {checkErrCode} from '../../Layout/checkErrCode';
 
 class Add extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            sdt: '',
-            name: '',
-            birth: '',
-            insuarance: '',
-            add: '',
+            BacSiTruongKhoa:'',
             redirect: false,
             arr:[],
             listSidebar: [{ text: "Admin", path: "/admin" },
@@ -31,7 +26,7 @@ class Add extends React.Component {
     }
     componentWillMount() {
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getChuyenKhoa';
+        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/getDoctorByName?HoTen=';
         fetch(proxy + apiadd, {
             method: 'GET',
             headers: {
@@ -43,21 +38,15 @@ class Add extends React.Component {
         })
             .then(response => response.json())
             .then(resData => {
-                checkErrCode(resData.errCode);
                 console.log(JSON.stringify(resData))
-                this.setState({ arr: resData.arr });
-
+                this.setState({ arr: resData.arr ,BacSiTruongKhoa: localStorage.getItem("idBacSiTruongKhoa")});
+                console.log(this.state.BacSiTruongKhoa);
             })
     }
-    add = () => {
-        var Arr = [];
-        Arr.push(this.state.sdt);
-        Arr.push(this.state.name);
-        Arr.push(this.refs.gender.value);
-        Arr.push(this.refs.chuyenkhoa.value);
-        console.log(Arr);
+    edit = () => {
+        var idChuyenKhoa= localStorage.getItem("idChuyenKhoa")
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/addDoctor';
+        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/assignedDoctor?idChuyenKhoa='+idChuyenKhoa;
         fetch(proxy + apiadd, {
             method: 'POST',
             headers: {
@@ -66,7 +55,7 @@ class Add extends React.Component {
                 'Origin': '',
                 'token': localStorage.getItem('userData'),
             },
-            body: (JSON.stringify(Arr)),
+            body: this.state.BacSiTruongKhoa,
         })
             .then(response => response.json())
             .then(resData => {
@@ -76,33 +65,24 @@ class Add extends React.Component {
 
     }
     render() {
-        const {arr} = this.state;
+        const {arr,BacSiTruongKhoa} = this.state;
         if (this.state.redirect) {
-            return (<Redirect to="/admin/bacsi" />)
+            return (<Redirect to="/admin/chuyenkhoa" />)
         }
         return (
             <div>
                 <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
                 <div className="row" id="Body">
-                    <h2 className="title">Thêm tài khoản bác sĩ</h2>
+                    <h2 className="title">Sửa bác sĩ trưởng khoa</h2>
                     <div className="medium-3 columns left">
-                        <h6>SĐT:</h6>
-                        <input type="text" name="sdt" ref="phone" onChange={this.handleChange} />
-                        <h6>Họ tên:</h6>
-                        <input type="text" name="name" ref="name_BN" onChange={this.handleChange} />
-                        <h6> Giới tính:</h6>
-                        <select name="gender" onChange={this.handleChange} ref="gender">
-                            <option key="0" value="0">Nam</option>
-                            <option key="1" value="1">Nữ</option>
-                        </select>
-                        <h6>Chuyên khoa:</h6>
-                        <select ref="chuyenkhoa" onChange={this.handleChange}>
-                            {arr.map(row => (
-                                <option key={row.idChuyenKhoa} value={row.idChuyenKhoa}>{row.tenChuyenkhoa}</option>
+                        <h6>Bác sĩ trưởng khoa:</h6>
+                        <select ref="bacsi" value={BacSiTruongKhoa} name="BacSiTruongKhoa" onChange={this.handleChange}>
+                            {arr.map((row,index)=> (
+                                <option key={index} value={row.idBacSi}>{row.HoTen}</option>
                             ))}
                         </select>
                         <div className="bt">
-                            <input type="submit" className="button success" value="Thêm" onClick={this.add} />
+                            <input type="submit" className="button success" value="Sửa" onClick={this.edit} />
                         </div>
                     </div>
                 </div>

@@ -55,22 +55,23 @@ class Home extends Component {
       return "Nam"
     }
   }
+
   render() {
     const { result } = this.state;
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
     }
     if (this.state.redirect) {
-      return (<Redirect to={'/admin/recep/add'} />)
+      return (<Redirect to={'/admin/letan/add'} />)
     }
-
+ 
     return (
       <div className="row">
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
         <div>
           <h3 className="title">Danh sách lễ tân</h3>
           <div className = "recep">
-            <Link onClick={this.add}>Thêm</Link>
+          <div><a onClick={this.add}>Thêm mới</a></div>
             <table className="tab">
               <thead>
                 <tr>

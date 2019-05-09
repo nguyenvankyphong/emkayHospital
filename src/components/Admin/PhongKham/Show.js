@@ -4,6 +4,8 @@ import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from '@material-ui/core';
 import './PhongKham.css';
 import {checkErrCode} from '../../Layout/checkErrCode';
+import Edit from '@material-ui/icons/Edit';
+import Delete from '@material-ui/icons/Delete';
 
 class Home extends Component {
 
@@ -108,9 +110,9 @@ class Home extends Component {
       <div className="showPK">
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />       
           <h3>Phòng khám</h3>
-          <div>
-          <Link onClick={this.add}>Thêm</Link>
-          <table className="table">
+         <div className="add">
+         <a onClick={this.add}>Thêm</a>
+          <table className="list">
             <thead>
               <tr>
                 <th>STT</th>
@@ -125,13 +127,13 @@ class Home extends Component {
                   <td>{index+1}</td>
                   <td>{row.SoPhong}</td>
                   <td>{row.TenPhong}</td>
-                  <td><Link onClick= {()=>this.edit(row.idPhongKham)}>Sửa</Link><Link onClick= {()=>this.delete(row.idPhongKham)}>Xóa</Link></td>
+                  <td><Link onClick= {()=>this.edit(row.idPhongKham)}><Edit /></Link><Link onClick= {()=>this.delete(row.idPhongKham)}> <Delete /></Link></td>
                 </tr>
               ))}
 
             </tbody>
           </table>
-        </div>
+         </div>
       </div>
     );
   }
