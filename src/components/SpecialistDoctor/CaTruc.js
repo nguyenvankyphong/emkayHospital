@@ -40,7 +40,7 @@ class LichTruc extends Component {
   }
 
   loadRoom() {
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListPhongKham',{
         method: 'GET',
         headers: {
@@ -60,13 +60,14 @@ class LichTruc extends Component {
   }
 
   componentDidMount() {
+
     if (localStorage.truongKhoa === "true") {
       let listSidebar = [...this.state.listSidebar];
       listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
       this.setState({ listSidebar });
     }
     var self = this;
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListPhongKham',{
         method: 'GET',
         headers: {
@@ -83,14 +84,23 @@ class LichTruc extends Component {
           listRoom: [...resData.arr],
           room: {...resData.arr[0]}
         });
+        console.log("tới đây");
         this.loadData(this.state.room, this.state.month, this.state.year)
 
     })
   }
 
+  loadRoomToStorage() {
+    var b = document.getElementById('selectRoom');
+    localStorage.setItem('idPhongKham', b.value);
+    console.log("localStorage");
+    console.log(localStorage);
+  }
+
   loadData(room, month, year) {
+    this.loadRoomToStorage();
     console.log("load data");
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getAllCaKham?idPhong='+localStorage.idPhongKham+'&month='+month+'&year='+year,{
         method: 'GET',
         headers: {
@@ -103,7 +113,6 @@ class LichTruc extends Component {
     .then(response =>  response.json())
     .then(resData => {
       checkErrCode(resData.errCode);
-      console.log(resData);
       console.log(resData);
       this.setState({ listCaTruc: resData.arr});
       console.log(this.state);
@@ -122,8 +131,6 @@ class LichTruc extends Component {
   }
 
   onChangeRoom = (e) => {
-    console.log("onchange room");
-    console.log(e.target.value);
     var b = document.getElementById('selectRoom');
 
     var room = this.state.listRoom.find((item) => {return item.idPhongKham == e.target.value})

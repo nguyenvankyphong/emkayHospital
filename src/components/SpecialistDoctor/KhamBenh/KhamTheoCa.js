@@ -51,7 +51,7 @@ class Home extends Component {
     }
     console.log(this.props.match.params);
     var idCaKham = this.props.match.params.id;
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListHoSo?idCaKham='+idCaKham,{
         method: 'GET',
         headers: {
@@ -78,7 +78,7 @@ class Home extends Component {
 
   chonBenhNhan(idHoSo) {
     var idCaKham = this.props.match.params.id;
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListMauHoSo?idCaKham='+idCaKham,{
         method: 'GET',
         headers: {
@@ -196,7 +196,7 @@ class Home extends Component {
     console.log(this.state);
     if(this.state.selectedThuoc && this.state.note && this.state.soLuong){
       var request = new XMLHttpRequest()
-      var proxy = 'https://cors-anywhere.herokuapp.com/'
+      var proxy = 'https://doanhttt.herokuapp.com/'
 
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/bill/themthuocvaodonthuoc', true)
@@ -275,7 +275,7 @@ class Home extends Component {
   }
 
   onSearchThuoc(e) {
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/bill/getDrugByName?TenChiPhi='+e.target.value,{
         method: 'GET',
         headers: {
@@ -385,7 +385,7 @@ class Home extends Component {
     console.log(this.state.kq);
     if(this.state.kq){
       var request = new XMLHttpRequest()
-      var proxy = 'https://cors-anywhere.herokuapp.com/'
+      var proxy = 'https://doanhttt.herokuapp.com/'
 
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/addKetQuaKham?idHoSo='+localStorage.idHoSo, true)

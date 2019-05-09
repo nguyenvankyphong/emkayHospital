@@ -17,7 +17,7 @@ class KetQuaKhamBenh extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     var listFeatures = {};
     var modelFeatures = {};
     // console.log(this.props.idHoSo);
@@ -38,14 +38,14 @@ class KetQuaKhamBenh extends Component {
       checkErrCode(resData.errCode);
        // console.log("resData hồ sơ");
        // console.log(resData);
-       console.log("features:");
-       console.log(JSON.parse(resData.mauHoSo.replace(/'/g, '"')));
+       // console.log("features:");
+       // console.log(JSON.parse(resData.mauHoSo.replace(/'/g, '"')));
        // console.log("kq");
        // console.log(JSON.parse(resData.ketQua.replace(/'/g, '"')));
        listFeatures = {...JSON.parse(resData.mauHoSo.replace(/'/g, '"'))};
        modelFeatures = JSON.parse(resData.ketQua.replace(/'/g, '"'));
        console.log("listFeatures");
-       console.log(listFeatures);
+       console.log(modelFeatures);
        listFeatures.array.map(item => (
          this.state.listFeatures.push(item)
        ));
@@ -77,7 +77,7 @@ class KetQuaKhamBenh extends Component {
     </div>;
     case 'boolean':
     return <Checkbox
-          disabled = "disabled"
+          disabled = {true}
           checked = {this.state.modelFeatures[item.id]}
           color="primary"
         />

@@ -31,7 +31,7 @@ class AddCaTrucForm extends React.Component {
   addCa() {
     if (this.state.selectCa>0 && this.state.selectBS){
       var request = new XMLHttpRequest()
-      var proxy = 'https://cors-anywhere.herokuapp.com/'
+      var proxy = 'https://doanhttt.herokuapp.com/'
 
       // Open a new connection, using the GET request on the URL endpoint
       request.open('POST', proxy+'http://168.61.49.94:8080/DOANHTTT/rest/account/login', true)
@@ -76,7 +76,7 @@ class AddCaTrucForm extends React.Component {
   }
 
   componentDidMount() {
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListBacSi',{
         method: 'GET',
         headers: {

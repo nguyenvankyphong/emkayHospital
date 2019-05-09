@@ -4,7 +4,8 @@ import Sidebar from "../Sidebar/Sidebar";
 import Calendar from "./LichLamViec/Calendar";
 import leftPad from 'left-pad';
 import Grid from '@material-ui/core/Grid';
-import {checkErrCode} from '../Layout/checkErrCode'
+import {checkErrCode} from '../Layout/checkErrCode';
+import './LichLamViec/Calendar.css';
 
 class LichLamViec extends Component {
 
@@ -40,7 +41,7 @@ class LichLamViec extends Component {
   }
 
   loadRoom() {
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListPhongKham',{
         method: 'GET',
         headers: {
@@ -66,7 +67,7 @@ class LichLamViec extends Component {
       this.setState({ listSidebar });
     }
     var self = this;
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getLichLamViec',{
         method: 'GET',
         headers: {
@@ -90,7 +91,7 @@ class LichLamViec extends Component {
   }
 
   loadData() {
-    var proxy = 'https://cors-anywhere.herokuapp.com/'
+    var proxy = 'https://doanhttt.herokuapp.com/'
     fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getLichLamViec',{
         method: 'GET',
         headers: {
@@ -174,18 +175,12 @@ class LichLamViec extends Component {
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
           <div className="row" id="Body">
             <div className="App">
-              Lịch Làm Việc
+              <h2 className="titleA">Lịch Làm Việc</h2>
               <form className="year-selection">
                 <Grid container spacing={24}>
-                  <Grid item xs = {4} >
-                    <label htmlFor="room">Room</label>
-                    <select name="room" value="phong" onChange={this.onChangeRoom}>
-                      {this.state.listRoom.map( (room) => {
-                        return <option key={room.idPhongKham} value={room.idPhongKham}>{room.SoPhong}-{room.TenPhong}</option>
-                      })}
-                    </select>
+                  <Grid item xs = {3} >
                   </Grid>
-                  <Grid item xs = {4}>
+                  <Grid item xs = {3}>
                     <label htmlFor="month">Month</label>
                     <select name="month" value={this.state.month} onChange={this.onChangeMonth}>
                       <option value="1">01 - January</option>
@@ -202,7 +197,7 @@ class LichLamViec extends Component {
                       <option value="12">12 - December</option>
                     </select>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={3}>
 
                       <label htmlFor="year">Year</label>
 

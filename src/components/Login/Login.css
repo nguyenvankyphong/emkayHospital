@@ -1,16 +1,18 @@
 .row {
     min-height: -webkit-fill-available;
-    max-width: 100%;
 }
 .left{
     background-color: white;
     margin-left: 30%;
+    width: 40%;
+    border-radius: 20px;
 }
 .medium-5{
     width: 34%;
 }
 .left h1{
     text-align: center;
+    margin-left: 0px;
 }
 .bt{
     text-align: center;
@@ -23,7 +25,9 @@ input[type="password"] {
 }
 .title{
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
+    font-family: "Ubuntu",sans-serif;
+    color: #2F6A77;
 }
 
 .ava{
@@ -37,4 +41,26 @@ input[type="password"] {
 
 .login_page {
   background-image: url('./bg.jpg');
+}
+
+.loginForm {
+  padding: 0px 0px 600px;
+  background-image: url("../../images/banner-bg.webp");
+  padding: 100px 0 600px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+
+}
+
+.loginPage {
+  background-color: #f0f0f0;
+  width: 100%;
+  /* height: 100px; */
+}
+
+.loginTitle {
+  font-family: "Ubuntu",sans-serif;
+  color: #6E9BA5;
 }

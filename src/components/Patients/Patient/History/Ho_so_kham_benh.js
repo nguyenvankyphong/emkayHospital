@@ -15,6 +15,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
+      idHSKB: 0,
       result:[],
       result1:[],
       redirectToReferrer: false,
@@ -49,13 +50,30 @@ class Home extends Component {
 
   }
 
+  hoso(IdHSKB) {
+    return <KetQuaKhamBenh idHoSo={IdHSKB}/>;
+  }
+
   chonHoSo(IdHSKB) {
     // console.log("chọn hồ sơ");
     // console.log(IdHSKB);
-    ReactDOM.render(<div></div>, document.getElementById("ketquakham"));
-    localStorage.setItem("idHoSoKhamBenh", IdHSKB);
+    // var e = document.getElementById("ketquakham");
 
-    ReactDOM.render(<KetQuaKhamBenh idHoSo={IdHSKB}/>, document.getElementById("ketquakham"));
+    // ReactDOM.render(<div></div>, document.getElementById("ketquakham"));
+    // localStorage.setItem("idHoSoKhamBenh", IdHSKB);
+    this.setState({idHSKB: IdHSKB});
+    console.log("đã qua");
+
+    // var a = <KetQuaKhamBenh idHoSo={IdHSKB}/>;
+    // e.innerHTML = "";
+    // console.log("a");
+    // var b={__html: a};
+    // var c = <div  dangerouslySetInnerHTML={{__html: a}} />;
+    // console.log(c);
+    // e.innerHTML = c;
+    // ReactDOM.unmountComponentAtNode, document.getElementById("ketquakham");
+
+    // ReactDOM.render(<KetQuaKhamBenh idHoSo={IdHSKB}/>, document.getElementById("ketquakham"));
   }
 
   handleStatus(status){
@@ -110,7 +128,16 @@ class Home extends Component {
           <Grid item xs={7}>
             <div id = "hosokhambenh">
               Kết quả khám bệnh
-              <div id = "ketquakham"></div>
+              {console.log("check lại")}
+              {console.log(this.state.idHSKB)}
+              <div id = "ketquakham">
+                {this.state.idHSKB != 0 &&
+                  <div>
+                    {console.log("a")}
+                    <KetQuaKhamBenh idHoSo={this.state.idHSKB}/>
+                  </div>
+                }
+              </div>
 
             </div>
           </Grid>
