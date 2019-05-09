@@ -6,7 +6,7 @@ import PersonAdd from '@material-ui/icons/PersonAdd';
 import InputBase from '@material-ui/core/InputBase';
 import Home from '@material-ui/icons/Home';
 import Patient1 from '@material-ui/icons/History';
-import Patient2 from '@material-ui/icons/Book';
+import Patient2 from '@material-ui/icons/CalendarToday';
 import Patient3 from '@material-ui/icons/Comment';
 import Recep1 from '@material-ui/icons/Create';
 import Recep3 from '@material-ui/icons/Add';
@@ -67,7 +67,7 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
               break;
       case 5: listSidebar= [{ text: "Home", path: "/patients/patient", icon: listIcon.home },
                             { text: "Lịch sử khám bệnh", path: "/patients/patient/history", icon: listIcon.history },
-                            { text: "Đặt lịch khám", path: "/patients/patient/dat_lich_kham", icon: listIcon.book },
+                            { text: "Đặt lịch khám", path: "/patients/patient/dat_lich_kham", icon: listIcon.comment },
                             { text: "Góp ý", path: "/patients/patient/gopy", icon: listIcon.comment }]
               break;
       default:

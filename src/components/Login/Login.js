@@ -40,7 +40,7 @@ class Login extends Component {
       var rs = {};
 
       const scope = this;
-
+      localStorage.setItem("User",this.state.username)
       request.onload = function () {
         console.log("response: ");
         console.log(this.response);
@@ -48,12 +48,9 @@ class Login extends Component {
         console.log(rs);
         console.log("role" +rs.role);
         checkErrCode(rs.errCode);
-        if (!rs.errCode) {
+        if (!rs.errCode) {         
           localStorage.setItem('userData', rs.token);
-          localStorage.setItem('userData',rs.token);
           localStorage.setItem('userRole', rs.role);
-          localStorage.setItem('userRole',rs.role);
-          localStorage.setItem('truongKhoa', rs.truongKhoa);
           localStorage.setItem('truongKhoa', rs.truongKhoa);
           scope.setState({redirectToReferrer: true});
 

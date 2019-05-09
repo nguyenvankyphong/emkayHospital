@@ -32,6 +32,7 @@ import Trangchu from '../Admin/Trangchu';
 import listSidebar from './ListSidebar'
 import {applySidebar} from './applySidebar';
 import './Sidebar.css';
+import { checkErrCode } from '../Layout/checkErrCode';
 
 const drawerWidth = 240;
 
@@ -177,7 +178,8 @@ class Admin extends React.Component {
       redirectToReferrer: false,
       path: '',
       changePass:false,
-      listSidebar: []
+      listSidebar: [],
+      name:''
     };
     this.logout = this.logout.bind(this);
     this.handleUrlSidebar = this.handleUrlSidebar.bind(this);
@@ -186,6 +188,36 @@ class Admin extends React.Component {
   }
 
   componentWillMount() {
+    var token= localStorage.getItem("userRole");
+    if(token == 1 || token == 2){
+      var username = localStorage.getItem("User");
+        var proxy = 'https://doanhttt.herokuapp.com/'
+        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/account/getinfo?userName='+username;
+        fetch(proxy + apiadd, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Origin': '',
+                'token': localStorage.getItem('userData'),
+            },
+        })
+            .then(response => response.json())
+            .then(resData => {
+                checkErrCode(resData.errCode);
+                console.log(JSON.stringify(resData));
+                this.setState({name: resData.name})
+                
+            })
+    }else if(token == 3){
+      console.log("token=3");
+      
+      this.setState({name: "Receptionist"})
+    }else{
+      this.setState({name: "Admin"})
+    }
+
+
     console.log("to will mount");
     console.log(applySidebar(window.location.pathname));
     this.setState({listSidebar: applySidebar(window.location.pathname)})
@@ -254,7 +286,7 @@ class Admin extends React.Component {
     if(this.state.changePass){
       return (<Redirect to={'/changePass'}/>)
     }
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl, mobileMoreAnchorEl,name } = this.state;
     const { classes, theme } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const renderMenu = (
@@ -298,7 +330,7 @@ class Admin extends React.Component {
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <p className="hello">Hello!</p>
+              <p className="hello">Hello, {name}</p>
               <IconButton
                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                 aria-haspopup="true"
