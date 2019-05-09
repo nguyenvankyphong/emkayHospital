@@ -7,6 +7,7 @@ import KetQuaKhamBenh from './KetQuaKhamBenh';
 import ReactDOM from 'react-dom';
 import Grid from '@material-ui/core/Grid';
 import {checkErrCode} from '../../../Layout/checkErrCode';
+import './KetQuaKhamBenh.css';
 
 class Home extends Component {
 
@@ -62,7 +63,7 @@ class Home extends Component {
     // ReactDOM.render(<div></div>, document.getElementById("ketquakham"));
     // localStorage.setItem("idHoSoKhamBenh", IdHSKB);
     this.setState({idHSKB: IdHSKB});
-    console.log("đã qua");
+    // console.log("đã qua");
 
     // var a = <KetQuaKhamBenh idHoSo={IdHSKB}/>;
     // e.innerHTML = "";
@@ -83,11 +84,20 @@ class Home extends Component {
           return "Chưa khám"
       }
   }
+
+  hskb = (id) => {
+    // console.log("scsdvds");
+    // console.log(id);
+    return <KetQuaKhamBenh idHoSo={id}/>
+  }
+
   render() {
     const {result,result1} = this.state;
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
     }
+
+
 
     return (
       <div className="row">
@@ -127,16 +137,9 @@ class Home extends Component {
           </Grid>
           <Grid item xs={7}>
             <div id = "hosokhambenh">
-              Kết quả khám bệnh
-              {console.log("check lại")}
-              {console.log(this.state.idHSKB)}
-              <div id = "ketquakham">
-                {this.state.idHSKB != 0 &&
-                  <div>
-                    {console.log("a")}
-                    <KetQuaKhamBenh idHoSo={this.state.idHSKB}/>
-                  </div>
-                }
+              <h3>Kết quả khám bệnh</h3>
+              <div id = "ketquakham" className="table">
+                <KetQuaKhamBenh idHoSo={35}/>
               </div>
 
             </div>

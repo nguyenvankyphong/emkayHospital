@@ -3,10 +3,9 @@ import {Redirect} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import {checkErrCode} from '../../../Layout/checkErrCode';
+import './KetQuaKhamBenh.css';
 
 class KetQuaKhamBenh extends Component {
-
-
   constructor(props) {
     super(props);
 
@@ -14,55 +13,45 @@ class KetQuaKhamBenh extends Component {
       redirectToReferrer : false,
       listFeatures: [],
       modelFeatures: {},
+      idHoSo: this.props.idHoSo
     };
   }
 
-  componentWillMount() {
-    var listFeatures = {};
-    var modelFeatures = {};
-    // console.log(this.props.idHoSo);
-    var proxy = 'https://doanhttt.herokuapp.com/'
-    var id= localStorage.getItem('idDK');
-    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/xemHoSoKhamBenh?idHoSo=' + this.props.idHoSo;
-    fetch(proxy+apiadd,{
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Origin': '',
-          'Token' : localStorage.getItem('userData'),
-        },
-    })
-    .then(response =>  response.json())
-    .then(resData => {
-      checkErrCode(resData.errCode);
-       // console.log("resData hồ sơ");
-       // console.log(resData);
-       // console.log("features:");
-       // console.log(JSON.parse(resData.mauHoSo.replace(/'/g, '"')));
-       // console.log("kq");
-       // console.log(JSON.parse(resData.ketQua.replace(/'/g, '"')));
-       listFeatures = {...JSON.parse(resData.mauHoSo.replace(/'/g, '"'))};
-       modelFeatures = JSON.parse(resData.ketQua.replace(/'/g, '"'));
-       console.log("listFeatures");
-       console.log(modelFeatures);
-       listFeatures.array.map(item => (
-         this.state.listFeatures.push(item)
-       ));
-       this.setState(prevState => ({
-         modelFeatures: {
-             ...modelFeatures,
+  componentWillReceiveProps(newProps){
+    this.setState({
+      idHoSo: newProps.idHoSo,
+    });
+    if (newProps.idHoSo) {
+      var listFeatures = {};
+      var modelFeatures = {};
+      var proxy = 'https://doanhttt.herokuapp.com/'
+      var id= localStorage.getItem('idDK');
+      var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/patient/xemHoSoKhamBenh?idHoSo=' + newProps.idHoSo;
+      fetch(proxy+apiadd,{
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Origin': '',
+            'Token' : localStorage.getItem('userData'),
+          },
+      })
+      .then(response =>  response.json())
+      .then(resData => {
+        checkErrCode(resData.errCode);
+         listFeatures = {...JSON.parse(resData.mauHoSo.replace(/'/g, '"'))};
+         modelFeatures = JSON.parse(resData.ketQua.replace(/'/g, '"'));
+         listFeatures.array.map(item => (
+           this.state.listFeatures.push(item)
+         ));
+         this.setState(prevState => ({
+           modelFeatures: {
+               ...modelFeatures,
+           }
          }
-       }
-     ));
-    })
-
-    // listFeatures = require('../../../SpecialistDoctor/khoanoi.json');
-    // modelFeatures = require('../../ketquakham.json');
-
-    // this.setState({modelFeatures: a});
-    // console.log(modelFeatures);
-
+       ));
+      })
+    }
   }
 
   renderInput(item) {
@@ -89,7 +78,7 @@ class KetQuaKhamBenh extends Component {
       <Grid item xs={item.isGroup ? 12 : (item.type == "longText"? 6 : 4)} key = {index} item>
       {item.isGroup ? (
         <div>
-          <label><h5><b>{item.name}:</b></h5></label>
+          <label className="groupTitle"><h6><b>{item.name}:</b></h6></label>
           <Grid container spacing={24}>
             {this.renderListFeatures(item.arr)}
           </Grid>
@@ -97,8 +86,6 @@ class KetQuaKhamBenh extends Component {
       ): (
         <div>
           <label>{item.name}:{this.renderInput(item)}</label>
-
-
         </div>
         )
       }
@@ -111,14 +98,15 @@ class KetQuaKhamBenh extends Component {
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'}/>)
     }
-    // console.log(this.state);
-
     return (
       <div>
-          <div className="row" id="Body">
-            Bệnh án
+          <div className="kqContainer" id="Body">
             <Grid container spacing={24}>
-              {this.renderListFeatures(this.state.listFeatures)}
+              {this.state.idHoSo!=0 &&
+                <div>
+                  {this.renderListFeatures(this.state.listFeatures)}
+                </div>
+              }
             </Grid>
           </div>
       </div>
