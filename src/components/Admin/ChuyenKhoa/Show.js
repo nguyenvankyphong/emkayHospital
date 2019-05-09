@@ -15,10 +15,10 @@ class Home extends Component {
       redirect: false,
       redirectToReferrer: '',
       listSidebar: [{ text: "Admin", path: "/admin" },
-      { text: "Bác sĩ", path: "/admin/doctor" },
-      { text: "Lễ tân", path: "/admin/recep" },
-      { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
-      { text: "Phòng khám", path: "/admin/phongKham" },
+      { text: "Bác sĩ", path: "/admin/bacsi" },
+      { text: "Lễ tân", path: "/admin/letan" },
+      { text: "Chuyên khoa", path: "/admin/chuyenkhoa" },
+      { text: "Phòng khám", path: "/admin/phongkham" },
       ],
     };
     this.componentWillMount = this.componentWillMount.bind(this);
@@ -48,9 +48,15 @@ class Home extends Component {
   add = () => {
     this.setState({ redirectToReferrer: 2 });
   }
-  edit =(idChuyenKhoa)=>{
+  edit =(tenChuyenKhoa,idChuyenKhoa)=>{
     this.setState({redirectToReferrer: 3})
+    localStorage.setItem("tenChuyenKhoa",tenChuyenKhoa);
     localStorage.setItem("idChuyenKhoa",idChuyenKhoa);
+  }
+  editBSTK =(idChuyenKhoa,idBacSiTruongKhoa)=>{
+    this.setState({redirectToReferrer: 4})
+    localStorage.setItem("idChuyenKhoa",idChuyenKhoa);
+    localStorage.setItem("idBacSiTruongKhoa",idBacSiTruongKhoa);
   }
   render() {
     const { result } = this.state;
@@ -59,10 +65,13 @@ class Home extends Component {
       return (<Redirect to={'/login'} />)
         break;
       case 2:
-      return (<Redirect to={'/admin/chuyenKhoa/add'} />)
+      return (<Redirect to={'/admin/chuyenkhoa/add'} />)
         break;
       case 3:
-      return (<Redirect to={'/admin/chuyenKhoa/edit'}/>)
+      return (<Redirect to={'/admin/chuyenkhoa/editCK'}/>)
+        break;
+        case 4:
+      return (<Redirect to={'/admin/chuyenkhoa/editBS'}/>)
         break;
     }
     return (
@@ -77,16 +86,14 @@ class Home extends Component {
                 <th>STT</th>
                 <th>Tên chuyên khoa</th>
                 <th>Tên bác sĩ trưởng khoa</th>
-                <th>Chức năng</th>
               </tr>
             </thead>
             <tbody>
                {result.map((row, index) => (
-                <tr>
+                <tr key= {index}>
                   <td>{index+1}</td>
-                  <td>{row.tenChuyenkhoa}</td>
-                  <td>{row.tenBacSiTruongKhoa}</td>
-                  <td><Link onClick={() => this.edit(row.idChuyenKhoa)}>Sửa</Link></td>
+                  <td><Link onClick={() => this.edit(row.tenChuyenkhoa,row.idChuyenKhoa)}>{row.tenChuyenkhoa}</Link></td>
+                  <td><Link onClick={() => this.editBSTK(row.idChuyenKhoa,row.idBacSiTruongKhoa)}>{row.tenBacSiTruongKhoa}</Link></td>
                 </tr>
               ))
 

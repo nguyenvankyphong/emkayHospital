@@ -1,3 +1,10 @@
 .showPK{
-    
+    text-align: center;
+}
+.add{
+    margin-top: 50px;
+}
+.list{
+    margin: 0 auto;
+    margin-top: 10px;
 }

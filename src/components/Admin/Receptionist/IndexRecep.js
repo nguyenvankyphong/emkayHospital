@@ -4,7 +4,6 @@ import {Redirect} from 'react-router-dom';
 import Show from './Show';
 import Add from './Add';
 
-
 class Receptionist extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,6 @@ class Receptionist extends Component {
       <div>
             <Route exact path={this.props.match.path} component={Show} />
             <Route path={`${this.props.match.path}/add`} component={Add} />
-            
       </div>
     );
   }

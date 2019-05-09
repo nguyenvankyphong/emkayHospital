@@ -68,7 +68,6 @@ class Home extends Component {
                 <tr>
                   <th>STT</th>
                   <th>Username</th>
-                  <th>Password</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,7 +75,6 @@ class Home extends Component {
                   <tr>
                     <td>{index + 1}</td>
                     <td>{row.username}</td>
-                    <td>{row.pass}</td>
                   </tr>
                 ))
 

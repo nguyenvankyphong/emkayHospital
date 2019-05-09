@@ -7,18 +7,15 @@ class Add extends React.Component {
         super(props);
 
         this.state = {
-            sdt: '',
-            name: '',
-            birth: '',
-            insuarance: '',
-            add: '',
+            tenChuyenKhoa:'',
+            bacsi:'',
             redirect: false,
             arr:[],
             listSidebar: [{ text: "Admin", path: "/admin" },
-            { text: "Bác sĩ", path: "/admin/doctor" },
-            { text: "Lễ tân", path: "/admin/recep" },
-            { text: "Chuyên khoa", path: "/admin/chuyenKhoa" },
-            { text: "Phòng khám", path: "/admin/phongKham" },
+            { text: "Bác sĩ", path: "/admin/bacsi" },
+            { text: "Lễ tân", path: "/admin/letan" },
+            { text: "Chuyên khoa", path: "/admin/chuyenkhoa" },
+            { text: "Phòng khám", path: "/admin/phongkham" },
             ],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -30,7 +27,7 @@ class Add extends React.Component {
     }
     componentWillMount() {
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getChuyenKhoa';
+        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/getDoctorByName?HoTen=';
         fetch(proxy + apiadd, {
             method: 'GET',
             headers: {
@@ -48,14 +45,14 @@ class Add extends React.Component {
             })
     }
     add = () => {
+        console.log(this.refs.bacsi.value);
+        
         var Arr = [];
-        Arr.push(this.state.sdt);
-        Arr.push(this.state.name);
-        Arr.push(this.refs.gender.value);
-        Arr.push(this.refs.chuyenkhoa.value);
+        Arr.push(this.state.tenChuyenKhoa);
+        Arr.push(this.state.bacsi);
         console.log(Arr);
         var proxy = 'https://doanhttt.herokuapp.com/'
-        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/addDoctor';
+        var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/admin/addSpecialist';
         fetch(proxy + apiadd, {
             method: 'POST',
             headers: {
@@ -76,7 +73,7 @@ class Add extends React.Component {
     render() {
         const {arr} = this.state;
         if (this.state.redirect) {
-            return (<Redirect to="/admin/chuyenKhoa" />)
+            return (<Redirect to="/admin/chuyenkhoa" />)
         }
         return (
             <div>
@@ -85,11 +82,11 @@ class Add extends React.Component {
                     <h2 className="title">Thêm chuyên khoa</h2>
                     <div className="medium-3 columns left">
                         <h6>Tên chuyên khoa:</h6>
-                        <input type="text" name="name" onChange={this.handleChange} />
-                        <h6>Chuyên khoa:</h6>
-                        <select ref="chuyenkhoa" onChange={this.handleChange}>
-                            {arr.map(row => (
-                                <option key={row.idChuyenKhoa} value={row.idChuyenKhoa}>{row.tenChuyenkhoa}</option>
+                        <input type="text" name="tenChuyenKhoa" onChange={this.handleChange} />
+                        <h6>Bác sĩ trưởng khoa:</h6>
+                        <select ref="bacsi" name ="bacsi" onChange={this.handleChange}>
+                            {arr.map((row,index)=> (
+                                <option key={index} value={row.idBacSi}>{row.HoTen}</option>
                             ))}
                         </select>
                         <div className="bt">

@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import Show from './Show';
 import Add from './Add';
 import Edit from './Edit';
+import EditBSTK from './EditBSTK';
 
 
 class Receptionist extends Component {
@@ -27,7 +28,9 @@ class Receptionist extends Component {
       <div>
             <Route exact path={this.props.match.path} component={Show} />
             <Route path={`${this.props.match.path}/add`} component={Add} />
-            <Route path={`${this.props.match.path}/edit`} component={Edit} />
+            <Route path={`${this.props.match.path}/editCK`} component={Edit} />
+            <Route path={`${this.props.match.path}/editBS`} component={EditBSTK} />
+            
             
       </div>
     );

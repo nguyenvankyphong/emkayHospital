@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from '@material-ui/core';
-import {checkErrCode} from '../../Layout/checkErrCode';
+import { checkErrCode } from '../../Layout/checkErrCode';
 
 class Home extends Component {
 
@@ -14,6 +14,7 @@ class Home extends Component {
       result: [],
       redirect: false,
       redirectToReferrer: false,
+      list: [],
       listSidebar: [{ text: "Admin", path: "/admin" },
       { text: "Bác sĩ", path: "/admin/doctor" },
       { text: "Lễ tân", path: "/admin/recep" },
@@ -45,6 +46,27 @@ class Home extends Component {
       })
 
   }
+  componentDidMount() {
+    var proxy = 'https://doanhttt.herokuapp.com/'
+    var id = localStorage.getItem('idDK');
+    var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getChuyenKhoa';
+    fetch(proxy + apiadd, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Origin': '',
+        'Token': localStorage.getItem('userData'),
+      },
+    })
+      .then(response => response.json())
+      .then(resData => {
+        checkErrCode(resData.errCode);
+        console.log(JSON.stringify(resData))
+        this.setState({ list: resData.arr });
+      })
+
+  }
   add = () => {
     this.setState({ redirect: true });
   }
@@ -55,13 +77,14 @@ class Home extends Component {
       return "Nam"
     }
   }
+
   render() {
-    const { result } = this.state;
+    const { result, list } = this.state;
     if (this.state.redirectToReferrer) {
       return (<Redirect to={'/login'} />)
     }
     if (this.state.redirect) {
-      return (<Redirect to={'/admin/doctor/add'} />)
+      return (<Redirect to={'/admin/bacsi/add'} />)
     }
     return (
       <div className="row">
@@ -74,7 +97,7 @@ class Home extends Component {
               <tr>
                 <th>STT</th>
                 <th>Họ tên</th>
-                <th>Tên phòng</th>
+                <th>Chuyên khoa</th>
                 <th>Giới tính</th>
                 <th>SĐT</th>
               </tr>
@@ -82,9 +105,14 @@ class Home extends Component {
             <tbody>
               {result.map((row, index) => (
                 <tr>
-                  <td>{index}</td>
+                  <td>{index + 1}</td>
                   <td>{row.HoTen}</td>
-                  <td>{row.idPhongBan}</td>
+                  {list.map((row1, index) => (
+                    row1.idChuyenKhoa == row.idPhongBan ?
+                      <td>{row1.tenChuyenkhoa}</td> :
+                      ""
+                  ))}
+
                   <td>{this.handleGender(row.gender)}</td>
                   <td>{row.SoDienThoai}</td>
                 </tr>
