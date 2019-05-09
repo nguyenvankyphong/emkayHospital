@@ -55,7 +55,7 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
                              { text: "Tạo tài khoản", path: "/receptionist/register", icon: listIcon.recep1 },
                              { text: "Đặt lịch khám", path: "/receptionist/datLich", icon: listIcon.book },
                              { text: "Thêm khoản phí", path: "/receptionist/addKhoanPhi", icon: listIcon.recep3 },
-                             { text: "Xuất hóa đơn", path: "/receptionist/xuatHoaDon", icon: listIcon.recep4 },
+                             { text: "Xuất hóa đơn", path: "/receptionist/danhsachdotkham", icon: listIcon.recep4 },
                              {text: "Tạo QR mới", path: "/receptionist/newqr", icon: listIcon.recep5}]
                break;
        case 3: listSidebar = [{text: "Home", path: "/doctor", icon: listIcon.home },
