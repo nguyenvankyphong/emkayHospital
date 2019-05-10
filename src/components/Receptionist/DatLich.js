@@ -69,7 +69,7 @@ class DatLich extends Component {
     }
 
     duyetDatLich(iddatLich) {
-      if(confirm("Bạn có chắc chắn muốn xóa không?")){//eslint-disable-line
+      if(confirm("Phê duyệt yêu cầu đặt lịch này?")){//eslint-disable-line
         var proxy = 'https://doanhttt.herokuapp.com/'
         var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/recip/datLichThanhCong?idDatLich=' + iddatLich;
         fetch(proxy + apiadd, {

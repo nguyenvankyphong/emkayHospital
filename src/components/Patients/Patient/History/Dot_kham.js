@@ -44,14 +44,18 @@ class Home extends Component {
     .then(response =>  response.json())
     .then(resData => {
       checkErrCode(resData.errCode);
-       console.log(resData);
-       console.log("id :"+id);
+        console.log("resData đợt khám");
+        console.log(resData);
        this.setState({result:resData.result});
     })
   }
-  hoSoKhamBenh(idDK){
-    this.setState({redirectHSKB: true,id: idDK});
-    localStorage.setItem("idDK",idDK);
+  hoSoKhamBenh(idDK, isThanhtoan){
+    if (isThanhtoan == "1") {
+      this.setState({redirectHSKB: true,id: idDK});
+      localStorage.setItem("idDK",idDK);
+    } else {
+      alert("Bạn phải thanh toán để xem được thông tin");
+    }
   }
   handleStatus(status){
     if(status == 0){
@@ -68,7 +72,7 @@ class Home extends Component {
     if(this.state.redirectHSKB){
         return (<Redirect to={`${this.props.match.path}/${this.state.id}`} />)
     }
-    
+
     return (
       <div className="row">
         <Sidebar listSidebar={this.state.listSidebar}/>
@@ -84,9 +88,9 @@ class Home extends Component {
           </thead>
           <tbody>
             {result.map((row, index)=>(
-              <tr>
+              <tr key={index}>
                 <td>{index+1}</td>
-                <td><Link onClick= {()=>this.hoSoKhamBenh(row.IdHoSoDotKham)}>{row.ThongTinBenh}</Link></td>
+                <td><Link onClick= {()=>this.hoSoKhamBenh(row.IdHoSoDotKham, row.IsThanhToan)}>{row.ThongTinBenh}</Link></td>
                 <td>{row.NgayKham}</td>
                 <td>{this.handleStatus(row.Status)}</td>
               </tr>

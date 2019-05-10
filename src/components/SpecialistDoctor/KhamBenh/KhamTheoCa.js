@@ -43,7 +43,7 @@ class Home extends Component {
     this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     if (localStorage.truongKhoa === "true") {
       let listSidebar = [...this.state.listSidebar];
       listSidebar.push({text: "Lịch trực", path: "/doctor/lichtruc"});
@@ -76,64 +76,68 @@ class Home extends Component {
     })
   }
 
-  chonBenhNhan(idHoSo) {
-    var idCaKham = this.props.match.params.id;
-    var proxy = 'https://doanhttt.herokuapp.com/'
-    fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListMauHoSo?idCaKham='+idCaKham,{
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Origin': '',
-          'Token' : localStorage.getItem('userData'),
-        },
-    })
-    .then(response =>  response.json())
-    .then(resData => {
-      checkErrCode(resData.errCode);
-        // console.log(resData);
-        this.setState({
-          listMauHoSo: [...resData.arr]
-        });
-        localStorage.setItem('idHoSo',idHoSo);
-        console.log(this.state.listMauHoSo);
-        var selector = <div>
-          <label htmlFor="mauHoSo">Chọn mẫu hồ sơ</label>
-          <select name="mauHoSo" value={this.state.mauHoSo} onChange={this.onChangeHoSo}>
-            {this.state.listMauHoSo.map( (hoso) => {
-              return <option key={hoso.idMauHoSo} value={hoso.idMauHoSo}>Mẫu hồ sơ - {hoso.idMauHoSo}</option>
-            })}
-          </select>
-        </div>;
+  chonBenhNhan(idHoSo, index) {
+    if (index) {
+      alert("Chưa đến lượt bệnh nhân này");
+    } else {
+      var idCaKham = this.props.match.params.id;
+      var proxy = 'https://doanhttt.herokuapp.com/'
+      fetch(proxy+'http://168.61.49.94:8080/DOANHTTT/rest/doctor/getListMauHoSo?idCaKham='+idCaKham,{
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Origin': '',
+            'Token' : localStorage.getItem('userData'),
+          },
+      })
+      .then(response =>  response.json())
+      .then(resData => {
+        checkErrCode(resData.errCode);
+          // console.log(resData);
+          this.setState({
+            listMauHoSo: [...resData.arr]
+          });
+          localStorage.setItem('idHoSo',idHoSo);
+          console.log(this.state.listMauHoSo);
+          var selector = <div>
+            <label htmlFor="mauHoSo">Chọn mẫu hồ sơ</label>
+            <select name="mauHoSo" value={this.state.mauHoSo} onChange={this.onChangeHoSo}>
+              {this.state.listMauHoSo.map( (hoso) => {
+                return <option key={hoso.idMauHoSo} value={hoso.idMauHoSo}>Mẫu hồ sơ - {hoso.idMauHoSo}</option>
+              })}
+            </select>
+          </div>;
 
-        var a = this.state.listMauHoSo[0].data;
-        var c = this.state.listMauHoSo.find((item) => {
-          return item.idMauHoSo == this.state.mauHoSo
-        })
+          var a = this.state.listMauHoSo[0].data;
+          var c = this.state.listMauHoSo.find((item) => {
+            return item.idMauHoSo == this.state.mauHoSo
+          })
 
-        if (typeof c === 'undefined') {
-          console.log("cccc");
-          c=this.state.listMauHoSo[0];
-        }
+          if (typeof c === 'undefined') {
+            console.log("cccc");
+            c=this.state.listMauHoSo[0];
+          }
 
-        this.setState({
-          mauHoSo: c.idMauHoSo
-        })
+          this.setState({
+            mauHoSo: c.idMauHoSo
+          })
 
-        console.log("c: "+c);
-        var b = JSON.parse(c.data.replace(/'/g, '"'));
-        console.log(b.array);
-        ReactDOM.render(<div>{selector}</div>, document.getElementById("chonMauHoSo"));
-        ReactDOM.render(<div>
-          {this.renderListFeatures(b.array)}
-          <input type="submit" className="button success" value="Thêm thuốc" onClick={this.addFormDonThuoc} />
-          <div id="formDonThuoc">
-          </div>
+          console.log("c: "+c);
+          var b = JSON.parse(c.data.replace(/'/g, '"'));
+          console.log(b.array);
+          ReactDOM.render(<div>{selector}</div>, document.getElementById("chonMauHoSo"));
+          ReactDOM.render(<div>
+            {this.renderListFeatures(b.array)}
+            <input type="submit" className="button success" value="Thêm thuốc" onClick={this.addFormDonThuoc} />
+            <div id="formDonThuoc">
+            </div>
 
-          <input type="submit" className="button success" value="Lưu" onClick={this.addKetQuaKham} />
+            <input type="submit" className="button success" value="Lưu" onClick={this.addKetQuaKham} />
 
-        </div>, document.getElementById("Khambenh"));
-    })
+          </div>, document.getElementById("Khambenh"));
+      })
+    }
   }
 
   addFormDonThuoc() {
@@ -409,17 +413,20 @@ class Home extends Component {
         console.log(this.response);
         rs = JSON.parse(this.response);
         console.log(rs);
-        console.log("role" +rs.role);
-
+        var list = scope.state.listBenhNhan;
         if (!rs.errCode) {
+          alert("Đã khám xong");
         // localStorage.setItem('userRole',rs.role);
-        scope.setState({
-          listMauHoSo: [],
-          mauHoSo: '',
-          kq: {},
-        });
-        ReactDOM.render(<div></div>, document.getElementById("chonMauHoSo"));
-        ReactDOM.render(<div></div>, document.getElementById("Khambenh"));
+          scope.setState({
+            listMauHoSo: [],
+            mauHoSo: '',
+            kq: {},
+            listBenhNhan: list.filter((item) => {
+              return item.idHoSoKhamBenh != localStorage.idHoSo
+            })
+          });
+          ReactDOM.render(<div></div>, document.getElementById("chonMauHoSo"));
+          ReactDOM.render(<div></div>, document.getElementById("Khambenh"));
 
         }
       }
@@ -436,25 +443,35 @@ class Home extends Component {
       fontSize: 15,
     };
 
+    var renderHangDoi = () => {
+      console.log("this.state.listBenhNhan");
+      console.log(this.state.listBenhNhan);
+
+      if (this.state.listBenhNhan.length == 0) {
+        return <h6>Không có bệnh nhân đang chờ</h6>
+      }
+      return this.state.listBenhNhan.map((item, index) => (
+        <ListItem style={ulStyle} key={item.idHoSoKhamBenh}>
+          <a onClick= {() => this.chonBenhNhan(item.idHoSoKhamBenh, index)}>
+            <ListItemText primary={item.name} secondary={item.thongTinBenh}/>
+          </a>
+        </ListItem>
+      ))
+    }
+
     return (
       <div>
         <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
         <div className="row" id="Body">
           <Grid container spacing={24}>
-            <Grid item xs = {2} >
+            <Grid item xs = {3} >
               <b>BỆNH NHÂN ĐANG CHỜ</b>
-              {this.state.listBenhNhan.map((item) => (
-                <ListItem style={ulStyle} key={item.idHoSoKhamBenh}>
-                  <a onClick= {() => this.chonBenhNhan(item.idHoSoKhamBenh)}>
-                    <ListItemText primary={item.name} secondary={item.thongTinBenh}/>
-                  </a>
-                </ListItem>
-              ))}
+                {renderHangDoi()}
               <List>
 
               </List>
             </Grid>
-            <Grid item xs = {10} >
+            <Grid item xs = {9} >
               <b>KHÁM BỆNH</b>
               <div id="chonMauHoSo">
               </div>

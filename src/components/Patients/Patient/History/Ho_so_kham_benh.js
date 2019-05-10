@@ -46,6 +46,7 @@ class Home extends Component {
     .then(response =>  response.json())
     .then(resData => {
       checkErrCode(resData.errCode);
+      
       this.setState({result:resData.result});
     })
 

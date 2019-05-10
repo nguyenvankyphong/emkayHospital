@@ -157,12 +157,47 @@ class Home extends Component {
       leftPad(this.state.day, 2, 0)
     ].join("-");
 
+    var renderDotKham = () => {
+      if (this.state.listDotKham.length == 0) {
+        return <h5>Hiện không có đợt khám nào đã hoàn thành và chưa thanh toán</h5>
+      }
+      return <table className="table">
+                <thead>
+                  <tr>
+                    <th className="col_1">STT</th>
+                    <th>Tên bệnh nhân</th>
+                    <th>Thông tin bệnh</th>
+                    <th>Ngày sinh</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Chức năng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.state.listDotKham.map((row,index) => (
+                   <tr key= {index}>
+                    <td>{index+1}</td>
+                      <td>{row.tenBenhNhan}</td>
+                      <td>{row.ThongTinBenh}</td>
+                      <td>{row.ngaySinh}</td>
+                      <td>{row.diaChi}</td>
+                      <td>{row.soDienThoai}</td>
+                      <td><a onClick={()=>this.xemHoaDon(row.IdHoSoDotKham)}>Xem hóa đơn</a></td>
+                   </tr>
+                  ))
+
+                  }
+
+                </tbody>
+              </table>
+    }
+
     return (
       <div>
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
         <div className="row" id="Body">
           <div className="App">
-            <h2 className="titleA">Danh sách hóa đơn</h2>
+            <h2 className="titleA">Danh sách đợt khám</h2>
             <form className="year-selection">
               <Grid container spacing={24}>
                 <Grid item xs={3} >
@@ -202,35 +237,7 @@ class Home extends Component {
                 </Grid>
               </Grid>
             </form>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th className="col_1">STT</th>
-                  <th>Tên bệnh nhân</th>
-                  <th>Thông tin bệnh</th>
-                  <th>Ngày sinh</th>
-                  <th>Địa chỉ</th>
-                  <th>Số điện thoại</th>
-                  <th>Chức năng</th>
-                </tr>
-              </thead>
-              <tbody>
-              {this.state.listDotKham.map((row,index) => (
-                 <tr key= {index}>
-                  <td>{index+1}</td>
-                    <td>{row.tenBenhNhan}</td>
-                    <td>{row.ThongTinBenh}</td>
-                    <td>{row.ngaySinh}</td>
-                    <td>{row.diaChi}</td>
-                    <td>{row.soDienThoai}</td>
-                    <td><a onClick={()=>this.xemHoaDon(row.IdHoSoDotKham)}>Xem hóa đơn</a></td>
-                 </tr>
-                ))
-
-                }
-
-              </tbody>
-            </table>
+            {renderDotKham()}
           </div>
 
         </div>
