@@ -22,6 +22,8 @@ class KetQuaKhamBenh extends Component {
       idHoSo: newProps.idHoSo,
     });
     if (newProps.idHoSo) {
+      console.log("newProps.idHoSo");
+      console.log(newProps.idHoSo);
       var listFeatures = {};
       var modelFeatures = {};
       var proxy = 'https://doanhttt.herokuapp.com/'
@@ -38,6 +40,7 @@ class KetQuaKhamBenh extends Component {
       })
       .then(response =>  response.json())
       .then(resData => {
+        console.log(resData);
         checkErrCode(resData.errCode);
          listFeatures = {...JSON.parse(resData.mauHoSo.replace(/'/g, '"'))};
          modelFeatures = JSON.parse(resData.ketQua.replace(/'/g, '"'));
