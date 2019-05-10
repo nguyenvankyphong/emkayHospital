@@ -7,6 +7,7 @@ import HosoKhamBenh from "./HosoKhamBenh";
 import CaTruc from "./CaTruc";
 import LichLamViec from "./LichLamViec";
 import KhamBenh from "./KhamBenh";
+import XemGopY from "./XemGopY";
 
 
 class SpecialistDoctor extends Component {
@@ -31,8 +32,10 @@ class SpecialistDoctor extends Component {
     }
     return (
       <div>
-            <Route exact path={this.props.match.path} component={LichLamViec} />
-            <Route path={`${this.props.match.path}/hoso`} component={HosoKhamBenh} />
+            <Route exact path={this.props.match.path} component={Home} />
+            <Route path={`${this.props.match.path}/xemgopy`} component={XemGopY} />
+            <Route path={`${this.props.match.path}/hosokhambenh`} component={HosoKhamBenh} />
+            <Route path={`${this.props.match.path}/home`} component={Home} />
             <Route path={`${this.props.match.path}/lichtruc`} component={CaTruc} />
             <Route path={`${this.props.match.path}/lichlamviec`} component={LichLamViec} />
             <Route path={`${this.props.match.path}/khambenh`} component={KhamBenh} />

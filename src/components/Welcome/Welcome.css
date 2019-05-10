@@ -48,3 +48,25 @@
   color: black;
   font-family: "Ubuntu",sans-serif;
 }
+
+.home {
+  background-image: url("../../images/home.jpg");
+  padding: 0px 0 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  background-color: #b0b0b0;
+}
+
+.home .quotesContent {
+  font-family: "Ubuntu",sans-serif;
+  margin-left: 150px;
+  font-size: 30px;
+}
+
+.home .quotesStogan {
+  font-family: "Ubuntu",sans-serif;
+  font-size: 30px;
+  color: white;
+}

@@ -48,7 +48,7 @@ class Login extends Component {
         console.log(rs);
         console.log("role" +rs.role);
         checkErrCode(rs.errCode);
-        if (!rs.errCode) {         
+        if (!rs.errCode) {
           localStorage.setItem('userData', rs.token);
           localStorage.setItem('userRole', rs.role);
           localStorage.setItem('truongKhoa', rs.truongKhoa);
