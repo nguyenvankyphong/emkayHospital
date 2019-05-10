@@ -48,7 +48,7 @@ class Home extends Component {
     console.log("get đợt khám");
     var self = this;
     var proxy = 'https://doanhttt.herokuapp.com/'
-    fetch(proxy + 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getAllDotKhamTheoNgay?date=' + formattedDate, {
+    fetch(proxy + 'http://168.61.49.94:8080/DOANHTTT/rest/recip/getAllDotKhamTheoNgay?date='+ formattedDate, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
