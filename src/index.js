@@ -4,5 +4,7 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
+document.title = "[E]mkay Hospital"
+
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
