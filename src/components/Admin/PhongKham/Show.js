@@ -43,7 +43,8 @@ class Home extends Component {
       .then(response => response.json())
       .then(resData => {
         checkErrCode(resData.errCode);
-        console.log(JSON.stringify(resData))
+        console.log("resData phong kham")
+        console.log(resData)
         this.setState({ arr: resData.arr });
       })
 
@@ -71,7 +72,7 @@ class Home extends Component {
     })
       
       .then(resData => {
-        console.log(resData.errCode)
+        
         if(resData.errCode == 0){
           var index= this.findIndex(arr,idPhongKham);
           if(index !== -1){
@@ -112,9 +113,9 @@ class Home extends Component {
           <h3>Phòng khám</h3>
          <div className="add">
          <a onClick={this.add}>Thêm</a>
-         {/* {typeof result == "undefined"? (
+         {typeof arr == "undefined"? (
                 <div>Chưa có phòng khám</div>
-              ) : ( */}
+              ) : (
           <table className="list">
             <thead>
               <tr>
@@ -136,8 +137,8 @@ class Home extends Component {
 
             </tbody>
           </table>
-            {/* )
-          } */}
+              )
+          }
          </div>
       </div>
     );

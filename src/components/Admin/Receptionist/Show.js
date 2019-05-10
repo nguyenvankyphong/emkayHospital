@@ -43,7 +43,9 @@ class Home extends Component {
         if (resData.errCode) {
           
         }
-        console.log(JSON.stringify(resData))
+        
+        console.log("resData lt");
+        console.log(resData);
         this.setState({ result: resData.arr });
       })
 
