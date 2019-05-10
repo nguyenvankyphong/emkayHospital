@@ -52,7 +52,30 @@ class Home extends Component {
     })
   }
   thanhToan(){
-    window.location.pathname="/receptionist/danhsachdotkham"
+
+    if(confirm("Bạn muốn thanh toán?")){//eslint-disable-line
+      var proxy = 'https://doanhttt.herokuapp.com/'
+      var apiadd = 'http://168.61.49.94:8080/DOANHTTT/rest/bill/isPayment?idHSDK=' + localStorage.IdHoSoDotKham;
+      fetch(proxy + apiadd, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Origin': '',
+          'token': localStorage.getItem('userData'),
+        },
+      })
+        .then(response => response.json())
+        .then(resData => {
+          checkErrCode(resData.errCode);
+          console.log("resData thanh toán");
+          console.log(resData);
+          // this.setState({ redirect: true })
+          // console.log(resData.errCode)
+          window.location.pathname="/receptionist/danhsachdotkham";
+        })
+
+    }
   }
   render() {
     const { result, value} = this.state;
@@ -63,12 +86,12 @@ class Home extends Component {
       return (
         <div className="row">
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        
+
           <div className = "hoadon">
           <h3 className="hoadonTitle">Hóa đơn</h3>
           <h5 className="title">Chưa có hóa đơn</h5>
           </div>
-         
+
 
       </div>
       );
@@ -76,7 +99,7 @@ class Home extends Component {
       return (
         <div className="row">
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
-        
+
           <div className = "hoadon">
           <h3 className="hoadonTitle">Xuất hóa đơn</h3>
           <table className="table">
@@ -107,11 +130,22 @@ class Home extends Component {
               </tr>
             </tbody>
           </table>
-         
+
           <div className="bt">
-                    <input type="submit" className="button" onClick={this.thanhToan} />
-                </div>
+            <input
+              type="submit"
+              className="button"
+              onClick={this.thanhToan}
+              value="Thanh toán"
+            />
+            <input
+              type="submit"
+              className="button"
+              onClick={() => window.location.pathname="/receptionist/danhsachdotkham"}
+              value="Quay lại"
+            />
           </div>
+        </div>
       </div>
       );
     }

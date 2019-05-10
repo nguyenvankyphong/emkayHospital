@@ -65,7 +65,7 @@ class Home extends Component {
        this.setState({result:resData.result});
     })
   }
- 
+
   render() {
     const {result} = this.state;
     if (this.state.redirectToReferrer) {
