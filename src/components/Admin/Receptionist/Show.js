@@ -40,6 +40,9 @@ class Home extends Component {
       .then(response => response.json())
       .then(resData => {
         checkErrCode(resData.errCode);
+        if (resData.errCode) {
+          
+        }
         console.log(JSON.stringify(resData))
         this.setState({ result: resData.arr });
       })
@@ -72,7 +75,12 @@ class Home extends Component {
           <h3 className="title">Danh sách lễ tân</h3>
           <div className = "recep">
           <div><a onClick={this.add}>Thêm mới</a></div>
-            <table className="tab">
+            
+              
+              {typeof result == "undefined"? (
+                <div>Chưa có lễ tân</div>
+              ) : (
+                <table className="tab">
               <thead>
                 <tr>
                   <th>STT</th>
@@ -83,8 +91,8 @@ class Home extends Component {
                   <th>Số điện thoại</th>
                 </tr>
               </thead>
-              <tbody>
-                {result.map((row, index) => (
+                <tbody>
+                {this.state.result.map((row, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{row.name}</td>
@@ -94,10 +102,12 @@ class Home extends Component {
                     <td>{row.sodienthoai}</td>
                   </tr>
                 ))
-
                 }
-              </tbody>
-            </table>
+              </tbody></table>
+              )
+              }
+              
+            
           </div>
         </div>
       </div>

@@ -317,6 +317,7 @@ class AddCaKham extends React.Component {
     render() {
         return (
             <div>
+                <h2 className="title">Đăng kí khám bệnh</h2>
                 <div className="com1">
                     <div className="" id="com1">
                         <h4>Nhập Username</h4>

@@ -51,8 +51,7 @@ export function checkErrCode(err) {
       alert("Lỗi");
       break;
       case 11:
-      console.log("lỗi 11");
-      alert("Lỗi không tồn tại");
+      
       break;
       case 12:
       console.log("lỗi 12");
