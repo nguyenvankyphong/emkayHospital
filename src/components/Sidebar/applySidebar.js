@@ -58,8 +58,12 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
                              { text: "Xuất hóa đơn", path: "/receptionist/danhsachdotkham", icon: listIcon.recep4 },
                              {text: "Tạo QR mới", path: "/receptionist/newqr", icon: listIcon.recep5}]
                break;
-       case 3: listSidebar = [{text: "Home", path: "/doctor", icon: listIcon.home },
-                             {text: "Lịch trực", path: "/doctor/lichtruc", icon: listIcon.book}]
+       case 3: listSidebar = [{text: "Home", path: "/", icon: listIcon.home },
+                             {text: "Lịch làm việc", path: "/doctor/lichlamviec", icon: listIcon.book},
+                             {text: "Xem góp ý", path: "/doctor/xemgopy", icon: listIcon.book}]
+               if (localStorage.truongKhoa === "true") {
+                 listSidebar.splice(1, 0, {text: "Lịch trực", path: "/doctor/lichtruc", icon: listIcon.book});
+               }
                break;
        case 4: listSidebar= [{ text: "Home", path: "/admin", icon: listIcon.home },
                              { text: "Bác sĩ", path: "/admin/bacsi", icon: listIcon.admin1 },

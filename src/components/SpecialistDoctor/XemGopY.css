@@ -1,0 +1,18 @@
+.col_1 {
+  width: 10%;
+}
+.col_2 {
+  width: 20%;
+}
+
+.col_3 {
+  width: 70%;
+}
+
+.col_3b {
+  overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    width:400px;
+    overflow-wrap: break-word;
+}

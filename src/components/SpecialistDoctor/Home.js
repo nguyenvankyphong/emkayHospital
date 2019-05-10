@@ -33,14 +33,16 @@ class Home extends Component {
       return (<Redirect to={'/login'}/>)
     }
 
-    
+
 
     return (
-      <div>
-        <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
-          <div className="row" id="Body">
-
-          </div>
+      <div className="home">
+        <div>
+          <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
+        </div>
+        <div className="quotesContent">
+          <p className="quotesStogan">We Care for Your Health Every Moment</p>
+        </div>
       </div>
     );
   }

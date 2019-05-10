@@ -59,11 +59,16 @@ class Home extends Component {
     })
       .then(response => response.json())
       .then(resData => {
-        console.log(JSON.stringify(resData))
+        console.log(resData);
+        if (resData.errCode==0) {
+          alert("Góp ý thành công");
+          this.refs.noidung.value ="";
+          // window.location.reload();
+        }
       })
   }
   handleChange(e) {
-    this.setState({ 
+    this.setState({
       [e.target.name]: e.target.value
     });
 }
@@ -82,7 +87,7 @@ class Home extends Component {
             <select ref="chuyenkhoa" className="select" onChange={this.handleChange}>
             {arr.map(row =>(
               <option key= {row.idChuyenKhoa} value={row.idChuyenKhoa}>{row.tenChuyenkhoa}</option>
-            ))}            
+            ))}
             </select>
             <textarea rows="4" cols="50" ref= "noidung"  onChange={this.handleChange} name= "noidung"></textarea>
           </div>
