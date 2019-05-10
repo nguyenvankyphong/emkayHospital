@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
 import DatePicker from 'react-datepicker';
 import { checkErrCode } from '../Layout/checkErrCode';
+import leftPad from 'left-pad';
 
 class Register extends Component {
   constructor(props) {
@@ -45,6 +46,16 @@ class Register extends Component {
   }
 
   register() {
+    console.log(this.state.startDate);
+    var a = this.state.startDate;
+    const formattedDate = [
+      leftPad(a.getFullYear(), 4, 0),
+      leftPad(a.getMonth()+1, 2, 0),
+      leftPad(a.getDate(), 2, 0)
+    ].join("-");
+
+    console.log(formattedDate);
+    
 
     if (this.state.sdt && this.state.ten) {
       var request = new XMLHttpRequest()
@@ -59,7 +70,7 @@ class Register extends Component {
       var list = [];
       list.push(this.state.sdt);
       list.push(this.state.ten);
-      list.push(this.state.ngaysinh);
+      list.push(formattedDate);
       list.push(this.refs.gender.value);
       list.push(this.state.bhyt);
       list.push(this.state.diachi);
