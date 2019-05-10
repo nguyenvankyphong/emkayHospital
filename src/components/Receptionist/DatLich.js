@@ -119,6 +119,8 @@ class DatLich extends Component {
               </tr>
             </thead>
             <tbody>
+            {console.log("rs phong:")}
+            {console.log(result)}
               {result.map((row, index)=>(
                 <tr key={index} id={"datlich"+row.iddatLich}>
                   <td>{index+1}</td>

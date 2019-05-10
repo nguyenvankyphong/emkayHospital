@@ -139,7 +139,7 @@ class Home extends Component {
             <div id = "hosokhambenh">
               <h3>Kết quả khám bệnh</h3>
               <div id = "ketquakham" className="table">
-                <KetQuaKhamBenh idHoSo={35}/>
+                <KetQuaKhamBenh idHoSo={this.state.idHSKB}/>
               </div>
 
             </div>
