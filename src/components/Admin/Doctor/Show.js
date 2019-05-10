@@ -92,6 +92,10 @@ class Home extends Component {
         <div className="hoso">
           <h3>Danh sách bác sĩ</h3>
           <Link onClick={this.add}>Thêm</Link>
+           
+          {typeof result == "undefined"? (
+                <div>Chưa có bác sĩ</div>
+              ) : (
           <table className="table">
             <thead>
               <tr>
@@ -120,6 +124,8 @@ class Home extends Component {
               }
             </tbody>
           </table>
+            )
+          }
         </div>
       </div>
     );

@@ -112,6 +112,9 @@ class Home extends Component {
           <h3>Phòng khám</h3>
          <div className="add">
          <a onClick={this.add}>Thêm</a>
+         {/* {typeof result == "undefined"? (
+                <div>Chưa có phòng khám</div>
+              ) : ( */}
           <table className="list">
             <thead>
               <tr>
@@ -133,6 +136,8 @@ class Home extends Component {
 
             </tbody>
           </table>
+            {/* )
+          } */}
          </div>
       </div>
     );
