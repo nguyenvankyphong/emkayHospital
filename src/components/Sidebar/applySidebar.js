@@ -49,7 +49,7 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
 
    let listSidebar = [];
      switch (key) {
-       case 1: listSidebar = [{text: "Home", path: "/patients", icon: listIcon.home}]
+       case 1: listSidebar = [{text: "Home", path: "/home", icon: listIcon.home}]
                break;
        case 2: listSidebar = [{ text: "Home", path: "/receptionist", icon: listIcon.home },
                              { text: "Tạo tài khoản", path: "/receptionist/register", icon: listIcon.recep1 },
