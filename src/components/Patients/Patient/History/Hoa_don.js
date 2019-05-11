@@ -74,7 +74,7 @@ class Home extends Component {
                 <th>Đơn vị tính</th>
                 <th>Đơn giá</th>
                 <th>Số lượng</th>
-                <th>Type</th>
+                <th>Loại</th>
               </tr>
             </thead>
             <tbody>

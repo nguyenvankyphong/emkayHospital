@@ -30,7 +30,7 @@ class index extends Component {
 
     return (
       <div>
-        <Sidebar listSidebar= {this.state.listSidebar} />
+        <Sidebar listSidebar= {this.state.listSidebar} current_path = {window.location.pathname}/>
         <div className="row" id="Body">
             <InfoPatient />
         </div>

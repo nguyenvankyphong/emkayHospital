@@ -70,9 +70,9 @@ class Home extends Component {
         'Token': localStorage.getItem('userData'),
       },
     })
-      
+
       .then(resData => {
-        
+
         if(resData.errCode == 0){
           var index= this.findIndex(arr,idPhongKham);
           if(index !== -1){
@@ -82,7 +82,7 @@ class Home extends Component {
         }
       })
     }
-    
+
 
   }
   findIndex=(arr,id)=>{
@@ -109,7 +109,7 @@ class Home extends Component {
     }
     return (
       <div className="showPK">
-        <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />       
+        <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
           <h3>Phòng khám</h3>
          <div className="add">
          <a onClick={this.add}>Thêm</a>

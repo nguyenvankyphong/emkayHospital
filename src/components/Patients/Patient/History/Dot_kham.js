@@ -75,7 +75,7 @@ class Home extends Component {
 
     return (
       <div className="row">
-        <Sidebar listSidebar={this.state.listSidebar}/>
+        <Sidebar listSidebar={this.state.listSidebar} current_path = {window.location.pathname}/>
         <h3>Danh sách đợt khám</h3>
         <table className="table">
           <thead>
@@ -83,7 +83,7 @@ class Home extends Component {
               <th>STT</th>
               <th>Thông tin bệnh</th>
               <th>Ngày khám</th>
-              <th>Status</th>
+              <th>Trạng thái</th>
             </tr>
           </thead>
           <tbody>

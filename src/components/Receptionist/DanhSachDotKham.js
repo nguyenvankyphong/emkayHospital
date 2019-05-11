@@ -203,7 +203,7 @@ class Home extends Component {
                 <Grid item xs={3} >
                 </Grid>
                 <Grid item xs={2}>
-                  <label htmlFor="day">Day</label>
+                  <label htmlFor="day">Ngày</label>
                   <select name="day" value={this.state.day} onChange={this.onChangeDay}>
                     {dayRange.map((day) => {
                       return <option key={day} value={day}>{day}</option>
@@ -211,7 +211,7 @@ class Home extends Component {
                   </select>
                 </Grid>
                 <Grid item xs={2}>
-                  <label htmlFor="month">Month</label>
+                  <label htmlFor="month">Tháng</label>
                   <select name="month" value={this.state.month} onChange={this.onChangeMonth}>
                     <option value="1">01 - January</option>
                     <option value="2">02 - February</option>
@@ -228,7 +228,7 @@ class Home extends Component {
                   </select>
                 </Grid>
                 <Grid item xs={2}>
-                  <label htmlFor="year">Year</label>
+                  <label htmlFor="year">Năm</label>
                   <select name="year" value={this.state.year} onChange={this.onChangeYear}>
                     {yearRange.map((year) => {
                       return <option key={year} value={year}>{year}</option>

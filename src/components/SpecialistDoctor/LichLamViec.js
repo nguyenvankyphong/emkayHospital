@@ -181,7 +181,7 @@ class LichLamViec extends Component {
                   <Grid item xs = {3} >
                   </Grid>
                   <Grid item xs = {3}>
-                    <label htmlFor="month">Month</label>
+                    <label htmlFor="month">Tháng</label>
                     <select name="month" value={this.state.month} onChange={this.onChangeMonth}>
                       <option value="1">01 - January</option>
                       <option value="2">02 - February</option>
@@ -199,7 +199,7 @@ class LichLamViec extends Component {
                   </Grid>
                   <Grid item xs={3}>
 
-                      <label htmlFor="year">Year</label>
+                      <label htmlFor="year">Năm</label>
 
                       <select name="year" value={this.state.year} onChange={this.onChangeYear}>
                         {yearRange.map( (year) => {
