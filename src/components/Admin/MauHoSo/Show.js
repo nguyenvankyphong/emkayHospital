@@ -115,7 +115,7 @@ class Receptionist extends Component {
                     </Grid>
                     <Grid container spacing={24}>
                       <Grid item xs = {12} >
-                        <label><a href="/admin/mauhoso/add">Thêm mẫu mới</a></label>
+                        <label><a href="http://168.61.49.94/img/api/test2.html" target="_blank">Thêm mẫu mới</a></label>
                         <label htmlFor="room">Danh sách mẫu</label>
 
                         <ul>
