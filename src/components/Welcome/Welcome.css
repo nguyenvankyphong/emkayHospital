@@ -44,7 +44,7 @@
 
 .login-btn:hover {
   background-color: white;
-  opacity: 0.5;
+  opacity: 0.75;
   color: black;
   font-family: "Ubuntu",sans-serif;
 }

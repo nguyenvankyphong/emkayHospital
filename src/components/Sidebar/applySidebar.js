@@ -49,16 +49,16 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
 
    let listSidebar = [];
      switch (key) {
-       case 1: listSidebar = [{text: "Home", path: "/home", icon: listIcon.home}]
+       case 1: listSidebar = [{text: "Trang chủ", path: "/", icon: listIcon.home}]
                break;
-       case 2: listSidebar = [{ text: "Home", path: "/receptionist", icon: listIcon.home },
+       case 2: listSidebar = [{ text: "Trang chủ", path: "/receptionist", icon: listIcon.home },
                              { text: "Tạo tài khoản", path: "/receptionist/register", icon: listIcon.recep1 },
                              { text: "Đặt lịch khám", path: "/receptionist/datLich", icon: listIcon.book },
                              { text: "Thêm khoản phí", path: "/receptionist/addKhoanPhi", icon: listIcon.recep3 },
-                             { text: "Xuất hóa đơn", path: "/receptionist/danhsachdotkham", icon: listIcon.recep4 },
+                             { text: "Danh sách đợt khám", path: "/receptionist/danhsachdotkham", icon: listIcon.recep4 },
                              {text: "Tạo QR mới", path: "/receptionist/newqr", icon: listIcon.recep5}]
                break;
-       case 3: listSidebar = [{text: "Home", path: "/", icon: listIcon.home },
+       case 3: listSidebar = [{text: "Trang chủ", path: "/", icon: listIcon.home },
                              {text: "Lịch làm việc", path: "/doctor/lichlamviec", icon: listIcon.book},
                              ]
                if (localStorage.truongKhoa === "true") {
@@ -66,7 +66,7 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
                  listSidebar.splice(3, 0, {text: "Xem góp ý", path: "/doctor/xemgopy", icon: listIcon.book});
                }
                break;
-       case 4: listSidebar= [{ text: "Home", path: "/admin", icon: listIcon.home },
+       case 4: listSidebar= [{ text: "Trang chủ", path: "/admin", icon: listIcon.home },
                              { text: "Bác sĩ", path: "/admin/bacsi", icon: listIcon.admin1 },
                              { text: "Lễ tân", path: "/admin/letan", icon: listIcon.admin2 },
                              { text: "Chuyên khoa", path: "/admin/chuyenkhoa", icon: listIcon.admin3 },
@@ -74,7 +74,7 @@ import Admin3 from '@material-ui/icons/LibraryAdd';
                              { text: "Mẫu hồ sơ", path: "/admin/mauhoso", icon: listIcon.recep4 },
                            ]
                break;
-       case 5: listSidebar= [{ text: "Home", path: "/patients/patient", icon: listIcon.home },
+       case 5: listSidebar= [{ text: "Trang chủ", path: "/patients/patient", icon: listIcon.home },
                              { text: "Lịch sử khám bệnh", path: "/patients/patient/history", icon: listIcon.history },
                              { text: "Đặt lịch khám", path: "/patients/patient/dat_lich_kham", icon: listIcon.book },
                              { text: "Góp ý", path: "/patients/patient/gopy", icon: listIcon.comment }]

@@ -82,7 +82,7 @@ class Home extends Component {
               <th>STT</th>
               <th>Thông tin bệnh</th>
               <th>Ngày khám</th>
-              <th>Status</th>
+              <th>Trạng thái</th>
             </tr>
           </thead>
           <tbody>

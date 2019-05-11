@@ -34,6 +34,7 @@ class Register extends Component {
     this.register = this.register.bind(this);
     this.convertTime = this.convertTime.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handlereset = this.handlereset.bind(this);
   }
 
   componentWillMount() {
@@ -43,6 +44,21 @@ class Register extends Component {
   convertTime(created) {
     let date = new Date(created * 1000);
     return date;
+  }
+
+  handlereset(){
+   this.refs.sdt.value = '';
+   this.refs.ten.value = '';
+   this.refs.diachi.value = '';
+   this.refs.bhyt.value = '';
+   this.setState({
+     sdt: '',
+     ngaysinh: '',
+     ten: '',
+     gioitinh: '',
+     bhyt: '',
+     diachi: '',
+   })
   }
 
   register() {
@@ -55,7 +71,7 @@ class Register extends Component {
     ].join("-");
 
     console.log(formattedDate);
-    
+
 
     if (this.state.sdt && this.state.ten) {
       var request = new XMLHttpRequest()
@@ -82,15 +98,20 @@ class Register extends Component {
 
       const scope = this;
       request.onload = function () {
-        
+
         console.log("response: ");
         console.log(this.response);
         rs = JSON.parse(this.response);
         console.log(rs.errCode);
         checkErrCode(rs.errCode);
         if (!rs.errCode) {
-          scope.setState({ isRegistered: true });
-          scope.setState({ qr: rs.value });
+          if (rs.value === "success") {
+            alert("Đã thêm bệnh nhân thành công");
+            scope.handlereset();
+          } else {
+            scope.setState({ isRegistered: true });
+            scope.setState({ qr: rs.value });
+          }
         }
       }
     }
@@ -130,7 +151,8 @@ class Register extends Component {
           <div className="row" id="Body">
             <div className="row" cid="Body">
               <div className="medium-4 columns left">
-                <h1>Register</h1>
+              <h1>ĐĂNG KÝ TÀI KHOẢN</h1>
+                <h3>Quét mã bên dưới</h3>
                 <img src={this.state.qr}></img>
                 <input type="submit" className="button success" value="New account" onClick={this.newAccount} />
               </div>
@@ -141,25 +163,26 @@ class Register extends Component {
     }
     var body;
     switch (localStorage.getItem("userRole")) {
-      case "1": body = "<div> savs</div"
+      case "1": body = "<div></div"
     }
 
     return (
       <div>
         <Sidebar listSidebar={this.state.listSidebar} current_path={window.location.pathname} />
         <div className="row" id="Body">
-          <h1 className="title">EMKAY HOSPITAL</h1>
+          <h1 className="title">BỆNH VIỆN EMKAY</h1>
           <div className="medium-4 columns left">
             <h1>Register</h1>
             <label>Số điện thoại</label>
-            <input type="text" ref="someUser" name="sdt" placeholder="Số điện thoại" onChange={this.onChange}/>
+            <input type="text" ref="sdt" name="sdt" placeholder="Số điện thoại" onChange={this.onChange}/>
 
             <label>Tên</label>
-            <input type="text" ref="someUser" name="ten" placeholder="Tên" onChange={this.onChange}/>
+            <input type="text" ref="ten" name="ten" placeholder="Tên" onChange={this.onChange}/>
 
             <label>Ngày sinh</label>
            <div>
            <DatePicker
+            ref="ngaysinh"
             dateFormat="yyyy-MM-dd"
             selected={this.state.startDate}
             onChange={this.handleChangeDate}
@@ -177,12 +200,12 @@ class Register extends Component {
             </select>
 
             <label>Địa chỉ</label>
-            <input type="text" ref="someUser" name="diachi" placeholder="Địa chỉ" onChange={this.onChange}/>
+            <input type="text" ref="diachi" name="diachi" placeholder="Địa chỉ" onChange={this.onChange}/>
 
             <label>Số BHYT</label>
-            <input type="text" ref="someUser" name="bhyt" placeholder="Số BHYT" onChange={this.onChange}/>
+            <input type="text" ref="bhyt" name="bhyt" placeholder="Số BHYT" onChange={this.onChange}/>
             <div className= "bt">
-              <input type="submit" className="button success" value="Register" onClick={this.register} />
+              <input type="submit" className="button success" value="Đăng ký" onClick={this.register} />
               <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
             </div>
           </div>

@@ -180,7 +180,7 @@ class LichTruc extends Component {
               <form className="year-selection">
                 <Grid container spacing={24}>
                   <Grid item xs = {4} >
-                    <label htmlFor="room">Room</label>
+                    <label htmlFor="room">Phòng</label>
                     <select name="room" onChange={this.onChangeRoom} id="selectRoom" value={localStorage.idPhongKham}>
                       {this.state.listRoom.map( (room) => {
                         return <option key={room.idPhongKham} value={room.idPhongKham}>{room.SoPhong}-{room.TenPhong}</option>
@@ -188,7 +188,7 @@ class LichTruc extends Component {
                     </select>
                   </Grid>
                   <Grid item xs = {4}>
-                    <label htmlFor="month">Month</label>
+                    <label htmlFor="month">Tháng</label>
                     <select name="month" value={this.state.month} onChange={this.onChangeMonth}>
                       <option value="1">01 - January</option>
                       <option value="2">02 - February</option>
@@ -206,7 +206,7 @@ class LichTruc extends Component {
                   </Grid>
                   <Grid item xs={4}>
 
-                      <label htmlFor="year">Year</label>
+                      <label htmlFor="year">Năm</label>
 
                       <select name="year" value={this.state.year} onChange={this.onChangeYear}>
                         {yearRange.map( (year) => {

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar";
 import ReactDOM from 'react-dom';
+import {checkErrCode} from '../Layout/checkErrCode';
+
 
 class QRImg extends React.Component {
   constructor(props) {
@@ -69,6 +71,7 @@ class NewQR extends Component {
       // } else {
       //
       // }
+        checkErrCode(rs.errCode);
 
         switch (rs.errCode) {
           case 0:
@@ -109,7 +112,7 @@ class NewQR extends Component {
               <label>Số điện thoại</label>
               <input type="text" ref="someUser" name="sdt" placeholder="Số điện thoại" onChange={this.onChange}/>
               <div className= "bt">
-                <input type="submit" className="button success" value="Register" onClick={this.submit} />
+                <input type="submit" className="button success" value="Tạo mã QR mới" onClick={this.submit} />
                 <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
               </div>
               <div id="qrimg">

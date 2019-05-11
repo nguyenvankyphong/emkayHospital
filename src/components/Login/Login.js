@@ -99,14 +99,14 @@ class Login extends Component {
           <div className="loginForm">
 
              <div className="columns left">
-             <h1 className="title">EMKAY HOSPITAL</h1>
-               <h1 className="loginTitle">LOGIN</h1>
+             <h1 className="title">BỆNH VIỆN EMKAY</h1>
+               <h1 className="loginTitle">ĐĂNG NHẬP</h1>
                <label>Username</label>
                <input
                  type="text"
                  ref="someUser"
                  name="username"
-                 placeholder="Username"
+                 placeholder="Số điện thoại"
                  onChange={this.onChange}
 
                  />
@@ -115,11 +115,11 @@ class Login extends Component {
                  type="password"
                  ref="somePass"
                  name="password"
-                 placeholder="Password"
+                 placeholder="Mật khẩu"
                  onChange={this.onChange}
                  />
                <div className= "bt">
-               <input type="submit" className="button success" value="Login" onClick={this.login} />
+               <input type="submit" className="button success" value="Đăng nhập" onClick={this.login} />
                <input type="reset" className="button reset" value="reset" onClick={this.handlereset}/>
                </div>
              </div>
